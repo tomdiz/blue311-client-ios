@@ -1,0 +1,58 @@
+//
+//  O311MapViewController.m
+//  open311
+//
+//  Created by Thomas DiZoglio on 3/23/15.
+//  Copyright (c) 2015 Thomas DiZoglio. All rights reserved.
+//
+
+#import <MapKit/MapKit.h>
+#import "O311MapViewController.h"
+#import "JVFloatingDrawerSpringAnimator.h"
+#import "AppDelegate.h"
+
+@interface O311MapViewController ()
+
+@property (nonatomic, strong, readonly) JVFloatingDrawerSpringAnimator *drawerAnimator;
+
+@property (weak, nonatomic) IBOutlet MKMapView *mkMapView;
+
+- (IBAction)menuBurgerButtonPressed:(id)sender;
+
+@end
+
+@implementation O311MapViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+- (IBAction)menuBurgerButtonPressed:(id)sender {
+    
+    [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
+}
+
+#pragma mark - Helpers
+
+- (JVFloatingDrawerSpringAnimator *)drawerAnimator {
+    
+    return [[AppDelegate globalDelegate] drawerAnimator];
+}
+
+@end

@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		11C27B8396985533C399F257 /* libPods-blue311.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D91073D1134B2EB88F6700 /* libPods-blue311.a */; };
+		D102BEF71AC10D780094B836 /* B311MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BEEB1AC10D780094B836 /* B311MapViewController.m */; };
+		D102BEF81AC10D780094B836 /* B311LeftDrawerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BEEE1AC10D780094B836 /* B311LeftDrawerTableViewCell.m */; };
+		D102BEF91AC10D780094B836 /* B311LeftDrawerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BEF01AC10D780094B836 /* B311LeftDrawerTableViewController.m */; };
+		D102BEFA1AC10D780094B836 /* page1.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BEF21AC10D780094B836 /* page1.png */; };
+		D102BEFB1AC10D780094B836 /* page2.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BEF31AC10D780094B836 /* page2.png */; };
+		D102BEFC1AC10D780094B836 /* page3.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BEF41AC10D780094B836 /* page3.png */; };
+		D102BEFD1AC10D780094B836 /* TutorialPageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BEF61AC10D780094B836 /* TutorialPageContentViewController.m */; };
+		D102BF081AC10DE40094B836 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BEFE1AC10DE40094B836 /* ViewController.m */; };
+		D102BF091AC10DE40094B836 /* O311MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF001AC10DE40094B836 /* O311MapViewController.m */; };
+		D102BF0A1AC10DE40094B836 /* B311SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF021AC10DE40094B836 /* B311SettingsViewController.m */; };
+		D102BF0B1AC10DE40094B836 /* B311ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF041AC10DE40094B836 /* B311ProfileViewController.m */; };
+		D102BF0C1AC10DE40094B836 /* B311HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF061AC10DE40094B836 /* B311HelpViewController.m */; };
+		D102BF0E1AC10FC30094B836 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D102BF0D1AC10FC30094B836 /* MapKit.framework */; };
+		D16795B91AC10C8800BF32AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795B81AC10C8800BF32AF /* main.m */; };
+		D16795BC1AC10C8800BF32AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795BB1AC10C8800BF32AF /* AppDelegate.m */; };
+		D16795C21AC10C8800BF32AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D16795C01AC10C8800BF32AF /* Main.storyboard */; };
+		D16795C41AC10C8800BF32AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D16795C31AC10C8800BF32AF /* Images.xcassets */; };
+		D16795C71AC10C8800BF32AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16795C51AC10C8800BF32AF /* LaunchScreen.xib */; };
+		D16795D31AC10C8800BF32AF /* blue311Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795D21AC10C8800BF32AF /* blue311Tests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D16795CD1AC10C8800BF32AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D16795AB1AC10C8800BF32AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D16795B21AC10C8800BF32AF;
+			remoteInfo = blue311;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1E8868157362B85569A10972 /* Pods-blue311.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blue311.debug.xcconfig"; path = "Pods/Target Support Files/Pods-blue311/Pods-blue311.debug.xcconfig"; sourceTree = "<group>"; };
+		46226D4FB03240CAB542A795 /* Pods-blue311.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blue311.release.xcconfig"; path = "Pods/Target Support Files/Pods-blue311/Pods-blue311.release.xcconfig"; sourceTree = "<group>"; };
+		D102BEEA1AC10D780094B836 /* B311MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311MapViewController.h; sourceTree = "<group>"; };
+		D102BEEB1AC10D780094B836 /* B311MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311MapViewController.m; sourceTree = "<group>"; };
+		D102BEED1AC10D780094B836 /* B311LeftDrawerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311LeftDrawerTableViewCell.h; sourceTree = "<group>"; };
+		D102BEEE1AC10D780094B836 /* B311LeftDrawerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311LeftDrawerTableViewCell.m; sourceTree = "<group>"; };
+		D102BEEF1AC10D780094B836 /* B311LeftDrawerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311LeftDrawerTableViewController.h; sourceTree = "<group>"; };
+		D102BEF01AC10D780094B836 /* B311LeftDrawerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311LeftDrawerTableViewController.m; sourceTree = "<group>"; };
+		D102BEF21AC10D780094B836 /* page1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page1.png; sourceTree = "<group>"; };
+		D102BEF31AC10D780094B836 /* page2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page2.png; sourceTree = "<group>"; };
+		D102BEF41AC10D780094B836 /* page3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page3.png; sourceTree = "<group>"; };
+		D102BEF51AC10D780094B836 /* TutorialPageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPageContentViewController.h; sourceTree = "<group>"; };
+		D102BEF61AC10D780094B836 /* TutorialPageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPageContentViewController.m; sourceTree = "<group>"; };
+		D102BEFE1AC10DE40094B836 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D102BEFF1AC10DE40094B836 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D102BF001AC10DE40094B836 /* O311MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = O311MapViewController.m; sourceTree = "<group>"; };
+		D102BF011AC10DE40094B836 /* O311MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = O311MapViewController.h; sourceTree = "<group>"; };
+		D102BF021AC10DE40094B836 /* B311SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311SettingsViewController.m; sourceTree = "<group>"; };
+		D102BF031AC10DE40094B836 /* B311SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311SettingsViewController.h; sourceTree = "<group>"; };
+		D102BF041AC10DE40094B836 /* B311ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311ProfileViewController.m; sourceTree = "<group>"; };
+		D102BF051AC10DE40094B836 /* B311ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311ProfileViewController.h; sourceTree = "<group>"; };
+		D102BF061AC10DE40094B836 /* B311HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311HelpViewController.m; sourceTree = "<group>"; };
+		D102BF071AC10DE40094B836 /* B311HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311HelpViewController.h; sourceTree = "<group>"; };
+		D102BF0D1AC10FC30094B836 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D16795B31AC10C8800BF32AF /* blue311.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = blue311.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D16795B71AC10C8800BF32AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D16795B81AC10C8800BF32AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D16795BA1AC10C8800BF32AF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D16795BB1AC10C8800BF32AF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D16795C11AC10C8800BF32AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D16795C31AC10C8800BF32AF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D16795C61AC10C8800BF32AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		D16795CC1AC10C8800BF32AF /* blue311Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = blue311Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D16795D11AC10C8800BF32AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D16795D21AC10C8800BF32AF /* blue311Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = blue311Tests.m; sourceTree = "<group>"; };
+		E6D91073D1134B2EB88F6700 /* libPods-blue311.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-blue311.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D16795B01AC10C8800BF32AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D102BF0E1AC10FC30094B836 /* MapKit.framework in Frameworks */,
+				11C27B8396985533C399F257 /* libPods-blue311.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D16795C91AC10C8800BF32AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		51D16127466E1C59B95B36A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D102BF0D1AC10FC30094B836 /* MapKit.framework */,
+				E6D91073D1134B2EB88F6700 /* libPods-blue311.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		597A4913F9649A773D5F1046 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1E8868157362B85569A10972 /* Pods-blue311.debug.xcconfig */,
+				46226D4FB03240CAB542A795 /* Pods-blue311.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D102BEE91AC10D780094B836 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D102BEFE1AC10DE40094B836 /* ViewController.m */,
+				D102BEFF1AC10DE40094B836 /* ViewController.h */,
+				D102BF001AC10DE40094B836 /* O311MapViewController.m */,
+				D102BF011AC10DE40094B836 /* O311MapViewController.h */,
+				D102BF021AC10DE40094B836 /* B311SettingsViewController.m */,
+				D102BF031AC10DE40094B836 /* B311SettingsViewController.h */,
+				D102BF041AC10DE40094B836 /* B311ProfileViewController.m */,
+				D102BF051AC10DE40094B836 /* B311ProfileViewController.h */,
+				D102BF061AC10DE40094B836 /* B311HelpViewController.m */,
+				D102BF071AC10DE40094B836 /* B311HelpViewController.h */,
+				D102BEEA1AC10D780094B836 /* B311MapViewController.h */,
+				D102BEEB1AC10D780094B836 /* B311MapViewController.m */,
+				D102BEEC1AC10D780094B836 /* MenuViewControllers */,
+				D102BEF11AC10D780094B836 /* TutorialViewControllers */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D102BEEC1AC10D780094B836 /* MenuViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D102BEED1AC10D780094B836 /* B311LeftDrawerTableViewCell.h */,
+				D102BEEE1AC10D780094B836 /* B311LeftDrawerTableViewCell.m */,
+				D102BEEF1AC10D780094B836 /* B311LeftDrawerTableViewController.h */,
+				D102BEF01AC10D780094B836 /* B311LeftDrawerTableViewController.m */,
+			);
+			path = MenuViewControllers;
+			sourceTree = "<group>";
+		};
+		D102BEF11AC10D780094B836 /* TutorialViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D102BEF21AC10D780094B836 /* page1.png */,
+				D102BEF31AC10D780094B836 /* page2.png */,
+				D102BEF41AC10D780094B836 /* page3.png */,
+				D102BEF51AC10D780094B836 /* TutorialPageContentViewController.h */,
+				D102BEF61AC10D780094B836 /* TutorialPageContentViewController.m */,
+			);
+			path = TutorialViewControllers;
+			sourceTree = "<group>";
+		};
+		D16795AA1AC10C8800BF32AF = {
+			isa = PBXGroup;
+			children = (
+				D16795B51AC10C8800BF32AF /* blue311 */,
+				D16795CF1AC10C8800BF32AF /* blue311Tests */,
+				D16795B41AC10C8800BF32AF /* Products */,
+				597A4913F9649A773D5F1046 /* Pods */,
+				51D16127466E1C59B95B36A5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D16795B41AC10C8800BF32AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D16795B31AC10C8800BF32AF /* blue311.app */,
+				D16795CC1AC10C8800BF32AF /* blue311Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D16795B51AC10C8800BF32AF /* blue311 */ = {
+			isa = PBXGroup;
+			children = (
+				D102BEE91AC10D780094B836 /* ViewControllers */,
+				D16795BA1AC10C8800BF32AF /* AppDelegate.h */,
+				D16795BB1AC10C8800BF32AF /* AppDelegate.m */,
+				D16795C01AC10C8800BF32AF /* Main.storyboard */,
+				D16795C31AC10C8800BF32AF /* Images.xcassets */,
+				D16795C51AC10C8800BF32AF /* LaunchScreen.xib */,
+				D16795B61AC10C8800BF32AF /* Supporting Files */,
+			);
+			path = blue311;
+			sourceTree = "<group>";
+		};
+		D16795B61AC10C8800BF32AF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D16795B71AC10C8800BF32AF /* Info.plist */,
+				D16795B81AC10C8800BF32AF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D16795CF1AC10C8800BF32AF /* blue311Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D16795D21AC10C8800BF32AF /* blue311Tests.m */,
+				D16795D01AC10C8800BF32AF /* Supporting Files */,
+			);
+			path = blue311Tests;
+			sourceTree = "<group>";
+		};
+		D16795D01AC10C8800BF32AF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D16795D11AC10C8800BF32AF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D16795B21AC10C8800BF32AF /* blue311 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D16795D61AC10C8800BF32AF /* Build configuration list for PBXNativeTarget "blue311" */;
+			buildPhases = (
+				154A9552915D5D744D502EE8 /* Check Pods Manifest.lock */,
+				D16795AF1AC10C8800BF32AF /* Sources */,
+				D16795B01AC10C8800BF32AF /* Frameworks */,
+				D16795B11AC10C8800BF32AF /* Resources */,
+				CAF43511279823870A5CD279 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = blue311;
+			productName = blue311;
+			productReference = D16795B31AC10C8800BF32AF /* blue311.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D16795CB1AC10C8800BF32AF /* blue311Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D16795D91AC10C8800BF32AF /* Build configuration list for PBXNativeTarget "blue311Tests" */;
+			buildPhases = (
+				D16795C81AC10C8800BF32AF /* Sources */,
+				D16795C91AC10C8800BF32AF /* Frameworks */,
+				D16795CA1AC10C8800BF32AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D16795CE1AC10C8800BF32AF /* PBXTargetDependency */,
+			);
+			name = blue311Tests;
+			productName = blue311Tests;
+			productReference = D16795CC1AC10C8800BF32AF /* blue311Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D16795AB1AC10C8800BF32AF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Thomas DiZoglio";
+				TargetAttributes = {
+					D16795B21AC10C8800BF32AF = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = B28C6PLVZA;
+					};
+					D16795CB1AC10C8800BF32AF = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = D16795B21AC10C8800BF32AF;
+					};
+				};
+			};
+			buildConfigurationList = D16795AE1AC10C8800BF32AF /* Build configuration list for PBXProject "blue311" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D16795AA1AC10C8800BF32AF;
+			productRefGroup = D16795B41AC10C8800BF32AF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D16795B21AC10C8800BF32AF /* blue311 */,
+				D16795CB1AC10C8800BF32AF /* blue311Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D16795B11AC10C8800BF32AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16795C21AC10C8800BF32AF /* Main.storyboard in Resources */,
+				D16795C71AC10C8800BF32AF /* LaunchScreen.xib in Resources */,
+				D102BEFC1AC10D780094B836 /* page3.png in Resources */,
+				D102BEFA1AC10D780094B836 /* page1.png in Resources */,
+				D16795C41AC10C8800BF32AF /* Images.xcassets in Resources */,
+				D102BEFB1AC10D780094B836 /* page2.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D16795CA1AC10C8800BF32AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		154A9552915D5D744D502EE8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CAF43511279823870A5CD279 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-blue311/Pods-blue311-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D16795AF1AC10C8800BF32AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D102BF081AC10DE40094B836 /* ViewController.m in Sources */,
+				D102BEF91AC10D780094B836 /* B311LeftDrawerTableViewController.m in Sources */,
+				D16795BC1AC10C8800BF32AF /* AppDelegate.m in Sources */,
+				D102BF0B1AC10DE40094B836 /* B311ProfileViewController.m in Sources */,
+				D102BF0C1AC10DE40094B836 /* B311HelpViewController.m in Sources */,
+				D102BF091AC10DE40094B836 /* O311MapViewController.m in Sources */,
+				D16795B91AC10C8800BF32AF /* main.m in Sources */,
+				D102BF0A1AC10DE40094B836 /* B311SettingsViewController.m in Sources */,
+				D102BEF81AC10D780094B836 /* B311LeftDrawerTableViewCell.m in Sources */,
+				D102BEF71AC10D780094B836 /* B311MapViewController.m in Sources */,
+				D102BEFD1AC10D780094B836 /* TutorialPageContentViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D16795C81AC10C8800BF32AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16795D31AC10C8800BF32AF /* blue311Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D16795CE1AC10C8800BF32AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D16795B21AC10C8800BF32AF /* blue311 */;
+			targetProxy = D16795CD1AC10C8800BF32AF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D16795C01AC10C8800BF32AF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D16795C11AC10C8800BF32AF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D16795C51AC10C8800BF32AF /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D16795C61AC10C8800BF32AF /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D16795D41AC10C8800BF32AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D16795D51AC10C8800BF32AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D16795D71AC10C8800BF32AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E8868157362B85569A10972 /* Pods-blue311.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = blue311/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D16795D81AC10C8800BF32AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46226D4FB03240CAB542A795 /* Pods-blue311.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = blue311/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D16795DA1AC10C8800BF32AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = blue311Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/blue311.app/blue311";
+			};
+			name = Debug;
+		};
+		D16795DB1AC10C8800BF32AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = blue311Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/blue311.app/blue311";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D16795AE1AC10C8800BF32AF /* Build configuration list for PBXProject "blue311" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D16795D41AC10C8800BF32AF /* Debug */,
+				D16795D51AC10C8800BF32AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D16795D61AC10C8800BF32AF /* Build configuration list for PBXNativeTarget "blue311" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D16795D71AC10C8800BF32AF /* Debug */,
+				D16795D81AC10C8800BF32AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D16795D91AC10C8800BF32AF /* Build configuration list for PBXNativeTarget "blue311Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D16795DA1AC10C8800BF32AF /* Debug */,
+				D16795DB1AC10C8800BF32AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D16795AB1AC10C8800BF32AF /* Project object */;
+}

@@ -35,6 +35,13 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipTutorial:) name:@"skipTutorial" object:nil];
 
+    // Side menu bar
+    NSArray *imageList = @[[UIImage imageNamed:@"menuChat.png"], [UIImage imageNamed:@"menuUsers.png"], [UIImage imageNamed:@"menuMap.png"], [UIImage imageNamed:@"menuClose.png"]];
+    sideBar = [[CDSideBarController alloc] initWithImages:imageList];
+    sideBar.delegate = self;
+    [sideBar insertMenuButtonOnView:self.view atPosition:CGPointMake(self.view.frame.size.width - 70, 50)];
+//    [self.view bringSubviewToFront:sideBar];
+
     // Tutorial Setup
     // Create the data model
     _pageTitles = @[@"Annotate handicap parking spots on a map", @"Discover handicap entrances at locations", @"Annotate general handicap tips on a map"];
@@ -54,6 +61,11 @@
     [self addChildViewController:_pageViewController];
     [self.view addSubview:_pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -148,6 +160,13 @@
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
 
     return 0;
+}
+
+#pragma mark - CDSideBarController delegate
+
+- (void)menuButtonClicked:(long)index {
+    
+    // Execute what ever you want
 }
 
 @end

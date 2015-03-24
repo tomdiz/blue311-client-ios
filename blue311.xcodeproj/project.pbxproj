@@ -20,6 +20,12 @@
 		D102BF0B1AC10DE40094B836 /* B311ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF041AC10DE40094B836 /* B311ProfileViewController.m */; };
 		D102BF0C1AC10DE40094B836 /* B311HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF061AC10DE40094B836 /* B311HelpViewController.m */; };
 		D102BF0E1AC10FC30094B836 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D102BF0D1AC10FC30094B836 /* MapKit.framework */; };
+		D102BF171AC11A310094B836 /* CDSideBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF111AC11A310094B836 /* CDSideBarController.m */; };
+		D102BF181AC11A310094B836 /* menuChat.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF121AC11A310094B836 /* menuChat.png */; };
+		D102BF191AC11A310094B836 /* menuClose.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF131AC11A310094B836 /* menuClose.png */; };
+		D102BF1A1AC11A310094B836 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF141AC11A310094B836 /* menuIcon.png */; };
+		D102BF1B1AC11A310094B836 /* menuMap.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF151AC11A310094B836 /* menuMap.png */; };
+		D102BF1C1AC11A310094B836 /* menuUsers.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF161AC11A310094B836 /* menuUsers.png */; };
 		D16795B91AC10C8800BF32AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795B81AC10C8800BF32AF /* main.m */; };
 		D16795BC1AC10C8800BF32AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795BB1AC10C8800BF32AF /* AppDelegate.m */; };
 		D16795C21AC10C8800BF32AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D16795C01AC10C8800BF32AF /* Main.storyboard */; };
@@ -61,6 +67,13 @@
 		D102BF061AC10DE40094B836 /* B311HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311HelpViewController.m; sourceTree = "<group>"; };
 		D102BF071AC10DE40094B836 /* B311HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311HelpViewController.h; sourceTree = "<group>"; };
 		D102BF0D1AC10FC30094B836 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D102BF101AC11A310094B836 /* CDSideBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSideBarController.h; sourceTree = "<group>"; };
+		D102BF111AC11A310094B836 /* CDSideBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDSideBarController.m; sourceTree = "<group>"; };
+		D102BF121AC11A310094B836 /* menuChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuChat.png; sourceTree = "<group>"; };
+		D102BF131AC11A310094B836 /* menuClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuClose.png; sourceTree = "<group>"; };
+		D102BF141AC11A310094B836 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
+		D102BF151AC11A310094B836 /* menuMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuMap.png; sourceTree = "<group>"; };
+		D102BF161AC11A310094B836 /* menuUsers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuUsers.png; sourceTree = "<group>"; };
 		D16795B31AC10C8800BF32AF /* blue311.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = blue311.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D16795B71AC10C8800BF32AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D16795B81AC10C8800BF32AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -126,6 +139,7 @@
 				D102BF071AC10DE40094B836 /* B311HelpViewController.h */,
 				D102BEEA1AC10D780094B836 /* B311MapViewController.h */,
 				D102BEEB1AC10D780094B836 /* B311MapViewController.m */,
+				D102BF0F1AC11A310094B836 /* CDSideBarController */,
 				D102BEEC1AC10D780094B836 /* MenuViewControllers */,
 				D102BEF11AC10D780094B836 /* TutorialViewControllers */,
 			);
@@ -153,6 +167,20 @@
 				D102BEF61AC10D780094B836 /* TutorialPageContentViewController.m */,
 			);
 			path = TutorialViewControllers;
+			sourceTree = "<group>";
+		};
+		D102BF0F1AC11A310094B836 /* CDSideBarController */ = {
+			isa = PBXGroup;
+			children = (
+				D102BF101AC11A310094B836 /* CDSideBarController.h */,
+				D102BF111AC11A310094B836 /* CDSideBarController.m */,
+				D102BF121AC11A310094B836 /* menuChat.png */,
+				D102BF131AC11A310094B836 /* menuClose.png */,
+				D102BF141AC11A310094B836 /* menuIcon.png */,
+				D102BF151AC11A310094B836 /* menuMap.png */,
+				D102BF161AC11A310094B836 /* menuUsers.png */,
+			);
+			path = CDSideBarController;
 			sourceTree = "<group>";
 		};
 		D16795AA1AC10C8800BF32AF = {
@@ -298,12 +326,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D102BF1C1AC11A310094B836 /* menuUsers.png in Resources */,
 				D16795C21AC10C8800BF32AF /* Main.storyboard in Resources */,
 				D16795C71AC10C8800BF32AF /* LaunchScreen.xib in Resources */,
 				D102BEFC1AC10D780094B836 /* page3.png in Resources */,
+				D102BF191AC11A310094B836 /* menuClose.png in Resources */,
+				D102BF1A1AC11A310094B836 /* menuIcon.png in Resources */,
 				D102BEFA1AC10D780094B836 /* page1.png in Resources */,
 				D16795C41AC10C8800BF32AF /* Images.xcassets in Resources */,
 				D102BEFB1AC10D780094B836 /* page2.png in Resources */,
+				D102BF181AC11A310094B836 /* menuChat.png in Resources */,
+				D102BF1B1AC11A310094B836 /* menuMap.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +397,7 @@
 				D102BEF81AC10D780094B836 /* B311LeftDrawerTableViewCell.m in Sources */,
 				D102BEF71AC10D780094B836 /* B311MapViewController.m in Sources */,
 				D102BEFD1AC10D780094B836 /* TutorialPageContentViewController.m in Sources */,
+				D102BF171AC11A310094B836 /* CDSideBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

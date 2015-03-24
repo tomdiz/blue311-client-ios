@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CDSideBarController.h"
 
-@interface B311MapViewController : UIViewController
+@interface B311MapViewController : UIViewController <CDSideBarControllerDelegate> {
+    
+    CDSideBarController *sideBar;
+}
 
 @end

@@ -26,6 +26,7 @@
 		D102BF1A1AC11A310094B836 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF141AC11A310094B836 /* menuIcon.png */; };
 		D102BF1B1AC11A310094B836 /* menuMap.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF151AC11A310094B836 /* menuMap.png */; };
 		D102BF1C1AC11A310094B836 /* menuUsers.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF161AC11A310094B836 /* menuUsers.png */; };
+		D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF281AC12A760094B836 /* B311AppProperties.m */; };
 		D16795B91AC10C8800BF32AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795B81AC10C8800BF32AF /* main.m */; };
 		D16795BC1AC10C8800BF32AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795BB1AC10C8800BF32AF /* AppDelegate.m */; };
 		D16795C21AC10C8800BF32AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D16795C01AC10C8800BF32AF /* Main.storyboard */; };
@@ -74,6 +75,8 @@
 		D102BF141AC11A310094B836 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
 		D102BF151AC11A310094B836 /* menuMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuMap.png; sourceTree = "<group>"; };
 		D102BF161AC11A310094B836 /* menuUsers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuUsers.png; sourceTree = "<group>"; };
+		D102BF271AC12A760094B836 /* B311AppProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B311AppProperties.h; path = utils/B311AppProperties.h; sourceTree = "<group>"; };
+		D102BF281AC12A760094B836 /* B311AppProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = B311AppProperties.m; path = utils/B311AppProperties.m; sourceTree = "<group>"; };
 		D16795B31AC10C8800BF32AF /* blue311.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = blue311.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D16795B71AC10C8800BF32AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D16795B81AC10C8800BF32AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -183,6 +186,15 @@
 			path = CDSideBarController;
 			sourceTree = "<group>";
 		};
+		D102BF261AC12A430094B836 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D102BF271AC12A760094B836 /* B311AppProperties.h */,
+				D102BF281AC12A760094B836 /* B311AppProperties.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		D16795AA1AC10C8800BF32AF = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +218,7 @@
 		D16795B51AC10C8800BF32AF /* blue311 */ = {
 			isa = PBXGroup;
 			children = (
+				D102BF261AC12A430094B836 /* Utils */,
 				D102BEE91AC10D780094B836 /* ViewControllers */,
 				D16795BA1AC10C8800BF32AF /* AppDelegate.h */,
 				D16795BB1AC10C8800BF32AF /* AppDelegate.m */,
@@ -394,6 +407,7 @@
 				D102BF0C1AC10DE40094B836 /* B311HelpViewController.m in Sources */,
 				D16795B91AC10C8800BF32AF /* main.m in Sources */,
 				D102BF0A1AC10DE40094B836 /* B311SettingsViewController.m in Sources */,
+				D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */,
 				D102BEF81AC10D780094B836 /* B311LeftDrawerTableViewCell.m in Sources */,
 				D102BEF71AC10D780094B836 /* B311MapViewController.m in Sources */,
 				D102BEFD1AC10D780094B836 /* TutorialPageContentViewController.m in Sources */,

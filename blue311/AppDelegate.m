@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "JVFloatingDrawerViewController.h"
 #import "JVFloatingDrawerSpringAnimator.h"
+#import "B311AppProperties.h"
 
 static NSString * const O311MainStoryboardName = @"Main";
 
@@ -43,6 +44,9 @@ static NSString * const kO311HelpViewControllerStoryboardID = @"O311HelpViewCont
     pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     pageControl.backgroundColor = [UIColor whiteColor];
 
+    // Set up application defaults
+    [self setAppDefaults];
+    
     return YES;
 }
 
@@ -167,6 +171,11 @@ static NSString * const kO311HelpViewControllerStoryboardID = @"O311HelpViewCont
     self.drawerViewController.animator = self.drawerAnimator;
     
     self.drawerViewController.backgroundImage = [UIImage imageNamed:@"drawer_image"];
+}
+
+- (void) setAppDefaults {
+
+    [[B311AppProperties getInstance] getSideMenuState];
 }
 
 #pragma mark - Global Access Helper

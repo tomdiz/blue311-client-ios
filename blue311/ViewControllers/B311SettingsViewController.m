@@ -9,12 +9,17 @@
 #import "B311SettingsViewController.h"
 #import "JVFloatingDrawerSpringAnimator.h"
 #import "AppDelegate.h"
+#import "B311AppProperties.h"
 
 @interface B311SettingsViewController ()
 
 @property (nonatomic, strong, readonly) JVFloatingDrawerSpringAnimator *drawerAnimator;
 
+@property (weak, nonatomic) IBOutlet UISwitch *swtSideMenu;
+@property (weak, nonatomic) IBOutlet UILabel *lblSideMenuOnMap;
+
 - (IBAction)menuBurgerButtonPressed:(id)sender;
+- (IBAction)sideMenuSwitchValueChanged:(id)sender;
 
 @end
 
@@ -23,7 +28,28 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    if ([[B311AppProperties getInstance] getSideMenuState] == NO) {
+        
+        _lblSideMenuOnMap.text = @"Open Side Menu on Map";
+        [_swtSideMenu setOn:YES];
+    }
+    else {
+        
+        _lblSideMenuOnMap.text = @"Hide Side Menu on Map";
+        [_swtSideMenu setOn:NO];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,6 +71,21 @@
 - (IBAction)menuBurgerButtonPressed:(id)sender {
     
     [[AppDelegate globalDelegate] toggleLeftDrawer:self animated:YES];
+}
+
+- (IBAction)sideMenuSwitchValueChanged:(id)sender {
+
+    // Save off settings
+    if (_swtSideMenu.isOn == YES) {
+        
+        [[B311AppProperties getInstance] setSideMenuState:NO];
+        _lblSideMenuOnMap.text = @"Open Side Menu on Map";
+    }
+    else {
+        
+        [[B311AppProperties getInstance] setSideMenuState:YES];
+        _lblSideMenuOnMap.text = @"Hide Side Menu on Map";
+    }
 }
 
 #pragma mark - Helpers

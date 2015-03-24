@@ -30,5 +30,6 @@
 
 - (CDSideBarController*)initWithImages:(NSArray*)buttonList;
 - (void)insertMenuButtonOnView:(UIView*)view atPosition:(CGPoint)position;
+- (void)handleMenuState;
 
 @end

@@ -40,7 +40,6 @@
     sideBar = [[CDSideBarController alloc] initWithImages:imageList];
     sideBar.delegate = self;
     [sideBar insertMenuButtonOnView:self.view atPosition:CGPointMake(self.view.frame.size.width - 70, 50)];
-//    [self.view bringSubviewToFront:sideBar];
 
     // Tutorial Setup
     // Create the data model
@@ -63,9 +62,11 @@
     [self.pageViewController didMoveToParentViewController:self];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+    
+    [sideBar handleMenuState];
 }
 
 - (void)didReceiveMemoryWarning {

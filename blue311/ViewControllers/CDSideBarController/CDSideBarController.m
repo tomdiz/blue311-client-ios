@@ -7,6 +7,7 @@
 //
 
 #import "CDSideBarController.h"
+#import "B311AppProperties.h"
 
 @implementation CDSideBarController
 
@@ -22,10 +23,7 @@
     _menuButton.frame = CGRectMake(0, 0, 40, 40);
     [_menuButton setImage:[UIImage imageNamed:@"menuIcon.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
-    _menuButton.hidden = YES;
-    
-    [self showMenu];
-    
+
     _backgroundMenuView = [[UIView alloc] init];
     _menuColor = [UIColor whiteColor];
     _buttonList = [[NSMutableArray alloc] initWithCapacity:images.count];
@@ -44,13 +42,31 @@
     return self;
 }
 
+- (void)handleMenuState {
+
+    // Added this so that menu doesn't open - aways on side.
+    if ([[B311AppProperties getInstance] getSideMenuState] == NO) {
+        
+        _menuButton.hidden = YES;
+        [self showMenu];
+    }
+    else {
+        
+        _menuButton.hidden = NO;
+        [self dismissMenu];
+    }
+}
+
 - (void)insertMenuButtonOnView:(UIView*)view atPosition:(CGPoint)position {
     
     _menuButton.frame = CGRectMake(position.x, position.y, _menuButton.frame.size.width, _menuButton.frame.size.height);
     [view addSubview:_menuButton];
     
-    //UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissMenu)];
-    //[view addGestureRecognizer:singleTap];
+    if ([[B311AppProperties getInstance] getSideMenuState] == YES) {
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissMenu)];
+        [view addGestureRecognizer:singleTap];
+    }
     
     for (UIButton *button in _buttonList) {
         
@@ -103,7 +119,11 @@
     
     if ([self.delegate respondsToSelector:@selector(menuButtonClicked:)])
         [self.delegate menuButtonClicked:button.tag];
-    //[self dismissMenuWithSelection:button];
+
+    if ([[B311AppProperties getInstance] getSideMenuState] == YES) {
+        
+        [self dismissMenuWithSelection:button];
+    }
 }
 
 #pragma mark -

@@ -16,7 +16,6 @@
 		D102BEFC1AC10D780094B836 /* page3.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BEF41AC10D780094B836 /* page3.png */; };
 		D102BEFD1AC10D780094B836 /* TutorialPageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BEF61AC10D780094B836 /* TutorialPageContentViewController.m */; };
 		D102BF081AC10DE40094B836 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BEFE1AC10DE40094B836 /* ViewController.m */; };
-		D102BF091AC10DE40094B836 /* O311MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF001AC10DE40094B836 /* O311MapViewController.m */; };
 		D102BF0A1AC10DE40094B836 /* B311SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF021AC10DE40094B836 /* B311SettingsViewController.m */; };
 		D102BF0B1AC10DE40094B836 /* B311ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF041AC10DE40094B836 /* B311ProfileViewController.m */; };
 		D102BF0C1AC10DE40094B836 /* B311HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF061AC10DE40094B836 /* B311HelpViewController.m */; };
@@ -55,8 +54,6 @@
 		D102BEF61AC10D780094B836 /* TutorialPageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPageContentViewController.m; sourceTree = "<group>"; };
 		D102BEFE1AC10DE40094B836 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D102BEFF1AC10DE40094B836 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D102BF001AC10DE40094B836 /* O311MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = O311MapViewController.m; sourceTree = "<group>"; };
-		D102BF011AC10DE40094B836 /* O311MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = O311MapViewController.h; sourceTree = "<group>"; };
 		D102BF021AC10DE40094B836 /* B311SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311SettingsViewController.m; sourceTree = "<group>"; };
 		D102BF031AC10DE40094B836 /* B311SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311SettingsViewController.h; sourceTree = "<group>"; };
 		D102BF041AC10DE40094B836 /* B311ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311ProfileViewController.m; sourceTree = "<group>"; };
@@ -121,8 +118,6 @@
 			children = (
 				D102BEFE1AC10DE40094B836 /* ViewController.m */,
 				D102BEFF1AC10DE40094B836 /* ViewController.h */,
-				D102BF001AC10DE40094B836 /* O311MapViewController.m */,
-				D102BF011AC10DE40094B836 /* O311MapViewController.h */,
 				D102BF021AC10DE40094B836 /* B311SettingsViewController.m */,
 				D102BF031AC10DE40094B836 /* B311SettingsViewController.h */,
 				D102BF041AC10DE40094B836 /* B311ProfileViewController.m */,
@@ -364,7 +359,6 @@
 				D16795BC1AC10C8800BF32AF /* AppDelegate.m in Sources */,
 				D102BF0B1AC10DE40094B836 /* B311ProfileViewController.m in Sources */,
 				D102BF0C1AC10DE40094B836 /* B311HelpViewController.m in Sources */,
-				D102BF091AC10DE40094B836 /* O311MapViewController.m in Sources */,
 				D16795B91AC10C8800BF32AF /* main.m in Sources */,
 				D102BF0A1AC10DE40094B836 /* B311SettingsViewController.m in Sources */,
 				D102BEF81AC10D780094B836 /* B311LeftDrawerTableViewCell.m in Sources */,

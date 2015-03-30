@@ -409,9 +409,6 @@
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Side Menu on Map" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="FAA-Nk-E99">
                                 <rect key="frame" x="16" y="149" width="287" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="287" id="mKG-Vy-xIC"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="KhmerSangamMN" family="Khmer Sangam MN" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -422,21 +419,47 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="1zJ-Xc-gZQ">
+                                <rect key="frame" x="364" y="255" width="207" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="203" id="LzO-B3-0Zo"/>
+                                </constraints>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Radius" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yo-MG-m2z">
+                                <rect key="frame" x="441" y="289" width="53" height="21"/>
+                                <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map Radius Search" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="CC6-x0-gcw">
+                                <rect key="frame" x="16" y="250" width="287" height="40"/>
+                                <fontDescription key="fontDescription" name="KhmerSangamMN" family="Khmer Sangam MN" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.77069516339999999" green="0.94901960780000005" blue="0.98477983499999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="0zt-GG-32g" firstAttribute="centerX" secondItem="hMJ-nZ-3SC" secondAttribute="centerX" id="5i0-CP-MTH"/>
-                            <constraint firstItem="5Sc-CM-1W3" firstAttribute="leading" secondItem="FAA-Nk-E99" secondAttribute="leading" id="7GP-Xz-49b"/>
-                            <constraint firstItem="0zt-GG-32g" firstAttribute="top" secondItem="5Sc-CM-1W3" secondAttribute="top" id="QTc-8y-HjR"/>
-                            <constraint firstItem="5Sc-CM-1W3" firstAttribute="top" secondItem="psB-jx-uUi" secondAttribute="bottom" constant="8" symbolic="YES" id="Vbg-Xj-taU"/>
-                            <constraint firstItem="FAA-Nk-E99" firstAttribute="top" secondItem="0zt-GG-32g" secondAttribute="bottom" constant="93" id="aJM-SY-d7O"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3dv-op-bQ9" secondAttribute="trailing" constant="15" id="bHe-77-5tR"/>
-                            <constraint firstItem="FAA-Nk-E99" firstAttribute="centerY" secondItem="3dv-op-bQ9" secondAttribute="centerY" constant="0.5" id="cJ7-wI-D9K"/>
-                            <constraint firstItem="5Sc-CM-1W3" firstAttribute="leading" secondItem="hMJ-nZ-3SC" secondAttribute="leadingMargin" id="vtP-Vo-g47"/>
+                            <constraint firstItem="FAA-Nk-E99" firstAttribute="leading" secondItem="hMJ-nZ-3SC" secondAttribute="leadingMargin" id="3yH-Rb-v6P"/>
+                            <constraint firstItem="1zJ-Xc-gZQ" firstAttribute="top" secondItem="3dv-op-bQ9" secondAttribute="bottom" constant="71" id="5ar-p6-G4l"/>
+                            <constraint firstItem="FAA-Nk-E99" firstAttribute="top" secondItem="0zt-GG-32g" secondAttribute="bottom" constant="93" id="9ax-3E-GRn"/>
+                            <constraint firstItem="1zJ-Xc-gZQ" firstAttribute="leading" secondItem="CC6-x0-gcw" secondAttribute="trailing" constant="63" id="HGb-Gg-wW0"/>
+                            <constraint firstItem="CC6-x0-gcw" firstAttribute="top" secondItem="FAA-Nk-E99" secondAttribute="bottom" constant="61" id="Msi-ko-aRr"/>
+                            <constraint firstItem="FAA-Nk-E99" firstAttribute="leading" secondItem="5Sc-CM-1W3" secondAttribute="leading" id="R62-KG-sB1"/>
+                            <constraint firstItem="CC6-x0-gcw" firstAttribute="trailing" secondItem="FAA-Nk-E99" secondAttribute="trailing" id="UbP-0W-aPf"/>
+                            <constraint firstItem="FAA-Nk-E99" firstAttribute="leading" secondItem="CC6-x0-gcw" secondAttribute="leading" id="Wy7-72-ff9"/>
+                            <constraint firstItem="5Sc-CM-1W3" firstAttribute="top" secondItem="0zt-GG-32g" secondAttribute="top" id="asU-BO-RmD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3dv-op-bQ9" secondAttribute="trailing" constant="15" id="jVx-Es-yQa"/>
+                            <constraint firstItem="3dv-op-bQ9" firstAttribute="trailing" secondItem="1zJ-Xc-gZQ" secondAttribute="trailing" id="mcD-2I-e43"/>
+                            <constraint firstItem="5Sc-CM-1W3" firstAttribute="top" secondItem="psB-jx-uUi" secondAttribute="bottom" constant="8" symbolic="YES" id="uoE-c9-sZU"/>
+                            <constraint firstItem="0zt-GG-32g" firstAttribute="centerX" secondItem="hMJ-nZ-3SC" secondAttribute="centerX" id="wIS-ca-pNO"/>
+                            <constraint firstItem="1zJ-Xc-gZQ" firstAttribute="centerY" secondItem="CC6-x0-gcw" secondAttribute="centerY" id="xpy-d5-xi9"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lblRadius" destination="9yo-MG-m2z" id="Ipp-AN-HPo"/>
                         <outlet property="lblSideMenuOnMap" destination="FAA-Nk-E99" id="d8W-Se-Sae"/>
+                        <outlet property="sldRadiusSearch" destination="1zJ-Xc-gZQ" id="gq9-pS-dGv"/>
                         <outlet property="swtSideMenu" destination="3dv-op-bQ9" id="nZO-AS-SZr"/>
                     </connections>
                 </viewController>

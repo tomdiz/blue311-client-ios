@@ -17,6 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *swtSideMenu;
 @property (weak, nonatomic) IBOutlet UILabel *lblSideMenuOnMap;
+@property (weak, nonatomic) IBOutlet UISlider *sldRadiusSearch;
+@property (weak, nonatomic) IBOutlet UILabel *lblRadius;
 
 - (IBAction)menuBurgerButtonPressed:(id)sender;
 - (IBAction)sideMenuSwitchValueChanged:(id)sender;

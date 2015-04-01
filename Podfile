@@ -3,7 +3,9 @@
 
 target 'blue311' do
 
-pod "JVFloatingDrawer"
+  pod "JVFloatingDrawer"
+  pod "MBProgressHUD"
+  pod 'INTULocationManager'
 
 end
 

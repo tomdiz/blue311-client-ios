@@ -27,6 +27,9 @@
 		D102BF1B1AC11A310094B836 /* menuMap.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF151AC11A310094B836 /* menuMap.png */; };
 		D102BF1C1AC11A310094B836 /* menuUsers.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF161AC11A310094B836 /* menuUsers.png */; };
 		D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF281AC12A760094B836 /* B311AppProperties.m */; };
+		D155D4921ACC81CC008535AF /* B311Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D48F1ACC81CC008535AF /* B311Comment.m */; };
+		D155D4931ACC81CC008535AF /* B311MapDataLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D4911ACC81CC008535AF /* B311MapDataLocation.m */; };
+		D155D4961ACC81E2008535AF /* B311User.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D4951ACC81E2008535AF /* B311User.m */; };
 		D16795B91AC10C8800BF32AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795B81AC10C8800BF32AF /* main.m */; };
 		D16795BC1AC10C8800BF32AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795BB1AC10C8800BF32AF /* AppDelegate.m */; };
 		D16795C21AC10C8800BF32AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D16795C01AC10C8800BF32AF /* Main.storyboard */; };
@@ -35,8 +38,6 @@
 		D16795D31AC10C8800BF32AF /* blue311Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795D21AC10C8800BF32AF /* blue311Tests.m */; };
 		D1891A8D1ACA4276003D3103 /* B311DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1891A8C1ACA4276003D3103 /* B311DetailsViewController.m */; };
 		D1891A911ACA4E8C003D3103 /* B311Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D1891A901ACA4E8C003D3103 /* B311Data.m */; };
-		D1891A951ACA51BF003D3103 /* B311MapDataLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D1891A941ACA51BF003D3103 /* B311MapDataLocation.m */; };
-		D1891A981ACA68BB003D3103 /* B311Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = D1891A971ACA68BB003D3103 /* B311Comment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,12 @@
 		D102BF161AC11A310094B836 /* menuUsers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuUsers.png; sourceTree = "<group>"; };
 		D102BF271AC12A760094B836 /* B311AppProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B311AppProperties.h; path = utils/B311AppProperties.h; sourceTree = "<group>"; };
 		D102BF281AC12A760094B836 /* B311AppProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = B311AppProperties.m; path = utils/B311AppProperties.m; sourceTree = "<group>"; };
+		D155D48E1ACC81CC008535AF /* B311Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311Comment.h; sourceTree = "<group>"; };
+		D155D48F1ACC81CC008535AF /* B311Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311Comment.m; sourceTree = "<group>"; };
+		D155D4901ACC81CC008535AF /* B311MapDataLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311MapDataLocation.h; sourceTree = "<group>"; };
+		D155D4911ACC81CC008535AF /* B311MapDataLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311MapDataLocation.m; sourceTree = "<group>"; };
+		D155D4941ACC81E2008535AF /* B311User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311User.h; sourceTree = "<group>"; };
+		D155D4951ACC81E2008535AF /* B311User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311User.m; sourceTree = "<group>"; };
 		D16795B31AC10C8800BF32AF /* blue311.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = blue311.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D16795B71AC10C8800BF32AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D16795B81AC10C8800BF32AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -96,10 +103,6 @@
 		D1891A8C1ACA4276003D3103 /* B311DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311DetailsViewController.m; sourceTree = "<group>"; };
 		D1891A8F1ACA4E8C003D3103 /* B311Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311Data.h; sourceTree = "<group>"; };
 		D1891A901ACA4E8C003D3103 /* B311Data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311Data.m; sourceTree = "<group>"; };
-		D1891A931ACA51BF003D3103 /* B311MapDataLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311MapDataLocation.h; sourceTree = "<group>"; };
-		D1891A941ACA51BF003D3103 /* B311MapDataLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311MapDataLocation.m; sourceTree = "<group>"; };
-		D1891A961ACA68BB003D3103 /* B311Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311Comment.h; sourceTree = "<group>"; };
-		D1891A971ACA68BB003D3103 /* B311Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311Comment.m; sourceTree = "<group>"; };
 		E6D91073D1134B2EB88F6700 /* libPods-blue311.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-blue311.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -209,6 +212,19 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		D155D48D1ACC81CC008535AF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D155D48E1ACC81CC008535AF /* B311Comment.h */,
+				D155D48F1ACC81CC008535AF /* B311Comment.m */,
+				D155D4901ACC81CC008535AF /* B311MapDataLocation.h */,
+				D155D4911ACC81CC008535AF /* B311MapDataLocation.m */,
+				D155D4941ACC81E2008535AF /* B311User.h */,
+				D155D4951ACC81E2008535AF /* B311User.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		D16795AA1AC10C8800BF32AF = {
 			isa = PBXGroup;
 			children = (
@@ -232,7 +248,7 @@
 		D16795B51AC10C8800BF32AF /* blue311 */ = {
 			isa = PBXGroup;
 			children = (
-				D1891A921ACA51BF003D3103 /* Model */,
+				D155D48D1ACC81CC008535AF /* Models */,
 				D1891A8E1ACA4E8C003D3103 /* Networking */,
 				D102BF261AC12A430094B836 /* Utils */,
 				D102BEE91AC10D780094B836 /* ViewControllers */,
@@ -279,17 +295,6 @@
 				D1891A901ACA4E8C003D3103 /* B311Data.m */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		D1891A921ACA51BF003D3103 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				D1891A931ACA51BF003D3103 /* B311MapDataLocation.h */,
-				D1891A941ACA51BF003D3103 /* B311MapDataLocation.m */,
-				D1891A961ACA68BB003D3103 /* B311Comment.h */,
-				D1891A971ACA68BB003D3103 /* B311Comment.m */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,20 +443,21 @@
 			files = (
 				D102BF081AC10DE40094B836 /* ViewController.m in Sources */,
 				D102BEF91AC10D780094B836 /* B311LeftDrawerTableViewController.m in Sources */,
-				D1891A981ACA68BB003D3103 /* B311Comment.m in Sources */,
 				D16795BC1AC10C8800BF32AF /* AppDelegate.m in Sources */,
+				D155D4961ACC81E2008535AF /* B311User.m in Sources */,
 				D102BF0B1AC10DE40094B836 /* B311ProfileViewController.m in Sources */,
 				D102BF0C1AC10DE40094B836 /* B311HelpViewController.m in Sources */,
 				D16795B91AC10C8800BF32AF /* main.m in Sources */,
 				D102BF0A1AC10DE40094B836 /* B311SettingsViewController.m in Sources */,
 				D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */,
+				D155D4931ACC81CC008535AF /* B311MapDataLocation.m in Sources */,
 				D1891A8D1ACA4276003D3103 /* B311DetailsViewController.m in Sources */,
 				D102BEF81AC10D780094B836 /* B311LeftDrawerTableViewCell.m in Sources */,
-				D1891A951ACA51BF003D3103 /* B311MapDataLocation.m in Sources */,
 				D102BEF71AC10D780094B836 /* B311MapViewController.m in Sources */,
 				D102BEFD1AC10D780094B836 /* TutorialPageContentViewController.m in Sources */,
 				D1891A911ACA4E8C003D3103 /* B311Data.m in Sources */,
 				D102BF171AC11A310094B836 /* CDSideBarController.m in Sources */,
+				D155D4921ACC81CC008535AF /* B311Comment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

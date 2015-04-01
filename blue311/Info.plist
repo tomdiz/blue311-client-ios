@@ -41,5 +41,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Blue311</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Blue311</string>
+	<key>NSLocationWhenInUseUsageDescription - 2</key>
+	<string>$(PRODUCT_NAME) would like to use your location</string>
 </dict>
 </plist>

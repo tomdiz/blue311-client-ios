@@ -30,7 +30,7 @@
         typeString = @"PARKING_RIGHT";
     } 
     return typeString;
-};
+}
 
 + (B311MapDataLocationType) b311MapDataLocationTypeFromString:(NSString *)strType {
     
@@ -49,7 +49,7 @@
         type = B311MapDataLocationTypeParkingRampRight;
     }
     return type;
-};
+}
 
 + (instancetype) parse:(NSDictionary *)fields {
 

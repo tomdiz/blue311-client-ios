@@ -74,13 +74,56 @@
 
 - (IBAction)createProfileButtonPressed:(id)sender {
 
-    // Get user data and call back-end
+    if (_txtFirstName.text == nil || [_txtFirstName.text isEqualToString:@""]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Profile Error"
+                                                        message:@"Please provide a first name"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    if (_txtLastName.text == nil || [_txtLastName.text isEqualToString:@""]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Profile Error"
+                                                        message:@"Please provide a last name"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    if (_txtEmailAddress.text == nil || [_txtEmailAddress.text isEqualToString:@""]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Profile Error"
+                                                        message:@"Please provide a email address"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+
+    if (_txtHandle.text == nil || [_txtHandle.text isEqualToString:@""]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Profile Error"
+                                                        message:@"Please provide a handle"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Creating Profile For B311...";
+    hud.labelText = @"Creating Profile For Blue311...";
     hud.dimBackground = YES;
 
     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyHouse
-                                       timeout:10.0
+                                       timeout:5.0
                           delayUntilAuthorized:YES  // This parameter is optional, defaults to NO if omitted
                                          block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
                                              if (status == INTULocationStatusSuccess) {

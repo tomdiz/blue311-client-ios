@@ -40,6 +40,7 @@
 		D1891A911ACA4E8C003D3103 /* B311Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D1891A901ACA4E8C003D3103 /* B311Data.m */; };
 		D1906DCC1ACCA34C0081C041 /* B311Comments.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906DCB1ACCA34C0081C041 /* B311Comments.m */; };
 		D1906DD01ACCB14C0081C041 /* B311CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906DCF1ACCB14C0081C041 /* B311CommentTableViewCell.m */; };
+		D1906DD31ACCF4A50081C041 /* B311MapDataLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906DD21ACCF4A50081C041 /* B311MapDataLocations.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,8 @@
 		D1906DCB1ACCA34C0081C041 /* B311Comments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311Comments.m; sourceTree = "<group>"; };
 		D1906DCE1ACCB14C0081C041 /* B311CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311CommentTableViewCell.h; sourceTree = "<group>"; };
 		D1906DCF1ACCB14C0081C041 /* B311CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311CommentTableViewCell.m; sourceTree = "<group>"; };
+		D1906DD11ACCF4A50081C041 /* B311MapDataLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311MapDataLocations.h; sourceTree = "<group>"; };
+		D1906DD21ACCF4A50081C041 /* B311MapDataLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311MapDataLocations.m; sourceTree = "<group>"; };
 		E6D91073D1134B2EB88F6700 /* libPods-blue311.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-blue311.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -308,6 +311,8 @@
 			children = (
 				D1906DCA1ACCA34C0081C041 /* B311Comments.h */,
 				D1906DCB1ACCA34C0081C041 /* B311Comments.m */,
+				D1906DD11ACCF4A50081C041 /* B311MapDataLocations.h */,
+				D1906DD21ACCF4A50081C041 /* B311MapDataLocations.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -467,6 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1906DD31ACCF4A50081C041 /* B311MapDataLocations.m in Sources */,
 				D102BF081AC10DE40094B836 /* ViewController.m in Sources */,
 				D102BEF91AC10D780094B836 /* B311LeftDrawerTableViewController.m in Sources */,
 				D16795BC1AC10C8800BF32AF /* AppDelegate.m in Sources */,

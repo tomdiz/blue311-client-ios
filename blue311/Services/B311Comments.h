@@ -14,7 +14,7 @@
 
 @interface B311Comments : NSObject
 
-@property (strong, nonatomic) NSArray *userMessages;
+@property (strong, nonatomic) NSArray *userComments;
 
 + (B311Comments *)instance;
 

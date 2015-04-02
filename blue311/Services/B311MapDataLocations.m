@@ -1,41 +1,43 @@
 //
-//  B311Comments.h
+//  B311MapDataLocations.m
 //  blue311
 //
-//  Created by Thomas DiZoglio on 4/01/15.
+//  Created by Thomas DiZoglio on 4/1/15.
 //  Copyright (c) 2015 Thomas DiZoglio. All rights reserved.
 //
 
-#import "B311Comments.h"
+#import "B311MapDataLocations.h"
 #import "B311Data.h"
 
-@implementation B311Comments
+@implementation B311MapDataLocations
 
-+ (B311Comments *)instance {
++ (B311MapDataLocations *)instance {
     
-    static B311Comments *_sharedClient = nil;
+    static B311MapDataLocations *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
-        _sharedClient = [B311Comments alloc];
+        _sharedClient = [B311MapDataLocations alloc];
     });
     
     return _sharedClient;
 }
 
-- (void)getComments:(void (^)(BOOL success, NSArray *location_comments, NSString *error))completion forLocationId:(NSString *)location_id andWithHUD:(MBProgressHUD *)hud {
+- (void)getMapLocations:(void (^)(BOOL success, NSArray *mapLocations, NSString *error))completion atLatitude:(double)lat atLongitude:(double)lng forRadius:(float)radius andWithHUD:(MBProgressHUD *)hud {
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [hud setProgress:45.00/360.00];
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@comments/byid", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_locations/", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
         NSLog(@"Path: %@", path);
-
+        
         NSMutableDictionary *params  = [NSMutableDictionary new];
-        [params setValue:location_id forKey:@"location_id"];
-
+        [params setValue:[NSNumber numberWithDouble:lat] forKey:@"latitude"];
+        [params setValue:[NSNumber numberWithDouble:lng] forKey:@"longitude"];
+        [params setValue:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+        
         NSDictionary *result;
         @try {
             
@@ -43,17 +45,17 @@
         }
         @catch (NSException *exception) {
             
-            NSLog(@"Downloading comments failed with error = %@", exception.description);
+            NSLog(@"Downloading map locations failed with error = %@", exception.description);
             // Complete
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                completion(NO, nil, @"Downloading Comments Failed");
+                completion(NO, nil, @"Downloading Map Locations Failed");
             });
             return;
         }
         
-        NSLog(@"Comments: %@", result);
-
+        NSLog(@"results: %@", result);
+        
         [hud setProgress:180.00/360.00];
         
         // Check for error first
@@ -70,37 +72,52 @@
         int msgCount = [[result objectForKey:@"count"] intValue];
         int offsetMsgsToSync = msgCount;
         
-        NSMutableArray *newComments = [NSMutableArray new];
-        NSArray *comments = [result objectForKey:@"Comments"];
-        for (NSDictionary *commentJson in comments) {
+        NSMutableArray *newLocations = [NSMutableArray new];
+        NSArray *locations = [result objectForKey:@"locations"];
+        for (NSDictionary *locationJson in locations) {
             
-            NSLog(@"msgJson = %@", commentJson);
+            NSLog(@"locationJson = %@", locationJson);
             
-            B311Comment *comment = [B311Comment parse:commentJson];
-            [newComments addObject:comment];
+            B311MapDataLocation *location = [B311MapDataLocation parse:locationJson];
+            [newLocations addObject:location];
             
             offsetMsgsToSync--;
             [hud setProgress:((msgCount - offsetMsgsToSync) / (float) msgCount)];
         }
         
-        _userComments = [newComments copy];
+        _mapLocations = [newLocations copy];
         
         // Complete
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            completion(YES, [newComments copy], nil);
+            completion(YES, [newLocations copy], nil);
         });
     });
 }
 
-- (void)postComment:(void (^)(NSString *error))completion withComment:(B311Comment *)comment forUser:(B311User *)user forLocationId:(NSString *)location_id andWithHUD:(MBProgressHUD *)hud {
-    
+- (void)newMapLocation:(void (^)(NSString *error))completion atLatitude:(double)lat atLongitude:(double)lng withData:(B311MapDataLocation *)data andWithHUD:(MBProgressHUD *)hud {
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@comment", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_location_new", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"user_id": user.id, @"user_handle": user.handle, @"location_id": location_id, @"comment_subject":comment.subject, @"comment_body":comment.body }];
-
+        NSString *locationType = @"GENERAL";
+        if (data.mtype == B311MapDataLocationTypeEntrance) {
+            
+            locationType = @"ENTRANCE";
+        } else if (data.mtype == B311MapDataLocationTypeParkingRampNone) {
+            
+            locationType = @"PARKING_NONE";
+        } else if (data.mtype == B311MapDataLocationTypeParkingRampLeft) {
+            
+            locationType = @"PARKING_LEFT";
+        } else if (data.mtype == B311MapDataLocationTypeParkingRampRight) {
+            
+            locationType = @"PARKING_RIGHT";
+        } 
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"title": data.title, @"address": data.address, @"city": data.city, @"state":data.state, @"zip":data.zip, @"location_type":locationType, @"latitude":[NSNumber numberWithDouble:lat], @"longitude":[NSNumber numberWithDouble:lng] }];
+        
         @try {
             
             NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"POST" stringParameters:params];
@@ -139,13 +156,13 @@
     });
 }
 
-- (void)postCommentRatingUp:(void (^)(NSString *error))completion withCommentId:(NSString *)commentId forUser:(B311User *)user andWithHUD:(MBProgressHUD *)hud {
+- (void)updateMapLocation:(void (^)(NSString *error))completion withData:(B311MapDataLocation *)data andWithHUD:(MBProgressHUD *)hud {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@comment_up", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_location_update", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"comment_id": commentId, @"user_id": user.id }];
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"title": data.title, @"address": data.address, @"city": data.city, @"state":data.state, @"zip":data.zip }];
         
         @try {
             
@@ -179,53 +196,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                completion(@"Could not change comment rating at this time.  Please check your internet connection and try again.");
-            });
-        }
-    });
-}
-
-- (void)postCommentRatingDown:(void (^)(NSString *error))completion withCommentId:(NSString *)commentId forUser:(B311User *)user andWithHUD:(MBProgressHUD *)hud {
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@comment_down", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"comment_id": commentId, @"user_id": user.id }];
-        
-        @try {
-            
-            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"POST" stringParameters:params];
-            
-            NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:nil];
-            
-            NSLog(@"results = %@", results);
-            
-            NSString *errorMessage = [results objectForKey:@"error"];
-            if (errorMessage != nil) {
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    NSString *errorDescription = [results objectForKey:@"error_description"];
-                    completion(errorDescription);
-                });
-                
-                return;
-            }
-            else {
-                
-                // return nil on successful POST
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    completion(nil);
-                });
-            }
-        }
-        @catch (NSException *exception) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                completion(@"Could not change comment rating at this time.  Please check your internet connection and try again.");
+                completion(@"Could not post comment at this time.  Please check your internet connection and try again.");
             });
         }
     });

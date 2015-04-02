@@ -23,6 +23,9 @@ typedef NS_ENUM(NSInteger, B311MapDataLocationType) {
 @property (strong, nonatomic) NSDate *created;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *address;
+@property (strong, nonatomic) NSString *city;
+@property (strong, nonatomic) NSString *state;
+@property (strong, nonatomic) NSString *zip;
 @property (assign, nonatomic) B311MapDataLocationType mtype;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;

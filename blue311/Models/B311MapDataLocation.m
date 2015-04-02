@@ -64,6 +64,9 @@
 
     message.title = fields[@"title"];
     message.address = fields[@"address"];
+    message.city = fields[@"city"];
+    message.state = fields[@"state"];
+    message.zip = fields[@"zip"];
     message.mtype = [self b311MapDataLocationTypeFromString:fields[@"mtype"]];
 
     message.latitude = [fields[@"latitude"] doubleValue];

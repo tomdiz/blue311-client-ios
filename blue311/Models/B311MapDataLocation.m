@@ -62,20 +62,12 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     message.created = [dateFormat dateFromString:fields[@"created"]];
 
-    message.subject = fields[@"subject"];
-    message.body = fields[@"body"];
-    message.threadId = fields[@"thread_id"];
+    message.title = fields[@"title"];
+    message.address = fields[@"address"];
     message.mtype = [self b311MapDataLocationTypeFromString:fields[@"mtype"]];
-    message.is_read = [fields[@"is_read"] boolValue];
-    message.is_archived = [fields[@"is_archived"] boolValue];
-    message.listing_id = fields[@"listing_id"];
-    message.booking_id = fields[@"booking_id"];
-    
-    NSDictionary *space_info = fields[@"space"];
-    message.space_id = space_info[@"id"];
-    NSDictionary *space_loc = space_info[@"loc"];
-    message.space_lat = [space_loc[@"lat"] doubleValue];
-    message.space_lng = [space_loc[@"lon"] doubleValue];
+
+    message.latitude = [fields[@"latitude"] doubleValue];
+    message.longitude = [fields[@"longitude"] doubleValue];
 
     return message;
 }

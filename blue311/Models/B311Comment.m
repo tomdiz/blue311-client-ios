@@ -16,14 +16,21 @@
     B311Comment *comment = [B311Comment new];
     
     comment.id = fields[@"id"];
-    
+
+    comment.user_handle = fields[@"user_handle"];
+
+    comment.b311MapDataLocationId = fields[@"location_id"];
+
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     comment.created = [dateFormat dateFromString:fields[@"created"]];
     
     comment.subject = fields[@"subject"];
     comment.body = fields[@"body"];
-    
+
+    comment.rating_down = [fields[@"rating_down"] intValue];
+    comment.rating_up = [fields[@"rating_up"] intValue];
+
     return comment;
 }
 

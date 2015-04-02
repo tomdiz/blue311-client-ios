@@ -21,18 +21,11 @@ typedef NS_ENUM(NSInteger, B311MapDataLocationType) {
 
 @property (strong, nonatomic) NSString *id;
 @property (strong, nonatomic) NSDate *created;
-@property (strong, nonatomic) NSString *subject;
-@property (strong, nonatomic) NSString *body;
-@property (strong, nonatomic) NSString *threadId;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *address;
 @property (assign, nonatomic) B311MapDataLocationType mtype;
-@property (assign, nonatomic) BOOL is_read;
-@property (assign, nonatomic) BOOL is_archived;
-@property (strong, nonatomic) NSString *listing_id;
-@property (strong, nonatomic) NSString *booking_id;
-
-@property (strong, nonatomic) NSString *space_id;
-@property (nonatomic) double space_lat;
-@property (nonatomic) double space_lng;
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
 
 + (B311MapDataLocationType) b311MapDataLocationTypeFromString:(NSString *)strType;
 + (NSString *)stringB311MapDataLocationType:(B311MapDataLocationType)type;

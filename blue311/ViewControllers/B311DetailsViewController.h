@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface B311DetailsViewController : UIViewController
+@interface B311DetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

@@ -54,25 +54,25 @@
 + (instancetype) parse:(NSDictionary *)fields {
 
     NSLog(@"fields = %@", fields);
-    B311MapDataLocation *message = [B311MapDataLocation new];
+    B311MapDataLocation *location = [B311MapDataLocation new];
     
-    message.id = fields[@"id"];
+    location.id = fields[@"id"];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
-    message.created = [dateFormat dateFromString:fields[@"created"]];
+    location.created = [dateFormat dateFromString:fields[@"created"]];
 
-    message.title = fields[@"title"];
-    message.address = fields[@"address"];
-    message.city = fields[@"city"];
-    message.state = fields[@"state"];
-    message.zip = fields[@"zip"];
-    message.mtype = [self b311MapDataLocationTypeFromString:fields[@"mtype"]];
+    location.title = fields[@"title"];
+    location.address = fields[@"address"];
+    location.city = fields[@"city"];
+    location.state = fields[@"state"];
+    location.zip = fields[@"zip"];
+    location.mtype = [self b311MapDataLocationTypeFromString:fields[@"mtype"]];
 
-    message.latitude = [fields[@"latitude"] doubleValue];
-    message.longitude = [fields[@"longitude"] doubleValue];
+    location.latitude = [fields[@"latitude"] doubleValue];
+    location.longitude = [fields[@"longitude"] doubleValue];
 
-    return message;
+    return location;
 }
 
 @end

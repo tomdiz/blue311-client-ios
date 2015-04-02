@@ -223,7 +223,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kpn-85-Q4s">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kpn-85-Q4s">
                                         <rect key="frame" x="85" y="210" width="431" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -307,7 +307,7 @@
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKx-i9-Gj9">
                                         <rect key="frame" x="532" y="132" width="40" height="40"/>
-                                        <state key="normal" title="Button" image="edit-details-image">
+                                        <state key="normal" title="Button" image="details-edit-image">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -316,7 +316,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hO3-fc-ggq">
                                         <rect key="frame" x="532" y="200" width="40" height="40"/>
-                                        <state key="normal" title="Button" image="edit-details-image">
+                                        <state key="normal" title="Button" image="details-edit-image">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -325,7 +325,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03p-wU-5w3">
                                         <rect key="frame" x="532" y="270" width="40" height="40"/>
-                                        <state key="normal" image="edit-details-image">
+                                        <state key="normal" image="details-edit-image">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -334,7 +334,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ljq-ek-yR6">
                                         <rect key="frame" x="532" y="345" width="40" height="40"/>
-                                        <state key="normal" title="Button" image="edit-details-image">
+                                        <state key="normal" title="Button" image="details-edit-image">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -343,11 +343,20 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uc7-D6-RBG">
                                         <rect key="frame" x="532" y="414" width="40" height="40"/>
-                                        <state key="normal" title="Button" image="edit-details-image">
+                                        <state key="normal" title="Button" image="details-edit-image">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="zipEditButtonPressed:" destination="Ttg-WY-Fd5" eventType="touchUpInside" id="W4G-Ko-sMw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJ1-aw-dgF">
+                                        <rect key="frame" x="532" y="28" width="40" height="40"/>
+                                        <state key="normal" image="details-close-image">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeButtonPressed:" destination="Ttg-WY-Fd5" eventType="touchUpInside" id="mtA-XD-noX"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TVo-l2-ZEG">
@@ -365,9 +374,9 @@
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
                         <outlet property="tblComments" destination="SMS-tN-eUA" id="U7l-GE-kLv"/>
+                        <outlet property="txtAddress" destination="kpn-85-Q4s" id="MuG-h6-qoI"/>
                         <outlet property="txtCity" destination="TVo-l2-ZEG" id="FRi-oO-KCp"/>
                         <outlet property="txtState" destination="iE1-bf-4SF" id="0w0-g6-s0O"/>
-                        <outlet property="txtStreet" destination="kpn-85-Q4s" id="zpK-dJ-tyj"/>
                         <outlet property="txtTitle" destination="nk7-B2-UNd" id="bup-w9-aGQ"/>
                         <outlet property="txtZip" destination="N4O-8f-o29" id="2Oy-WU-0Fc"/>
                     </connections>
@@ -689,7 +698,8 @@
         <image name="btn_burger_menu" width="28" height="20"/>
         <image name="comment_arrow_down" width="40" height="40"/>
         <image name="comment_arrow_up" width="40" height="40"/>
-        <image name="edit-details-image" width="40" height="40"/>
+        <image name="details-close-image" width="40" height="40"/>
+        <image name="details-edit-image" width="40" height="40"/>
         <image name="launch_image" width="128" height="128"/>
     </resources>
 </document>

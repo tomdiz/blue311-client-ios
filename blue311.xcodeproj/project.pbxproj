@@ -47,6 +47,7 @@
 		D1906E3B1ACE7E1A0081C041 /* map_annotation_parking_left.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E361ACE7E1A0081C041 /* map_annotation_parking_left.png */; };
 		D1906E3C1ACE7E1A0081C041 /* map_annotation_parking_no.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E371ACE7E1A0081C041 /* map_annotation_parking_no.png */; };
 		D1906E3D1ACE7E1A0081C041 /* map_annotation_parking_right.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E381ACE7E1A0081C041 /* map_annotation_parking_right.png */; };
+		D1906E521ACE91E90081C041 /* B311ParkingGeoFences.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906E511ACE91E90081C041 /* B311ParkingGeoFences.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,8 @@
 		D1906E361ACE7E1A0081C041 /* map_annotation_parking_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_left.png; sourceTree = "<group>"; };
 		D1906E371ACE7E1A0081C041 /* map_annotation_parking_no.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_no.png; sourceTree = "<group>"; };
 		D1906E381ACE7E1A0081C041 /* map_annotation_parking_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_right.png; sourceTree = "<group>"; };
+		D1906E501ACE91E90081C041 /* B311ParkingGeoFences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311ParkingGeoFences.h; sourceTree = "<group>"; };
+		D1906E511ACE91E90081C041 /* B311ParkingGeoFences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311ParkingGeoFences.m; sourceTree = "<group>"; };
 		E6D91073D1134B2EB88F6700 /* libPods-blue311.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-blue311.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -325,6 +328,8 @@
 				D1906DCB1ACCA34C0081C041 /* B311Comments.m */,
 				D1906DD11ACCF4A50081C041 /* B311MapDataLocations.h */,
 				D1906DD21ACCF4A50081C041 /* B311MapDataLocations.m */,
+				D1906E501ACE91E90081C041 /* B311ParkingGeoFences.h */,
+				D1906E511ACE91E90081C041 /* B311ParkingGeoFences.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -520,6 +525,7 @@
 				D1906DCC1ACCA34C0081C041 /* B311Comments.m in Sources */,
 				D102BF0B1AC10DE40094B836 /* B311ProfileViewController.m in Sources */,
 				D102BF0C1AC10DE40094B836 /* B311HelpViewController.m in Sources */,
+				D1906E521ACE91E90081C041 /* B311ParkingGeoFences.m in Sources */,
 				D16795B91AC10C8800BF32AF /* main.m in Sources */,
 				D102BF0A1AC10DE40094B836 /* B311SettingsViewController.m in Sources */,
 				D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */,

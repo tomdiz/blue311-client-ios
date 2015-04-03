@@ -12,6 +12,8 @@
 #import "JVFloatingDrawerSpringAnimator.h"
 #import "AppDelegate.h"
 #import "TutorialPageContentViewController.h"
+#import "B311MapDataLocations.h"
+#import "B311AppProperties.h"
 
 @interface B311MapViewController () <UIPageViewControllerDataSource>
 
@@ -35,6 +37,58 @@
     [super viewDidLoad];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipTutorial:) name:@"skipTutorial" object:nil];
+
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Updating Location Data...";
+    hud.dimBackground = YES;
+    
+    // Get current location to add icon to the map
+    [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyCity
+                                                                     timeout:10.0
+                                                        delayUntilAuthorized:YES
+                                                                       block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+
+                                                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
+                                                                           if (status == INTULocationStatusSuccess) {
+
+                                                                               // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
+                                                                               // currentLocation contains the device's current location.
+                                                                               [[B311MapDataLocations instance] getMapLocations:^(BOOL success, NSArray *mapLocations, NSString *error) {
+
+                                                                                   if (!error) {
+                                                                                       
+                                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Location Data API Error"
+                                                                                                                                           message:error
+                                                                                                                                          delegate:nil
+                                                                                                                                 cancelButtonTitle:@"OK"
+                                                                                                                                 otherButtonTitles:nil];
+                                                                                       [alertView show];
+                                                                                   } else {
+                                                                                       
+                                                                                       // UPDATE THE MAP ANNOTATIONS WITH ARRAY RETURNED FOR BACK-END
+                                                                                       
+                                                                                       //UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Location"
+                                                                                       //                                                     message:@"Location data has been updated."
+                                                                                       //                                                    delegate:nil
+                                                                                       //                                           cancelButtonTitle:@"OK"
+                                                                                       //                                           otherButtonTitles:nil];
+                                                                                       //[alertView show];
+                                                                                   }
+                                                                                   
+                                                                               } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:hud];
+                                                                           }
+                                                                           else if (status == INTULocationStatusTimedOut) {
+                                                                               
+                                                                               // Wasn't able to locate the user with the requested accuracy within the timeout interval.
+                                                                               // However, currentLocation contains the best location available (if any) as of right now,
+                                                                               // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
+                                                                           }
+                                                                           else {
+                                                                               
+                                                                               // An error occurred, more info is available by looking at the specific status returned.
+                                                                           }
+                                                                       }];
 
     // Side menu bar - Parking - Parking Ramp, Entrance and General
     NSArray *imageList = @[[UIImage imageNamed:@"handicap-ramp-no.png"], [UIImage imageNamed:@"handicap-ramp-left.png"], [UIImage imageNamed:@"handicap-ramp-right.png"], [UIImage imageNamed:@"entrance.png"], [UIImage imageNamed:@"general.png"]];
@@ -168,11 +222,19 @@
 
 - (void)menuButtonClicked:(long)index {
 
+    // NOTE: index values
+    //      0 -> handicap-ramp-no
+    //      1 -> handicap-ramp-left
+    //      2 -> handicap-ramp-right
+    //      3 -> entrance
+    //      4 -> general
+    
     // Get current location to add icon to the map
     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom
                                        timeout:10.0
                           delayUntilAuthorized:YES
                                          block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                                             
                                              if (status == INTULocationStatusSuccess) {
                                                  
                                                  // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
@@ -188,6 +250,7 @@
                                                  
                                                  // An error occurred, more info is available by looking at the specific status returned.
                                              }
-                                         }];}
+                                         }];
+}
 
 @end

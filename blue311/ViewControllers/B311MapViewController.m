@@ -7,6 +7,7 @@
 //
 
 #import <MapKit/MapKit.h>
+#import <INTULocationManager/INTULocationManager.h>
 #import "B311MapViewController.h"
 #import "JVFloatingDrawerSpringAnimator.h"
 #import "AppDelegate.h"
@@ -36,7 +37,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipTutorial:) name:@"skipTutorial" object:nil];
 
     // Side menu bar - Parking - Parking Ramp, Entrance and General
-    NSArray *imageList = @[[UIImage imageNamed:@"menuChat.png"], [UIImage imageNamed:@"menuUsers.png"], [UIImage imageNamed:@"menuMap.png"], [UIImage imageNamed:@"menuClose.png"]];
+    NSArray *imageList = @[[UIImage imageNamed:@"handicap-ramp-no.png"], [UIImage imageNamed:@"handicap-ramp-left.png"], [UIImage imageNamed:@"handicap-ramp-right.png"], [UIImage imageNamed:@"entrance.png"], [UIImage imageNamed:@"general.png"]];
     sideBar = [[CDSideBarController alloc] initWithImages:imageList];
     sideBar.delegate = self;
     [sideBar insertMenuButtonOnView:self.view atPosition:CGPointMake(self.view.frame.size.width - 70, 50)];
@@ -166,8 +167,27 @@
 #pragma mark - CDSideBarController delegate
 
 - (void)menuButtonClicked:(long)index {
-    
-    // Execute what ever you want
-}
+
+    // Get current location to add icon to the map
+    [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom
+                                       timeout:10.0
+                          delayUntilAuthorized:YES
+                                         block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                                             if (status == INTULocationStatusSuccess) {
+                                                 
+                                                 // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
+                                                 // currentLocation contains the device's current location.
+                                             }
+                                             else if (status == INTULocationStatusTimedOut) {
+                                                 
+                                                 // Wasn't able to locate the user with the requested accuracy within the timeout interval.
+                                                 // However, currentLocation contains the best location available (if any) as of right now,
+                                                 // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
+                                             }
+                                             else {
+                                                 
+                                                 // An error occurred, more info is available by looking at the specific status returned.
+                                             }
+                                         }];}
 
 @end

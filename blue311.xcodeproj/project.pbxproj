@@ -21,11 +21,7 @@
 		D102BF0C1AC10DE40094B836 /* B311HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF061AC10DE40094B836 /* B311HelpViewController.m */; };
 		D102BF0E1AC10FC30094B836 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D102BF0D1AC10FC30094B836 /* MapKit.framework */; };
 		D102BF171AC11A310094B836 /* CDSideBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF111AC11A310094B836 /* CDSideBarController.m */; };
-		D102BF181AC11A310094B836 /* menuChat.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF121AC11A310094B836 /* menuChat.png */; };
-		D102BF191AC11A310094B836 /* menuClose.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF131AC11A310094B836 /* menuClose.png */; };
 		D102BF1A1AC11A310094B836 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF141AC11A310094B836 /* menuIcon.png */; };
-		D102BF1B1AC11A310094B836 /* menuMap.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF151AC11A310094B836 /* menuMap.png */; };
-		D102BF1C1AC11A310094B836 /* menuUsers.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF161AC11A310094B836 /* menuUsers.png */; };
 		D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF281AC12A760094B836 /* B311AppProperties.m */; };
 		D155D4921ACC81CC008535AF /* B311Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D48F1ACC81CC008535AF /* B311Comment.m */; };
 		D155D4931ACC81CC008535AF /* B311MapDataLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D4911ACC81CC008535AF /* B311MapDataLocation.m */; };
@@ -41,6 +37,11 @@
 		D1906DCC1ACCA34C0081C041 /* B311Comments.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906DCB1ACCA34C0081C041 /* B311Comments.m */; };
 		D1906DD01ACCB14C0081C041 /* B311CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906DCF1ACCB14C0081C041 /* B311CommentTableViewCell.m */; };
 		D1906DD31ACCF4A50081C041 /* B311MapDataLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906DD21ACCF4A50081C041 /* B311MapDataLocations.m */; };
+		D1906DD51ACDB5490081C041 /* entrance.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906DD41ACDB5490081C041 /* entrance.png */; };
+		D1906DD71ACDB6F80081C041 /* general.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906DD61ACDB6F80081C041 /* general.png */; };
+		D1906DDB1ACDBAD60081C041 /* handicap-ramp-left.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906DD81ACDBAD60081C041 /* handicap-ramp-left.png */; };
+		D1906DDC1ACDBAD60081C041 /* handicap-ramp-no.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906DD91ACDBAD60081C041 /* handicap-ramp-no.png */; };
+		D1906DDD1ACDBAD60081C041 /* handicap-ramp-right.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906DDA1ACDBAD60081C041 /* handicap-ramp-right.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,11 +79,7 @@
 		D102BF0D1AC10FC30094B836 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D102BF101AC11A310094B836 /* CDSideBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSideBarController.h; sourceTree = "<group>"; };
 		D102BF111AC11A310094B836 /* CDSideBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDSideBarController.m; sourceTree = "<group>"; };
-		D102BF121AC11A310094B836 /* menuChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuChat.png; sourceTree = "<group>"; };
-		D102BF131AC11A310094B836 /* menuClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuClose.png; sourceTree = "<group>"; };
 		D102BF141AC11A310094B836 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
-		D102BF151AC11A310094B836 /* menuMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuMap.png; sourceTree = "<group>"; };
-		D102BF161AC11A310094B836 /* menuUsers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuUsers.png; sourceTree = "<group>"; };
 		D102BF271AC12A760094B836 /* B311AppProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B311AppProperties.h; path = utils/B311AppProperties.h; sourceTree = "<group>"; };
 		D102BF281AC12A760094B836 /* B311AppProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = B311AppProperties.m; path = utils/B311AppProperties.m; sourceTree = "<group>"; };
 		D155D48E1ACC81CC008535AF /* B311Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311Comment.h; sourceTree = "<group>"; };
@@ -112,6 +109,11 @@
 		D1906DCF1ACCB14C0081C041 /* B311CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311CommentTableViewCell.m; sourceTree = "<group>"; };
 		D1906DD11ACCF4A50081C041 /* B311MapDataLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311MapDataLocations.h; sourceTree = "<group>"; };
 		D1906DD21ACCF4A50081C041 /* B311MapDataLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311MapDataLocations.m; sourceTree = "<group>"; };
+		D1906DD41ACDB5490081C041 /* entrance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = entrance.png; sourceTree = "<group>"; };
+		D1906DD61ACDB6F80081C041 /* general.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = general.png; sourceTree = "<group>"; };
+		D1906DD81ACDBAD60081C041 /* handicap-ramp-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "handicap-ramp-left.png"; sourceTree = "<group>"; };
+		D1906DD91ACDBAD60081C041 /* handicap-ramp-no.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "handicap-ramp-no.png"; sourceTree = "<group>"; };
+		D1906DDA1ACDBAD60081C041 /* handicap-ramp-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "handicap-ramp-right.png"; sourceTree = "<group>"; };
 		E6D91073D1134B2EB88F6700 /* libPods-blue311.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-blue311.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -200,13 +202,14 @@
 		D102BF0F1AC11A310094B836 /* CDSideBarController */ = {
 			isa = PBXGroup;
 			children = (
+				D1906DD81ACDBAD60081C041 /* handicap-ramp-left.png */,
+				D1906DD91ACDBAD60081C041 /* handicap-ramp-no.png */,
+				D1906DDA1ACDBAD60081C041 /* handicap-ramp-right.png */,
+				D1906DD61ACDB6F80081C041 /* general.png */,
+				D1906DD41ACDB5490081C041 /* entrance.png */,
 				D102BF101AC11A310094B836 /* CDSideBarController.h */,
 				D102BF111AC11A310094B836 /* CDSideBarController.m */,
-				D102BF121AC11A310094B836 /* menuChat.png */,
-				D102BF131AC11A310094B836 /* menuClose.png */,
 				D102BF141AC11A310094B836 /* menuIcon.png */,
-				D102BF151AC11A310094B836 /* menuMap.png */,
-				D102BF161AC11A310094B836 /* menuUsers.png */,
 			);
 			path = CDSideBarController;
 			sourceTree = "<group>";
@@ -411,17 +414,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D102BF1C1AC11A310094B836 /* menuUsers.png in Resources */,
 				D16795C21AC10C8800BF32AF /* Main.storyboard in Resources */,
 				D16795C71AC10C8800BF32AF /* LaunchScreen.xib in Resources */,
+				D1906DDD1ACDBAD60081C041 /* handicap-ramp-right.png in Resources */,
+				D1906DD51ACDB5490081C041 /* entrance.png in Resources */,
 				D102BEFC1AC10D780094B836 /* page3.png in Resources */,
-				D102BF191AC11A310094B836 /* menuClose.png in Resources */,
+				D1906DDC1ACDBAD60081C041 /* handicap-ramp-no.png in Resources */,
 				D102BF1A1AC11A310094B836 /* menuIcon.png in Resources */,
+				D1906DD71ACDB6F80081C041 /* general.png in Resources */,
 				D102BEFA1AC10D780094B836 /* page1.png in Resources */,
 				D16795C41AC10C8800BF32AF /* Images.xcassets in Resources */,
+				D1906DDB1ACDBAD60081C041 /* handicap-ramp-left.png in Resources */,
 				D102BEFB1AC10D780094B836 /* page2.png in Resources */,
-				D102BF181AC11A310094B836 /* menuChat.png in Resources */,
-				D102BF1B1AC11A310094B836 /* menuMap.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

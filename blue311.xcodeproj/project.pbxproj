@@ -42,6 +42,11 @@
 		D1906DDB1ACDBAD60081C041 /* handicap-ramp-left.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906DD81ACDBAD60081C041 /* handicap-ramp-left.png */; };
 		D1906DDC1ACDBAD60081C041 /* handicap-ramp-no.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906DD91ACDBAD60081C041 /* handicap-ramp-no.png */; };
 		D1906DDD1ACDBAD60081C041 /* handicap-ramp-right.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906DDA1ACDBAD60081C041 /* handicap-ramp-right.png */; };
+		D1906E391ACE7E1A0081C041 /* map_annotation_entrance.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E341ACE7E1A0081C041 /* map_annotation_entrance.png */; };
+		D1906E3A1ACE7E1A0081C041 /* map_annotation_general.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E351ACE7E1A0081C041 /* map_annotation_general.png */; };
+		D1906E3B1ACE7E1A0081C041 /* map_annotation_parking_left.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E361ACE7E1A0081C041 /* map_annotation_parking_left.png */; };
+		D1906E3C1ACE7E1A0081C041 /* map_annotation_parking_no.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E371ACE7E1A0081C041 /* map_annotation_parking_no.png */; };
+		D1906E3D1ACE7E1A0081C041 /* map_annotation_parking_right.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E381ACE7E1A0081C041 /* map_annotation_parking_right.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +119,11 @@
 		D1906DD81ACDBAD60081C041 /* handicap-ramp-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "handicap-ramp-left.png"; sourceTree = "<group>"; };
 		D1906DD91ACDBAD60081C041 /* handicap-ramp-no.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "handicap-ramp-no.png"; sourceTree = "<group>"; };
 		D1906DDA1ACDBAD60081C041 /* handicap-ramp-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "handicap-ramp-right.png"; sourceTree = "<group>"; };
+		D1906E341ACE7E1A0081C041 /* map_annotation_entrance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_entrance.png; sourceTree = "<group>"; };
+		D1906E351ACE7E1A0081C041 /* map_annotation_general.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_general.png; sourceTree = "<group>"; };
+		D1906E361ACE7E1A0081C041 /* map_annotation_parking_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_left.png; sourceTree = "<group>"; };
+		D1906E371ACE7E1A0081C041 /* map_annotation_parking_no.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_no.png; sourceTree = "<group>"; };
+		D1906E381ACE7E1A0081C041 /* map_annotation_parking_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_right.png; sourceTree = "<group>"; };
 		E6D91073D1134B2EB88F6700 /* libPods-blue311.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-blue311.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -158,6 +168,7 @@
 		D102BEE91AC10D780094B836 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D1906E321ACE7DCD0081C041 /* Map */,
 				D102BEFE1AC10DE40094B836 /* ViewController.m */,
 				D102BEFF1AC10DE40094B836 /* ViewController.h */,
 				D102BF031AC10DE40094B836 /* B311SettingsViewController.h */,
@@ -166,8 +177,6 @@
 				D102BF041AC10DE40094B836 /* B311ProfileViewController.m */,
 				D102BF071AC10DE40094B836 /* B311HelpViewController.h */,
 				D102BF061AC10DE40094B836 /* B311HelpViewController.m */,
-				D102BEEA1AC10D780094B836 /* B311MapViewController.h */,
-				D102BEEB1AC10D780094B836 /* B311MapViewController.m */,
 				D1906DCD1ACCB0280081C041 /* Location Details */,
 				D102BF0F1AC11A310094B836 /* CDSideBarController */,
 				D102BEEC1AC10D780094B836 /* MenuViewControllers */,
@@ -331,6 +340,28 @@
 			name = "Location Details";
 			sourceTree = "<group>";
 		};
+		D1906E321ACE7DCD0081C041 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				D1906E331ACE7E1A0081C041 /* map_annotation_art */,
+				D102BEEA1AC10D780094B836 /* B311MapViewController.h */,
+				D102BEEB1AC10D780094B836 /* B311MapViewController.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		D1906E331ACE7E1A0081C041 /* map_annotation_art */ = {
+			isa = PBXGroup;
+			children = (
+				D1906E341ACE7E1A0081C041 /* map_annotation_entrance.png */,
+				D1906E351ACE7E1A0081C041 /* map_annotation_general.png */,
+				D1906E361ACE7E1A0081C041 /* map_annotation_parking_left.png */,
+				D1906E371ACE7E1A0081C041 /* map_annotation_parking_no.png */,
+				D1906E381ACE7E1A0081C041 /* map_annotation_parking_right.png */,
+			);
+			path = map_annotation_art;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -414,6 +445,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1906E3A1ACE7E1A0081C041 /* map_annotation_general.png in Resources */,
 				D16795C21AC10C8800BF32AF /* Main.storyboard in Resources */,
 				D16795C71AC10C8800BF32AF /* LaunchScreen.xib in Resources */,
 				D1906DDD1ACDBAD60081C041 /* handicap-ramp-right.png in Resources */,
@@ -422,10 +454,14 @@
 				D1906DDC1ACDBAD60081C041 /* handicap-ramp-no.png in Resources */,
 				D102BF1A1AC11A310094B836 /* menuIcon.png in Resources */,
 				D1906DD71ACDB6F80081C041 /* general.png in Resources */,
+				D1906E3D1ACE7E1A0081C041 /* map_annotation_parking_right.png in Resources */,
+				D1906E3B1ACE7E1A0081C041 /* map_annotation_parking_left.png in Resources */,
 				D102BEFA1AC10D780094B836 /* page1.png in Resources */,
+				D1906E391ACE7E1A0081C041 /* map_annotation_entrance.png in Resources */,
 				D16795C41AC10C8800BF32AF /* Images.xcassets in Resources */,
 				D1906DDB1ACDBAD60081C041 /* handicap-ramp-left.png in Resources */,
 				D102BEFB1AC10D780094B836 /* page2.png in Resources */,
+				D1906E3C1ACE7E1A0081C041 /* map_annotation_parking_no.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

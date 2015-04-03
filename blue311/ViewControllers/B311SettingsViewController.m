@@ -22,6 +22,7 @@
 
 - (IBAction)menuBurgerButtonPressed:(id)sender;
 - (IBAction)sideMenuSwitchValueChanged:(id)sender;
+- (IBAction)radiusValueChanged:(UISlider *)sender;
 
 @end
 
@@ -88,6 +89,13 @@
         [[B311AppProperties getInstance] setSideMenuState:YES];
         _lblSideMenuOnMap.text = @"Hide Side Menu on Map";
     }
+}
+
+- (IBAction)radiusValueChanged:(UISlider *)sender {
+    
+    // lblRadius miles
+    NSLog(@"slider value = %f", sender.value);
+    _lblRadius.text = [NSString stringWithFormat:@"%d miles", (int)sender.value];
 }
 
 #pragma mark - Helpers

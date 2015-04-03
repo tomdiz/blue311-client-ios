@@ -12,7 +12,10 @@
 
 +(B311AppProperties *) getInstance;
 
-- (BOOL) getSideMenuState;
-- (void) setSideMenuState:(BOOL)state;
+- (BOOL)getSideMenuState;
+- (void)setSideMenuState:(BOOL)state;
+
+- (float)getMapRadius;
+- (void)setMapRadius:(float)radius;
 
 @end

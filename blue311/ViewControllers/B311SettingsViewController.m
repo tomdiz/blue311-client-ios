@@ -47,6 +47,8 @@
         _lblSideMenuOnMap.text = @"Hide Side Menu on Map";
         [_swtSideMenu setOn:NO];
     }
+
+    _lblRadius.text = [NSString stringWithFormat:@"%d", (int)[[B311AppProperties getInstance] getMapRadius]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -93,9 +95,9 @@
 
 - (IBAction)radiusValueChanged:(UISlider *)sender {
     
-    // lblRadius miles
-    NSLog(@"slider value = %f", sender.value);
+    //NSLog(@"slider value = %f", sender.value);
     _lblRadius.text = [NSString stringWithFormat:@"%d miles", (int)sender.value];
+    [[B311AppProperties getInstance] setMapRadius:(float)sender.value];
 }
 
 #pragma mark - Helpers

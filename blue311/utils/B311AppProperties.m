@@ -12,7 +12,7 @@
 
 static B311AppProperties * shared = nil;
 
-+(B311AppProperties *) getInstance {
++ (B311AppProperties *)getInstance {
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -26,7 +26,7 @@ static B311AppProperties * shared = nil;
     return shared;
 }
 
--(id)init {
+- (id)init {
     
     self = [super init];
     if (self) {
@@ -41,13 +41,15 @@ static B311AppProperties * shared = nil;
     return self;
 }
 
-- (void) initAppProperties {
+- (void)initAppProperties {
     
     [[NSUserDefaults standardUserDefaults] setObject:@"hide" forKey:@"sideMenuBarState"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:2.0] forKey:@"map_radius"];
+
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (BOOL) getSideMenuState {
+- (BOOL)getSideMenuState {
 
     NSString *menuBarState = [[NSUserDefaults standardUserDefaults] objectForKey:@"sideMenuBarState"];
     if ([menuBarState isEqualToString:@"hide"]) {
@@ -60,7 +62,7 @@ static B311AppProperties * shared = nil;
     }
 }
 
-- (void) setSideMenuState:(BOOL)state {
+- (void)setSideMenuState:(BOOL)state {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -74,6 +76,18 @@ static B311AppProperties * shared = nil;
     }
     
     [defaults synchronize];
+}
+
+- (float)getMapRadius {
+    
+    float radius = [[[NSUserDefaults standardUserDefaults] objectForKey:@"map_radius"] floatValue];
+    return radius;
+}
+
+- (void)setMapRadius:(float)radius {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:radius] forKey:@"map_radius"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

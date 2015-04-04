@@ -19,6 +19,7 @@
 @interface B311MapViewController () <UIPageViewControllerDataSource> {
     
     NSArray *geoFences;
+    NSMutableArray *currentGeoFences;
 }
 
 @property (nonatomic, strong, readonly) JVFloatingDrawerSpringAnimator *drawerAnimator;
@@ -41,6 +42,8 @@
     [super viewDidLoad];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipTutorial:) name:@"skipTutorial" object:nil];
+
+    currentGeoFences = [NSMutableArray new];
     
     // Initialize Location Manager
     _locationManager = [[CLLocationManager alloc] init];
@@ -297,17 +300,22 @@
             
             geoFences = [B311GeoFenceLocations instance].geoFenceLocations;
 
-            if (locations && [locations count]) {
-                // Update Helper
-                //_didStartMonitoringRegion = YES;
+            if (geoFences && [geoFences count]) {
                 
-                // NOTE: Adding same region UUID will remove it.
+                // Clear old regions by passing in same UUID region identifier
+                for (B311GeoFence *geoFence in currentGeoFences) {
+                    
+                    [currentGeoFences removeObject:geoFence];
+                    [_locationManager startMonitoringForRegion:geoFence.region];
+                }
+
+                for (B311GeoFence *geoFence in geoFences) {
+                    
+                    [currentGeoFences addObject:geoFence];
+                    [_locationManager startMonitoringForRegion:geoFence.region];
+                }
                 
-                // Initialize Region to Monitor - we have region in GeoFence object - already created when read in
-                CLRegion *region = [[CLRegion alloc] initCircularRegionWithCenter:[location coordinate] radius:250.0 identifier:[[NSUUID UUID] UUIDString]];
-                
-                // Start Monitoring Region
-                [_locationManager startMonitoringForRegion:region];
+                // Start Monitoring geofence regions
                 [_locationManager stopUpdatingLocation];
             }
         }
@@ -332,6 +340,8 @@
             
         } else {
             
+            // Pull down geo-fence list again. Upadte icons using that info
+            // Get map locations data again too?
         }
         
     } atLocationId:region.identifier andWithHUD:nil];
@@ -354,6 +364,8 @@
             
         } else {
             
+            // Pull down geo-fence list again. Upadte icons using that info
+            // Get map locations data again too?
         }
         
     } atLocationId:region.identifier andWithHUD:nil];

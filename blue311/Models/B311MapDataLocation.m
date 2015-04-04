@@ -29,6 +29,7 @@
         
         typeString = @"PARKING_RIGHT";
     } 
+ 
     return typeString;
 }
 
@@ -48,6 +49,7 @@
         
         type = B311MapDataLocationTypeParkingRampRight;
     }
+
     return type;
 }
 

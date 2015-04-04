@@ -47,7 +47,14 @@
 		D1906E3B1ACE7E1A0081C041 /* map_annotation_parking_left.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E361ACE7E1A0081C041 /* map_annotation_parking_left.png */; };
 		D1906E3C1ACE7E1A0081C041 /* map_annotation_parking_no.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E371ACE7E1A0081C041 /* map_annotation_parking_no.png */; };
 		D1906E3D1ACE7E1A0081C041 /* map_annotation_parking_right.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E381ACE7E1A0081C041 /* map_annotation_parking_right.png */; };
-		D1906E521ACE91E90081C041 /* B311ParkingGeoFences.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906E511ACE91E90081C041 /* B311ParkingGeoFences.m */; };
+		D1906E521ACE91E90081C041 /* B311GeoFenceLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906E511ACE91E90081C041 /* B311GeoFenceLocations.m */; };
+		D1906E551ACF4FEF0081C041 /* B311GeoFence.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906E541ACF4FEF0081C041 /* B311GeoFence.m */; };
+		D1906E5C1ACF6DC70081C041 /* map_annotation_parking_left_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E561ACF6DC70081C041 /* map_annotation_parking_left_empty.png */; };
+		D1906E5D1ACF6DC70081C041 /* map_annotation_parking_left_full.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E571ACF6DC70081C041 /* map_annotation_parking_left_full.png */; };
+		D1906E5E1ACF6DC70081C041 /* map_annotation_parking_no_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E581ACF6DC70081C041 /* map_annotation_parking_no_empty.png */; };
+		D1906E5F1ACF6DC70081C041 /* map_annotation_parking_no_full.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E591ACF6DC70081C041 /* map_annotation_parking_no_full.png */; };
+		D1906E601ACF6DC70081C041 /* map_annotation_parking_right_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E5A1ACF6DC70081C041 /* map_annotation_parking_right_empty.png */; };
+		D1906E611ACF6DC70081C041 /* map_annotation_parking_right_full.png in Resources */ = {isa = PBXBuildFile; fileRef = D1906E5B1ACF6DC70081C041 /* map_annotation_parking_right_full.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,8 +132,16 @@
 		D1906E361ACE7E1A0081C041 /* map_annotation_parking_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_left.png; sourceTree = "<group>"; };
 		D1906E371ACE7E1A0081C041 /* map_annotation_parking_no.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_no.png; sourceTree = "<group>"; };
 		D1906E381ACE7E1A0081C041 /* map_annotation_parking_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_right.png; sourceTree = "<group>"; };
-		D1906E501ACE91E90081C041 /* B311ParkingGeoFences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311ParkingGeoFences.h; sourceTree = "<group>"; };
-		D1906E511ACE91E90081C041 /* B311ParkingGeoFences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311ParkingGeoFences.m; sourceTree = "<group>"; };
+		D1906E501ACE91E90081C041 /* B311GeoFenceLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311GeoFenceLocations.h; sourceTree = "<group>"; };
+		D1906E511ACE91E90081C041 /* B311GeoFenceLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311GeoFenceLocations.m; sourceTree = "<group>"; };
+		D1906E531ACF4FEF0081C041 /* B311GeoFence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311GeoFence.h; sourceTree = "<group>"; };
+		D1906E541ACF4FEF0081C041 /* B311GeoFence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311GeoFence.m; sourceTree = "<group>"; };
+		D1906E561ACF6DC70081C041 /* map_annotation_parking_left_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_left_empty.png; sourceTree = "<group>"; };
+		D1906E571ACF6DC70081C041 /* map_annotation_parking_left_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_left_full.png; sourceTree = "<group>"; };
+		D1906E581ACF6DC70081C041 /* map_annotation_parking_no_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_no_empty.png; sourceTree = "<group>"; };
+		D1906E591ACF6DC70081C041 /* map_annotation_parking_no_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_no_full.png; sourceTree = "<group>"; };
+		D1906E5A1ACF6DC70081C041 /* map_annotation_parking_right_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_right_empty.png; sourceTree = "<group>"; };
+		D1906E5B1ACF6DC70081C041 /* map_annotation_parking_right_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_annotation_parking_right_full.png; sourceTree = "<group>"; };
 		E6D91073D1134B2EB88F6700 /* libPods-blue311.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-blue311.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -244,6 +259,8 @@
 				D155D4911ACC81CC008535AF /* B311MapDataLocation.m */,
 				D155D4941ACC81E2008535AF /* B311User.h */,
 				D155D4951ACC81E2008535AF /* B311User.m */,
+				D1906E531ACF4FEF0081C041 /* B311GeoFence.h */,
+				D1906E541ACF4FEF0081C041 /* B311GeoFence.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -328,8 +345,8 @@
 				D1906DCB1ACCA34C0081C041 /* B311Comments.m */,
 				D1906DD11ACCF4A50081C041 /* B311MapDataLocations.h */,
 				D1906DD21ACCF4A50081C041 /* B311MapDataLocations.m */,
-				D1906E501ACE91E90081C041 /* B311ParkingGeoFences.h */,
-				D1906E511ACE91E90081C041 /* B311ParkingGeoFences.m */,
+				D1906E501ACE91E90081C041 /* B311GeoFenceLocations.h */,
+				D1906E511ACE91E90081C041 /* B311GeoFenceLocations.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -358,6 +375,12 @@
 		D1906E331ACE7E1A0081C041 /* map_annotation_art */ = {
 			isa = PBXGroup;
 			children = (
+				D1906E561ACF6DC70081C041 /* map_annotation_parking_left_empty.png */,
+				D1906E571ACF6DC70081C041 /* map_annotation_parking_left_full.png */,
+				D1906E581ACF6DC70081C041 /* map_annotation_parking_no_empty.png */,
+				D1906E591ACF6DC70081C041 /* map_annotation_parking_no_full.png */,
+				D1906E5A1ACF6DC70081C041 /* map_annotation_parking_right_empty.png */,
+				D1906E5B1ACF6DC70081C041 /* map_annotation_parking_right_full.png */,
 				D1906E341ACE7E1A0081C041 /* map_annotation_entrance.png */,
 				D1906E351ACE7E1A0081C041 /* map_annotation_general.png */,
 				D1906E361ACE7E1A0081C041 /* map_annotation_parking_left.png */,
@@ -453,6 +476,7 @@
 				D1906E3A1ACE7E1A0081C041 /* map_annotation_general.png in Resources */,
 				D16795C21AC10C8800BF32AF /* Main.storyboard in Resources */,
 				D16795C71AC10C8800BF32AF /* LaunchScreen.xib in Resources */,
+				D1906E5E1ACF6DC70081C041 /* map_annotation_parking_no_empty.png in Resources */,
 				D1906DDD1ACDBAD60081C041 /* handicap-ramp-right.png in Resources */,
 				D1906DD51ACDB5490081C041 /* entrance.png in Resources */,
 				D102BEFC1AC10D780094B836 /* page3.png in Resources */,
@@ -462,11 +486,16 @@
 				D1906E3D1ACE7E1A0081C041 /* map_annotation_parking_right.png in Resources */,
 				D1906E3B1ACE7E1A0081C041 /* map_annotation_parking_left.png in Resources */,
 				D102BEFA1AC10D780094B836 /* page1.png in Resources */,
+				D1906E5D1ACF6DC70081C041 /* map_annotation_parking_left_full.png in Resources */,
 				D1906E391ACE7E1A0081C041 /* map_annotation_entrance.png in Resources */,
 				D16795C41AC10C8800BF32AF /* Images.xcassets in Resources */,
+				D1906E611ACF6DC70081C041 /* map_annotation_parking_right_full.png in Resources */,
 				D1906DDB1ACDBAD60081C041 /* handicap-ramp-left.png in Resources */,
+				D1906E5C1ACF6DC70081C041 /* map_annotation_parking_left_empty.png in Resources */,
 				D102BEFB1AC10D780094B836 /* page2.png in Resources */,
+				D1906E601ACF6DC70081C041 /* map_annotation_parking_right_empty.png in Resources */,
 				D1906E3C1ACE7E1A0081C041 /* map_annotation_parking_no.png in Resources */,
+				D1906E5F1ACF6DC70081C041 /* map_annotation_parking_no_full.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1906DD31ACCF4A50081C041 /* B311MapDataLocations.m in Sources */,
+				D1906E551ACF4FEF0081C041 /* B311GeoFence.m in Sources */,
 				D102BF081AC10DE40094B836 /* ViewController.m in Sources */,
 				D102BEF91AC10D780094B836 /* B311LeftDrawerTableViewController.m in Sources */,
 				D16795BC1AC10C8800BF32AF /* AppDelegate.m in Sources */,
@@ -525,7 +555,7 @@
 				D1906DCC1ACCA34C0081C041 /* B311Comments.m in Sources */,
 				D102BF0B1AC10DE40094B836 /* B311ProfileViewController.m in Sources */,
 				D102BF0C1AC10DE40094B836 /* B311HelpViewController.m in Sources */,
-				D1906E521ACE91E90081C041 /* B311ParkingGeoFences.m in Sources */,
+				D1906E521ACE91E90081C041 /* B311GeoFenceLocations.m in Sources */,
 				D16795B91AC10C8800BF32AF /* main.m in Sources */,
 				D102BF0A1AC10DE40094B836 /* B311SettingsViewController.m in Sources */,
 				D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */,

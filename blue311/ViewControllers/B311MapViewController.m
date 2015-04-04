@@ -14,8 +14,12 @@
 #import "TutorialPageContentViewController.h"
 #import "B311MapDataLocations.h"
 #import "B311AppProperties.h"
+#import "B311GeoFenceLocations.h"
 
-@interface B311MapViewController () <UIPageViewControllerDataSource>
+@interface B311MapViewController () <UIPageViewControllerDataSource> {
+    
+    NSArray *geoFences;
+}
 
 @property (nonatomic, strong, readonly) JVFloatingDrawerSpringAnimator *drawerAnimator;
 
@@ -37,6 +41,13 @@
     [super viewDidLoad];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipTutorial:) name:@"skipTutorial" object:nil];
+    
+    // Initialize Location Manager
+    _locationManager = [[CLLocationManager alloc] init];
+    
+    // Configure Location Manager
+    [_locationManager setDelegate:self];
+    [_locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Updating Location Data...";
@@ -229,12 +240,23 @@
     //      3 -> entrance
     //      4 -> general
     
+    // NOTE: Create a new B311GeoFenceLocations - getGeofenceLocations
     // Get current location to add icon to the map
+    // - (void)newGeofenceLocation:(void (^)(NSString *error))completion withGeoFence:(B311GeoFence *)geo_fence andWithHUD:(MBProgressHUD *)hud;
+    // ***** Create the location first, because need "location_id" for geo_fence *****
+    
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Creating a New Location...";
+    hud.dimBackground = YES;
+
     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom
                                        timeout:10.0
                           delayUntilAuthorized:YES
                                          block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-                                             
+
+                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
                                              if (status == INTULocationStatusSuccess) {
                                                  
                                                  // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
@@ -251,6 +273,90 @@
                                                  // An error occurred, more info is available by looking at the specific status returned.
                                              }
                                          }];
+}
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+
+    // Fetch Current Location
+    CLLocation *location = [locations objectAtIndex:0];
+
+    [[B311GeoFenceLocations instance] getGeofenceLocations:^(BOOL success, NSArray *geFenceLocations, NSString *error) {
+
+        if (!success) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GeoFence API Error"
+                                                                message:error
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+
+        } else {
+            
+            geoFences = [B311GeoFenceLocations instance].geoFenceLocations;
+
+            if (locations && [locations count]) {
+                // Update Helper
+                //_didStartMonitoringRegion = YES;
+                
+                // NOTE: Adding same region UUID will remove it.
+                
+                // Initialize Region to Monitor - we have region in GeoFence object - already created when read in
+                CLRegion *region = [[CLRegion alloc] initCircularRegionWithCenter:[location coordinate] radius:250.0 identifier:[[NSUUID UUID] UUIDString]];
+                
+                // Start Monitoring Region
+                [_locationManager startMonitoringForRegion:region];
+                [_locationManager stopUpdatingLocation];
+            }
+        }
+        
+    } atLatitude:location.coordinate.latitude atLongitude:location.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    [[B311GeoFenceLocations instance] enteredGeoFenceLocation:^(NSString *error) {
+        
+        if (error) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GeoFence API Error - Enter"
+                                                                message:error
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            
+        } else {
+            
+        }
+        
+    } atLocationId:region.identifier andWithHUD:nil];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+    [[B311GeoFenceLocations instance] exitedGeoFenceLocation:^(NSString *error) {
+        
+        if (error) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GeoFence API Error - Exit"
+                                                                message:error
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            
+        } else {
+            
+        }
+        
+    } atLocationId:region.identifier andWithHUD:nil];
 }
 
 @end

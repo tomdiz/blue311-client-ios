@@ -1,35 +1,38 @@
 //
-//  B311MapDataLocations.m
+//  B311ParkingGeoFence.m
 //  blue311
 //
-//  Created by Thomas DiZoglio on 4/1/15.
+//  Created by Thomas DiZoglio on 4/3/15.
 //  Copyright (c) 2015 Thomas DiZoglio. All rights reserved.
 //
 
-#import "B311MapDataLocations.h"
+#import "B311GeoFenceLocations.h"
 #import "B311Data.h"
+#import "B311GeoFence.h"
 
-@implementation B311MapDataLocations
+@implementation B311GeoFenceLocations
 
-+ (B311MapDataLocations *)instance {
++ (B311GeoFenceLocations *)instance {
     
-    static B311MapDataLocations *_sharedClient = nil;
+    static B311GeoFenceLocations *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
-        _sharedClient = [B311MapDataLocations alloc];
+        _sharedClient = [B311GeoFenceLocations alloc];
     });
     
     return _sharedClient;
 }
 
-- (void)getMapLocations:(void (^)(BOOL success, NSArray *mapLocations, NSString *error))completion atLatitude:(double)lat atLongitude:(double)lng forRadius:(float)radius andWithHUD:(MBProgressHUD *)hud {
+#pragma mark - GeoFencing Network calls
 
+- (void)getGeofenceLocations:(void (^)(BOOL success, NSArray *geFenceLocations, NSString *error))completion atLatitude:(double)lat atLongitude:(double)lng forRadius:(float)radius andWithHUD:(MBProgressHUD *)hud {
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [hud setProgress:45.00/360.00];
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_locations/", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@geofences/", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
         NSLog(@"Path: %@", path);
         
@@ -72,36 +75,36 @@
         int msgCount = [[result objectForKey:@"count"] intValue];
         int offsetMsgsToSync = msgCount;
         
-        NSMutableArray *newLocations = [NSMutableArray new];
-        NSArray *locations = [result objectForKey:@"locations"];
-        for (NSDictionary *locationJson in locations) {
+        NSMutableArray *newGeoFenceLocations = [NSMutableArray new];
+        NSArray *geoFences = [result objectForKey:@"geoFences"];
+        for (NSDictionary *geoFencesJson in geoFences) {
             
-            NSLog(@"locationJson = %@", locationJson);
+            NSLog(@"geoFencesJson = %@", geoFencesJson);
             
-            B311MapDataLocation *location = [B311MapDataLocation parse:locationJson];
-            [newLocations addObject:location];
+            B311GeoFence *geoFence = [B311GeoFence parse:geoFencesJson];
+            [newGeoFenceLocations addObject:geoFence];
             
             offsetMsgsToSync--;
             [hud setProgress:((msgCount - offsetMsgsToSync) / (float) msgCount)];
         }
         
-        _mapLocations = [newLocations copy];
+        _geoFenceLocations = [newGeoFenceLocations copy];
         
         // Complete
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            completion(YES, [newLocations copy], nil);
+            completion(YES, [newGeoFenceLocations copy], nil);
         });
     });
 }
 
-- (void)newMapLocation:(void (^)(NSString *error))completion atLatitude:(double)lat atLongitude:(double)lng withData:(B311MapDataLocation *)data andWithHUD:(MBProgressHUD *)hud {
-
+- (void)newGeofenceLocation:(void (^)(NSString *error))completion withGeoFence:(B311GeoFence *)geo_fence andWithHUD:(MBProgressHUD *)hud {
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_location_new", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
-
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"title": data.title, @"address": data.address, @"city": data.city, @"state":data.state, @"zip":data.zip, @"location_type":[B311MapDataLocation stringB311MapDataLocationType:data.mtype], @"latitude":[NSNumber numberWithDouble:lat], @"longitude":[NSNumber numberWithDouble:lng] }];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@geofence_new", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"latitude": [NSNumber numberWithDouble:geo_fence.latitude], @"longitude": [NSNumber numberWithDouble:geo_fence.longitude], @"information":geo_fence.information, @"radius": [NSNumber numberWithDouble:geo_fence.radius], @"ltype":[B311GeoFence stringB311MapDataLocationType:geo_fence.ltype], @"location_id":geo_fence.location_id }];
         
         @try {
             
@@ -141,13 +144,13 @@
     });
 }
 
-- (void)updateMapLocation:(void (^)(NSString *error))completion withData:(B311MapDataLocation *)data andWithHUD:(MBProgressHUD *)hud {
+- (void)enteredGeoFenceLocation:(void (^)(NSString *error))completion atLocationId:(NSString *)location_id andWithHUD:(MBProgressHUD *)hud {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_location_update", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@geofence_enter", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"title": data.title, @"address": data.address, @"city": data.city, @"state":data.state, @"zip":data.zip }];
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"location_id": location_id }];
         
         @try {
             
@@ -185,6 +188,61 @@
             });
         }
     });
+}
+
+
+- (void)exitedGeoFenceLocation:(void (^)(NSString *error))completion atLocationId:(NSString *)location_id andWithHUD:(MBProgressHUD *)hud {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@geofence_exit", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"location_id": location_id }];
+        
+        @try {
+            
+            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"POST" stringParameters:params];
+            
+            NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:nil];
+            
+            NSLog(@"results = %@", results);
+            
+            NSString *errorMessage = [results objectForKey:@"error"];
+            if (errorMessage != nil) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    NSString *errorDescription = [results objectForKey:@"error_description"];
+                    completion(errorDescription);
+                });
+                
+                return;
+            }
+            else {
+                
+                // return nil on successful POST
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    completion(nil);
+                });
+            }
+        }
+        @catch (NSException *exception) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completion(@"Could not post comment at this time.  Please check your internet connection and try again.");
+            });
+        }
+    });
+}
+
+#pragma mark - Support selectors
+
+- (B311GeoFence *)findGeoFenceForLocation:(NSString *)location_id {
+    
+    NSArray *results = [_geoFenceLocations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(id == %@)", location_id]];
+    return results.count > 0 ? (B311GeoFence *)[results objectAtIndex:0] : nil;
 }
 
 @end

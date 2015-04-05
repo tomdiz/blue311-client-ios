@@ -20,9 +20,9 @@
 + (NSString *) kapi_domain {
     
 #if TARGET_IPHONE_SIMULATOR
-    return @"dev02-api.peerspaceapp.com";
+    return @"dev01-api.blue311.com";
 #else
-    return @"dev02-api.peerspaceapp.com";
+    return @"dev01-api.blue311.com";
 #endif
 }
 

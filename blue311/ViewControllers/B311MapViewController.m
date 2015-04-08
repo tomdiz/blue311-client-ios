@@ -22,7 +22,8 @@
     
     NSArray *geoFences;
     NSMutableArray *currentGeoFences;
-    NSArray *mapLocationAnnotations;
+    NSArray *mapLocationData;
+    NSMutableArray *mapLocationAnnotations;
     CLGeocoder *geocoder;
 }
 
@@ -115,11 +116,22 @@
                                                                                        [alertView show];
                                                                                    } else {
                                                                                        
-                                                                                       // UPDATE THE MAP ANNOTATIONS WITH ARRAY RETURNED FOR BACK-END
-                                                                                       mapLocationAnnotations = mapLocations;
+                                                                                       // Add map annotations from map data returned from server
+                                                                                       mapLocationAnnotations = [NSMutableArray new];
+                                                                                       mapLocationData = mapLocations;
+                                                                                       
+                                                                                       for (B311MapDataLocation *location in mapLocations) {
+                                                                                           
+                                                                                           B311MapDataAnnotation *annotation = [B311MapDataAnnotation new];
+                                                                                           annotation.ltype = location.mtype;
+                                                                                           annotation.title = location.address;
+                                                                                           annotation.coordinate = CLLocationCoordinate2DMake(location.latitude , location.longitude);
+                                                                                           [mapLocationAnnotations addObject:annotation];
+                                                                                       }
                                                                                        
                                                                                        [_mkMapView addAnnotations:mapLocationAnnotations];
-                                                                                       [_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
+                                                                                       //[_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
+                                                                                       [_mkMapView setCenterCoordinate:currentLocation.coordinate animated:NO];
                                                                                    }
                                                                                    
                                                                                } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:hud];
@@ -362,14 +374,22 @@
                                                                      [alertView show];
                                                                  } else {
                                                                      
-                                                                     // Update using data from back-end
-                                                                     mapLocationAnnotations = mapLocations;
-
-                                                                     // Walk the MapDataLocation from server and alloc B311MapDataAnnotation and translate
-                                                                     // set types same. Then code below translate
+                                                                     // Add map annotations from map data returned from server
+                                                                     mapLocationAnnotations = [NSMutableArray new];
+                                                                     mapLocationData = mapLocations;
                                                                      
-                                                                     //[_mkMapView addAnnotations:mapLocationAnnotations];
+                                                                     for (B311MapDataLocation *location in mapLocations) {
+                                                                         
+                                                                         B311MapDataAnnotation *annotation = [B311MapDataAnnotation new];
+                                                                         annotation.ltype = location.mtype;
+                                                                         annotation.title = location.address;
+                                                                         annotation.coordinate = CLLocationCoordinate2DMake(location.latitude , location.longitude);
+                                                                         [mapLocationAnnotations addObject:annotation];
+                                                                     }
+                                                                     
+                                                                     [_mkMapView addAnnotations:mapLocationAnnotations];
                                                                      //[_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
+                                                                     [_mkMapView setCenterCoordinate:currentLocation.coordinate animated:NO];
                                                                  }
                                                                  
                                                              } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];

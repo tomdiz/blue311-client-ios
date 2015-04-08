@@ -56,6 +56,34 @@
     [_locationManager setDelegate:self];
     [_locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
 
+    // Side menu bar - Parking - Parking Ramp, Entrance and General
+    NSArray *imageList = @[[UIImage imageNamed:@"handicap-ramp-no.png"], [UIImage imageNamed:@"handicap-ramp-left.png"], [UIImage imageNamed:@"handicap-ramp-right.png"], [UIImage imageNamed:@"entrance.png"], [UIImage imageNamed:@"general.png"]];
+    sideBar = [[CDSideBarController alloc] initWithImages:imageList];
+    sideBar.delegate = self;
+    [sideBar insertMenuButtonOnView:self.view atPosition:CGPointMake(self.view.frame.size.width - 70, 50)];
+    
+    // Tutorial Setup
+    // Create the data model
+    _pageTitles = @[@"Annotate handicap parking spots on a map", @"Discover handicap entrances at locations", @"Annotate general handicap tips on a map"];
+    _pageImages = @[@"page1.png", @"page2.png", @"page3.png"];
+    
+    // Create page view controller
+    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialPageViewController"];
+    self.pageViewController.dataSource = self;
+    
+    TutorialPageContentViewController *startingViewController = [self viewControllerAtIndex:0];
+    NSArray *viewControllers = @[startingViewController];
+    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
+    // Change the size of page view controller
+    self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    
+    [self addChildViewController:_pageViewController];
+    [self.view addSubview:_pageViewController.view];
+    [self.pageViewController didMoveToParentViewController:self];
+    
+    geocoder = [[CLGeocoder alloc] init];
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Updating Location Data...";
     hud.dimBackground = YES;
@@ -112,34 +140,6 @@
                                                                                [self setUpMapKitCameraViewLocation:currentDeviceLocation];
                                                                            }
                                                                        }];
-
-    // Side menu bar - Parking - Parking Ramp, Entrance and General
-    NSArray *imageList = @[[UIImage imageNamed:@"handicap-ramp-no.png"], [UIImage imageNamed:@"handicap-ramp-left.png"], [UIImage imageNamed:@"handicap-ramp-right.png"], [UIImage imageNamed:@"entrance.png"], [UIImage imageNamed:@"general.png"]];
-    sideBar = [[CDSideBarController alloc] initWithImages:imageList];
-    sideBar.delegate = self;
-    [sideBar insertMenuButtonOnView:self.view atPosition:CGPointMake(self.view.frame.size.width - 70, 50)];
-
-    // Tutorial Setup
-    // Create the data model
-    _pageTitles = @[@"Annotate handicap parking spots on a map", @"Discover handicap entrances at locations", @"Annotate general handicap tips on a map"];
-    _pageImages = @[@"page1.png", @"page2.png", @"page3.png"];
-    
-    // Create page view controller
-    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialPageViewController"];
-    self.pageViewController.dataSource = self;
-    
-    TutorialPageContentViewController *startingViewController = [self viewControllerAtIndex:0];
-    NSArray *viewControllers = @[startingViewController];
-    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
-    // Change the size of page view controller
-    self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    
-    [self addChildViewController:_pageViewController];
-    [self.view addSubview:_pageViewController.view];
-    [self.pageViewController didMoveToParentViewController:self];
-
-    geocoder = [[CLGeocoder alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -180,11 +180,12 @@
         _mkMapView.scrollEnabled = YES;
         _mkMapView.region = MKCoordinateRegionMakeWithDistance(coords.coordinate, 1000, 500);
         [_mkMapView setShowsBuildings:YES];
+        [_mkMapView setShowsUserLocation:YES];
         
         MKMapCamera *newCamera = [[_mkMapView camera] copy];
         [newCamera setPitch:45.0];
         [newCamera setHeading:90.0];
-        [newCamera setAltitude:800.0];
+        [newCamera setAltitude:200.0];
         [_mkMapView setCamera:newCamera animated:NO];
     }
 }

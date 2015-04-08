@@ -33,7 +33,7 @@
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setImage:image forState:UIControlStateNormal];
-        button.frame = CGRectMake(20, 50 + (80 * index), 50, 50);
+        button.frame = CGRectMake(20, 60 + (80 * index), 50, 50);
         button.tag = index;
         [button addTarget:self action:@selector(onMenuButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [_buttonList addObject:button];

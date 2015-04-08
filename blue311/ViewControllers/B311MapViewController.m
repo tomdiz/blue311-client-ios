@@ -283,21 +283,12 @@
 #pragma mark - CDSideBarController delegate
 
 - (void)menuButtonClicked:(long)index {
-
-    // NOTE: index values
-    //      0 -> handicap-ramp-no
-    //      1 -> handicap-ramp-left
-    //      2 -> handicap-ramp-right
-    //      3 -> entrance
-    //      4 -> general
     
     // NOTE: Create a new B311GeoFenceLocations - getGeofenceLocations
     // Get current location to add icon to the map
     // - (void)newGeofenceLocation:(void (^)(NSString *error))completion withGeoFence:(B311GeoFence *)geo_fence andWithHUD:(MBProgressHUD *)hud;
     // ***** Create the location first, because need "location_id" for geo_fence *****
-    
-    // NOTE: See notepad notes
-    
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Creating a New Location...";
     hud.dimBackground = YES;
@@ -336,6 +327,12 @@
                                                      @property (nonatomic, readonly, copy) NSString *ocean; // eg. Pacific Ocean
                                                      @property (nonatomic, readonly, copy) NSArray *areasOfInterest; // eg. Golden Gate Park
                                                     */
+                                                     // NOTE: index values
+                                                     //      0 -> handicap-ramp-no
+                                                     //      1 -> handicap-ramp-left
+                                                     //      2 -> handicap-ramp-right
+                                                     //      3 -> entrance
+                                                     //      4 -> general
                                                      B311MapDataLocation *location = [B311MapDataLocation new];
 
                                                      location.title = placemark.name;

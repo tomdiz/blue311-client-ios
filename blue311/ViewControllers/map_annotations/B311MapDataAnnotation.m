@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Thomas DiZoglio. All rights reserved.
 //
 
-#import "B311GeneralMapAnnotation.h"
+#import "B311MapDataAnnotation.h"
 
-@implementation B311GeneralMapAnnotation
+@implementation B311MapDataAnnotation
 
 -(void)dealloc {
 

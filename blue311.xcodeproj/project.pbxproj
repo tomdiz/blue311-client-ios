@@ -23,7 +23,7 @@
 		D102BF171AC11A310094B836 /* CDSideBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF111AC11A310094B836 /* CDSideBarController.m */; };
 		D102BF1A1AC11A310094B836 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF141AC11A310094B836 /* menuIcon.png */; };
 		D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF281AC12A760094B836 /* B311AppProperties.m */; };
-		D10EC1CE1AD4E54D005A3D9A /* B311GeneralMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D10EC1CD1AD4E54D005A3D9A /* B311GeneralMapAnnotation.m */; };
+		D10EC1CE1AD4E54D005A3D9A /* B311MapDataAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D10EC1CD1AD4E54D005A3D9A /* B311MapDataAnnotation.m */; };
 		D155D4921ACC81CC008535AF /* B311Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D48F1ACC81CC008535AF /* B311Comment.m */; };
 		D155D4931ACC81CC008535AF /* B311MapDataLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D4911ACC81CC008535AF /* B311MapDataLocation.m */; };
 		D155D4961ACC81E2008535AF /* B311User.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D4951ACC81E2008535AF /* B311User.m */; };
@@ -96,8 +96,8 @@
 		D102BF141AC11A310094B836 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
 		D102BF271AC12A760094B836 /* B311AppProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B311AppProperties.h; path = utils/B311AppProperties.h; sourceTree = "<group>"; };
 		D102BF281AC12A760094B836 /* B311AppProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = B311AppProperties.m; path = utils/B311AppProperties.m; sourceTree = "<group>"; };
-		D10EC1CC1AD4E54D005A3D9A /* B311GeneralMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B311GeneralMapAnnotation.h; path = map_annotations/B311GeneralMapAnnotation.h; sourceTree = "<group>"; };
-		D10EC1CD1AD4E54D005A3D9A /* B311GeneralMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = B311GeneralMapAnnotation.m; path = map_annotations/B311GeneralMapAnnotation.m; sourceTree = "<group>"; };
+		D10EC1CC1AD4E54D005A3D9A /* B311MapDataAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B311MapDataAnnotation.h; path = map_annotations/B311MapDataAnnotation.h; sourceTree = "<group>"; };
+		D10EC1CD1AD4E54D005A3D9A /* B311MapDataAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = B311MapDataAnnotation.m; path = map_annotations/B311MapDataAnnotation.m; sourceTree = "<group>"; };
 		D155D48E1ACC81CC008535AF /* B311Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311Comment.h; sourceTree = "<group>"; };
 		D155D48F1ACC81CC008535AF /* B311Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311Comment.m; sourceTree = "<group>"; };
 		D155D4901ACC81CC008535AF /* B311MapDataLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311MapDataLocation.h; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 				D102BF041AC10DE40094B836 /* B311ProfileViewController.m */,
 				D102BF071AC10DE40094B836 /* B311HelpViewController.h */,
 				D102BF061AC10DE40094B836 /* B311HelpViewController.m */,
-				D1906DCD1ACCB0280081C041 /* Location Details */,
+				D1906DCD1ACCB0280081C041 /* LocationDetails */,
 				D102BF0F1AC11A310094B836 /* CDSideBarController */,
 				D102BEEC1AC10D780094B836 /* MenuViewControllers */,
 				D102BEF11AC10D780094B836 /* TutorialViewControllers */,
@@ -253,13 +253,13 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		D10EC1CB1AD4E50A005A3D9A /* Location Annotations */ = {
+		D10EC1CB1AD4E50A005A3D9A /* LocationAnnotations */ = {
 			isa = PBXGroup;
 			children = (
-				D10EC1CC1AD4E54D005A3D9A /* B311GeneralMapAnnotation.h */,
-				D10EC1CD1AD4E54D005A3D9A /* B311GeneralMapAnnotation.m */,
+				D10EC1CC1AD4E54D005A3D9A /* B311MapDataAnnotation.h */,
+				D10EC1CD1AD4E54D005A3D9A /* B311MapDataAnnotation.m */,
 			);
-			name = "Location Annotations";
+			name = LocationAnnotations;
 			sourceTree = "<group>";
 		};
 		D155D48D1ACC81CC008535AF /* Models */ = {
@@ -363,7 +363,7 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		D1906DCD1ACCB0280081C041 /* Location Details */ = {
+		D1906DCD1ACCB0280081C041 /* LocationDetails */ = {
 			isa = PBXGroup;
 			children = (
 				D1891A8B1ACA4276003D3103 /* B311DetailsViewController.h */,
@@ -371,14 +371,14 @@
 				D1906DCE1ACCB14C0081C041 /* B311CommentTableViewCell.h */,
 				D1906DCF1ACCB14C0081C041 /* B311CommentTableViewCell.m */,
 			);
-			name = "Location Details";
+			name = LocationDetails;
 			sourceTree = "<group>";
 		};
 		D1906E321ACE7DCD0081C041 /* Map */ = {
 			isa = PBXGroup;
 			children = (
 				D1906E331ACE7E1A0081C041 /* map_annotation_art */,
-				D10EC1CB1AD4E50A005A3D9A /* Location Annotations */,
+				D10EC1CB1AD4E50A005A3D9A /* LocationAnnotations */,
 				D102BEEA1AC10D780094B836 /* B311MapViewController.h */,
 				D102BEEB1AC10D780094B836 /* B311MapViewController.m */,
 			);
@@ -563,7 +563,7 @@
 				D1906E551ACF4FEF0081C041 /* B311GeoFence.m in Sources */,
 				D102BF081AC10DE40094B836 /* ViewController.m in Sources */,
 				D102BEF91AC10D780094B836 /* B311LeftDrawerTableViewController.m in Sources */,
-				D10EC1CE1AD4E54D005A3D9A /* B311GeneralMapAnnotation.m in Sources */,
+				D10EC1CE1AD4E54D005A3D9A /* B311MapDataAnnotation.m in Sources */,
 				D16795BC1AC10C8800BF32AF /* AppDelegate.m in Sources */,
 				D155D4961ACC81E2008535AF /* B311User.m in Sources */,
 				D1906DCC1ACCA34C0081C041 /* B311Comments.m in Sources */,

@@ -16,7 +16,7 @@
 #import "B311MapDataLocations.h"
 #import "B311AppProperties.h"
 #import "B311GeoFenceLocations.h"
-#import "B311GeneralMapAnnotation.h"
+#import "B311MapDataAnnotation.h"
 
 @interface B311MapViewController () <UIPageViewControllerDataSource> {
     
@@ -328,7 +328,6 @@
                                                      location.state = placemark.administrativeArea;
                                                      location.zip = placemark.postalCode;
                                                      location.mtype = index;
-                                                     
                                                      location.latitude = placemark.location.coordinate.latitude;
                                                      location.longitude = placemark.location.coordinate.longitude;
 
@@ -359,7 +358,7 @@
                                                                      [alertView show];
                                                                  } else {
                                                                      
-                                                                     // UPDATE THE MAP ANNOTATIONS WITH ARRAY RETURNED FOR BACK-END
+                                                                     // Update using data from back-end
                                                                      mapLocationAnnotations = mapLocations;
 
                                                                      [_mkMapView addAnnotations:mapLocationAnnotations];
@@ -508,7 +507,9 @@
     static NSString *b311GeneralAnnotationIdentifier = @"com.b311.general.pin";
     static NSString *b311EntranceAnnotationIdentifier = @"com.b311.entrance.pin";
 
-    if ([annotation isKindOfClass:[B311GeneralMapAnnotation class]]) {
+    // NOTE: Use the map data type to figure out what type of annotation to load
+    
+    if ([annotation isKindOfClass:[B311MapDataAnnotation class]]) {
         MKAnnotationView *annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311GeneralAnnotationIdentifier];
         if (!annotationView)
         {

@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MKAnnotation.h>
 
-@interface B311GeneralMapAnnotation : NSObject <MKAnnotation>
+@interface B311MapDataAnnotation : NSObject <MKAnnotation>
 
 @property (nonatomic) CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) NSString *title;

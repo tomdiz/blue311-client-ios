@@ -13,9 +13,11 @@ extern const float kGeoFenceRadius;
 
 typedef NS_ENUM(NSInteger, B311GeoFenceLocationType) {
     
-    B311B311GeoFenceLocationTypeParking,
-    B311B311GeoFenceLocationTypeEntrance,
-    B311B311GeoFenceLocationTypeGeneral
+    B311GeoFenceLocationTypeParkingRampNone,
+    B311GeoFenceLocationTypeParkingRampLeft,
+    B311GeoFenceLocationTypeParkingRampRight,
+    B311GeoFenceLocationTypeEntrance,
+    B311GeoFenceLocationTypeGeneral
 };
 
 @interface B311GeoFence : NSObject

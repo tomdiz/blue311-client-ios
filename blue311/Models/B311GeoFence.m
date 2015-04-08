@@ -14,13 +14,19 @@ const float kGeoFenceRadius = 0.03f;
 
 + (B311GeoFenceLocationType) b311MapDataLocationTypeFromString:(NSString *)strType {
     
-    B311GeoFenceLocationType type = B311B311GeoFenceLocationTypeParking;
+    B311GeoFenceLocationType type = B311GeoFenceLocationTypeParkingRampNone;
     if ([strType isEqualToString:@"ENTRANCE"]) {
         
-        type = B311B311GeoFenceLocationTypeEntrance;
+        type = B311GeoFenceLocationTypeEntrance;
     } else if ([strType isEqualToString:@"GENERAL"]) {
         
-        type = B311B311GeoFenceLocationTypeGeneral;
+        type = B311GeoFenceLocationTypeGeneral;
+    } else if ([strType isEqualToString:@"PARKING_LEFT"]) {
+        
+        type = B311GeoFenceLocationTypeParkingRampLeft;
+    } else if ([strType isEqualToString:@"PARKING_RIGHT"]) {
+        
+        type = B311GeoFenceLocationTypeParkingRampRight;
     }
     
     return type;
@@ -29,13 +35,19 @@ const float kGeoFenceRadius = 0.03f;
 + (NSString *)stringB311MapDataLocationType:(B311GeoFenceLocationType)type {
     
     NSString *typeString = nil;
-    if (type == B311B311GeoFenceLocationTypeParking) {
+    if (type == B311GeoFenceLocationTypeParkingRampNone) {
         
-        typeString = @"PARKING";
-    } else if (type == B311B311GeoFenceLocationTypeEntrance) {
+        typeString = @"PARKING_NONE";
+    } else if (type == B311GeoFenceLocationTypeParkingRampLeft) {
+        
+        typeString = @"PARKING_LEFT";
+    } else if (type == B311GeoFenceLocationTypeParkingRampRight) {
+        
+        typeString = @"PARKING_RIGHT";
+    } else if (type == B311GeoFenceLocationTypeEntrance) {
         
         typeString = @"ENTRANCE";
-    } else if (type == B311B311GeoFenceLocationTypeGeneral) {
+    } else if (type == B311GeoFenceLocationTypeGeneral) {
         
         typeString = @"GENERAL";
     }

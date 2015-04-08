@@ -365,8 +365,11 @@
                                                                      // Update using data from back-end
                                                                      mapLocationAnnotations = mapLocations;
 
-                                                                     [_mkMapView addAnnotations:mapLocationAnnotations];
-                                                                     [_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
+                                                                     // Walk the MapDataLocation from server and alloc B311MapDataAnnotation and translate
+                                                                     // set types same. Then code below translate
+                                                                     
+                                                                     //[_mkMapView addAnnotations:mapLocationAnnotations];
+                                                                     //[_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
                                                                  }
                                                                  
                                                              } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];
@@ -486,8 +489,22 @@
 
 #pragma mark - MKMapViewDelegate
 
-- (void)mapView:(MKMapView *)lMapView didAddAnnotationViews:(NSArray *)views
-{
+// NOTE: No dragging yet. Try and get highest quality read from GPS and see if good enough.
+/*
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
+    
+    if (oldState == MKAnnotationViewDragStateDragging) {
+        
+        //MapCoordinates *annotation = (MapCoordinates *)annotationView.annotation;
+        //reverseDelegate = self;
+        //CLLocation *loc = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
+        //[findAddress lookupAddress:loc];
+        //annotation.subtitle = [NSString	stringWithFormat:@"%f %f", annotation.coordinate.latitude, annotation.coordinate.longitude];
+    }
+}
+*/
+- (void)mapView:(MKMapView *)lMapView didAddAnnotationViews:(NSArray *)views {
+    
     //[mapView selectAnnotation:currentSeller animated:YES];
     //[mapView selectAnnotation:[[mapView annotations] lastObject] animated:YES];
 }
@@ -498,8 +515,8 @@
 //    [_mkMapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
 
--(MKAnnotationView *) mapView:(MKMapView *)mV viewForAnnotation:(id <MKAnnotation>)annotation
-{
+-(MKAnnotationView *) mapView:(MKMapView *)mV viewForAnnotation:(id <MKAnnotation>)annotation {
+    
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         
         return nil;
@@ -507,44 +524,68 @@
     
     static NSString *b311ParkingRampNoneAnnotationIdentifier = @"com.b311.parking.ramp.none.pin";
     static NSString *b311ParkingRampLeftAnnotationIdentifier = @"com.b311.parking.ramp.left.pin";
-    static NSString *b311ParkingRamprightAnnotationIdentifier = @"com.b311.parking.ramp.right.pin";
+    static NSString *b311ParkingRampRightAnnotationIdentifier = @"com.b311.parking.ramp.right.pin";
     static NSString *b311GeneralAnnotationIdentifier = @"com.b311.general.pin";
     static NSString *b311EntranceAnnotationIdentifier = @"com.b311.entrance.pin";
 
-    // NOTE: Use the map data type to figure out what type of annotation to load
-    
     if ([annotation isKindOfClass:[B311MapDataAnnotation class]]) {
-        MKAnnotationView *annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311GeneralAnnotationIdentifier];
-        if (!annotationView)
-        {
-            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:b311GeneralAnnotationIdentifier];
-            annotationView.canShowCallout = YES;
-            //UIImageView *generalView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"deal_pin-a.png"]];
-            //[generalView setFrame:CGRectMake(0, 0, 30, 30)];
-            //annotationView.leftCalloutAccessoryView = generalView;
-            annotationView.image = [UIImage imageNamed:@"map_annotation_general"];
+        
+        B311MapDataAnnotation *annotationData = annotation;
+        MKAnnotationView *annotationView = nil;
+
+        if (annotationData.ltype == B311GeoFenceLocationTypeGeneral) {
+        
+            annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311GeneralAnnotationIdentifier];
+            if (!annotationView) {
+                
+                annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:b311GeneralAnnotationIdentifier];
+                annotationView.canShowCallout = YES;
+                //UIImageView *generalView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"deal_pin-a.png"]];
+                //[generalView setFrame:CGRectMake(0, 0, 30, 30)];
+                //annotationView.leftCalloutAccessoryView = generalView;
+                annotationView.image = [UIImage imageNamed:@"map_annotation_general"];
+            }
+        } else if (annotationData.ltype == B311GeoFenceLocationTypeEntrance) {
+            
+            annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311GeneralAnnotationIdentifier];
+            if (!annotationView) {
+                
+                annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:b311EntranceAnnotationIdentifier];
+                annotationView.canShowCallout = YES;
+                annotationView.image = [UIImage imageNamed:@"map_annotation_entrance"];
+            }
+        } else if (annotationData.ltype == B311GeoFenceLocationTypeParkingRampNone) {
+            
+            annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311ParkingRampNoneAnnotationIdentifier];
+            if (!annotationView) {
+                
+                annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:b311ParkingRampNoneAnnotationIdentifier];
+                annotationView.canShowCallout = YES;
+                annotationView.image = [UIImage imageNamed:@"map_annotation_parking_no_empty"];
+            }
+        } else if (annotationData.ltype == B311GeoFenceLocationTypeParkingRampLeft) {
+            
+            annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311ParkingRampLeftAnnotationIdentifier];
+            if (!annotationView) {
+                
+                annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:b311ParkingRampLeftAnnotationIdentifier];
+                annotationView.canShowCallout = YES;
+                annotationView.image = [UIImage imageNamed:@"map_annotation_parking_no_left"];
+            }
+        } else if (annotationData.ltype == B311GeoFenceLocationTypeParkingRampRight) {
+            
+            annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311ParkingRampRightAnnotationIdentifier];
+            if (!annotationView) {
+                
+                annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:b311ParkingRampRightAnnotationIdentifier];
+                annotationView.canShowCallout = YES;
+                annotationView.image = [UIImage imageNamed:@"map_annotation_parking_no_right"];
+            }
         }
+
         return annotationView;
     }
-/*
-    if (annotation != mapView.userLocation)
-    {
-        MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:waitTimeAnnotationIdentifier];
-        if (!annotationView)
-        {
-            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:waitTimeAnnotationIdentifier];
-            annotationView.canShowCallout = YES;
-            UIImageView *houseIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Wait_Pin-a.png"]];
-            [houseIconView setFrame:CGRectMake(0, 0, 30, 30)];
-            annotationView.leftCalloutAccessoryView = houseIconView;
-            annotationView.image = [UIImage imageNamed:@"Wait_Pin-b.png"];
-            //UIButton * disclosureButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-            //[disclosureButton addTarget:self action:@selector(presentMoreInfo:) forControlEvents:UIControlEventTouchUpInside];
-            //annotationView.rightCalloutAccessoryView = disclosureButton;
-        }
-        return annotationView;
-    }
-*/
+
     return nil;
 }
 

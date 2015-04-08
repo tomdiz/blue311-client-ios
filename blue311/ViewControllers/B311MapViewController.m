@@ -48,25 +48,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipTutorial:) name:@"skipTutorial" object:nil];
 
     currentGeoFences = [NSMutableArray new];
-    
-    // Do any additional setup after loading the view, typically from a nib.
-    _mkMapView.showsBuildings = YES;
-//    let eiffelTowerCoordinates = CLLocationCoordinate2DMake(48.85815,2.29452)
-//    mapView.region = MKCoordinateRegionMakeWithDistance(eiffelTowerCoordinates, 1000,100)
-    
-    _mkMapView.mapType = MKMapTypeStandard;
-    _mkMapView.zoomEnabled = YES;
-    _mkMapView.scrollEnabled = YES;
-    
-    
-    // 3D Camera
-    MKMapCamera *mapCamera = [MKMapCamera new];
-    mapCamera.pitch = 45;
-    mapCamera.altitude = 500;
-    mapCamera.heading = 45;
-    
-    //Set MKmapView camera property
-    _mkMapView.camera = mapCamera;
 
     // Initialize Location Manager
     _locationManager = [[CLLocationManager alloc] init];
@@ -87,11 +68,11 @@
 
                                                                            if (status == INTULocationStatusSuccess) {
 
-                                                                               mapCamera.centerCoordinate = currentLocation.coordinate;
-                                                                               _mkMapView.region = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate, 1000, 100);
-
                                                                                // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
                                                                                // currentLocation contains the device's current location.
+                                                                               
+                                                                               [self setUpMapKitCameraViewLocation:currentLocation];
+                                                                               
                                                                                [[B311MapDataLocations instance] getMapLocations:^(BOOL success, NSArray *mapLocations, NSString *error) {
 
                                                                                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -117,10 +98,9 @@
                                                                            }
                                                                            else if (status == INTULocationStatusTimedOut) {
                                                                                
-                                                                               CLLocationCoordinate2D sanFranciscoCoordinates = CLLocationCoordinate2DMake(37.773972, -122.431297);
-                                                                               mapCamera.centerCoordinate = sanFranciscoCoordinates;
-                                                                               _mkMapView.region = MKCoordinateRegionMakeWithDistance(sanFranciscoCoordinates, 1000, 100);
-
+                                                                               CLLocation *currentDeviceLocation = [[CLLocation alloc] initWithLatitude:37.773972 longitude:-122.431297];
+                                                                               [self setUpMapKitCameraViewLocation:currentDeviceLocation];
+                                                                               
                                                                                // Wasn't able to locate the user with the requested accuracy within the timeout interval.
                                                                                // However, currentLocation contains the best location available (if any) as of right now,
                                                                                // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
@@ -128,9 +108,8 @@
                                                                            else {
                                                                                
                                                                                // An error occurred, more info is available by looking at the specific status returned.
-                                                                               CLLocationCoordinate2D sanFranciscoCoordinates = CLLocationCoordinate2DMake(37.773972, -122.431297);
-                                                                               mapCamera.centerCoordinate = sanFranciscoCoordinates;
-                                                                               _mkMapView.region = MKCoordinateRegionMakeWithDistance(sanFranciscoCoordinates, 1000, 100);
+                                                                               CLLocation *currentDeviceLocation = [[CLLocation alloc] initWithLatitude:37.773972 longitude:-122.431297];
+                                                                               [self setUpMapKitCameraViewLocation:currentDeviceLocation];
                                                                            }
                                                                        }];
 
@@ -170,6 +149,11 @@
     [sideBar handleMenuState];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     
     [super didReceiveMemoryWarning];
@@ -185,6 +169,25 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)setUpMapKitCameraViewLocation:(CLLocation *)coords {
+    
+    // 3D Camera for cool 3D mapview
+    if ([_mkMapView respondsToSelector:@selector(camera)]) {
+        
+        _mkMapView.mapType = MKMapTypeStandard;
+        _mkMapView.zoomEnabled = YES;
+        _mkMapView.scrollEnabled = YES;
+        _mkMapView.region = MKCoordinateRegionMakeWithDistance(coords.coordinate, 1000, 500);
+        [_mkMapView setShowsBuildings:YES];
+        
+        MKMapCamera *newCamera = [[_mkMapView camera] copy];
+        [newCamera setPitch:45.0];
+        [newCamera setHeading:90.0];
+        [newCamera setAltitude:800.0];
+        [_mkMapView setCamera:newCamera animated:NO];
+    }
+}
 
 - (void)skipTutorial:(NSNotification *)note {
     
@@ -496,8 +499,8 @@
 
 -(MKAnnotationView *) mapView:(MKMapView *)mV viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    if ([annotation isKindOfClass:[MKUserLocation class]])
-    {
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        
         return nil;
     }
     

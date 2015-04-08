@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CDSideBarController.h"
 
-@interface B311MapViewController : UIViewController <CDSideBarControllerDelegate, CLLocationManagerDelegate> {
+@interface B311MapViewController : UIViewController <CDSideBarControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate> {
     
     CDSideBarController *sideBar;
 }

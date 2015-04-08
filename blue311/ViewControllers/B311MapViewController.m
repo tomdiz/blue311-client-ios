@@ -8,6 +8,7 @@
 
 #import <MapKit/MapKit.h>
 #import <INTULocationManager/INTULocationManager.h>
+#import <AddressBook/AddressBook.h>
 #import "B311MapViewController.h"
 #import "JVFloatingDrawerSpringAnimator.h"
 #import "AppDelegate.h"
@@ -15,11 +16,14 @@
 #import "B311MapDataLocations.h"
 #import "B311AppProperties.h"
 #import "B311GeoFenceLocations.h"
+#import "B311GeneralMapAnnotation.h"
 
 @interface B311MapViewController () <UIPageViewControllerDataSource> {
     
     NSArray *geoFences;
     NSMutableArray *currentGeoFences;
+    NSArray *mapLocationAnnotations;
+    CLGeocoder *geocoder;
 }
 
 @property (nonatomic, strong, readonly) JVFloatingDrawerSpringAnimator *drawerAnimator;
@@ -45,6 +49,25 @@
 
     currentGeoFences = [NSMutableArray new];
     
+    // Do any additional setup after loading the view, typically from a nib.
+    _mkMapView.showsBuildings = YES;
+//    let eiffelTowerCoordinates = CLLocationCoordinate2DMake(48.85815,2.29452)
+//    mapView.region = MKCoordinateRegionMakeWithDistance(eiffelTowerCoordinates, 1000,100)
+    
+    _mkMapView.mapType = MKMapTypeStandard;
+    _mkMapView.zoomEnabled = YES;
+    _mkMapView.scrollEnabled = YES;
+    
+    
+    // 3D Camera
+    MKMapCamera *mapCamera = [MKMapCamera new];
+    mapCamera.pitch = 45;
+    mapCamera.altitude = 500;
+    mapCamera.heading = 45;
+    
+    //Set MKmapView camera property
+    _mkMapView.camera = mapCamera;
+
     // Initialize Location Manager
     _locationManager = [[CLLocationManager alloc] init];
     
@@ -62,17 +85,20 @@
                                                         delayUntilAuthorized:YES
                                                                        block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
 
-                                                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-
                                                                            if (status == INTULocationStatusSuccess) {
+
+                                                                               mapCamera.centerCoordinate = currentLocation.coordinate;
+                                                                               _mkMapView.region = MKCoordinateRegionMakeWithDistance(currentLocation.coordinate, 1000, 100);
 
                                                                                // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
                                                                                // currentLocation contains the device's current location.
                                                                                [[B311MapDataLocations instance] getMapLocations:^(BOOL success, NSArray *mapLocations, NSString *error) {
 
+                                                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
                                                                                    if (!error) {
                                                                                        
-                                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Location Data API Error"
+                                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Locations Data API Error"
                                                                                                                                            message:error
                                                                                                                                           delegate:nil
                                                                                                                                  cancelButtonTitle:@"OK"
@@ -81,19 +107,20 @@
                                                                                    } else {
                                                                                        
                                                                                        // UPDATE THE MAP ANNOTATIONS WITH ARRAY RETURNED FOR BACK-END
+                                                                                       mapLocationAnnotations = mapLocations;
                                                                                        
-                                                                                       //UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Location"
-                                                                                       //                                                     message:@"Location data has been updated."
-                                                                                       //                                                    delegate:nil
-                                                                                       //                                           cancelButtonTitle:@"OK"
-                                                                                       //                                           otherButtonTitles:nil];
-                                                                                       //[alertView show];
+                                                                                       [_mkMapView addAnnotations:mapLocationAnnotations];
+                                                                                       [_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
                                                                                    }
                                                                                    
                                                                                } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:hud];
                                                                            }
                                                                            else if (status == INTULocationStatusTimedOut) {
                                                                                
+                                                                               CLLocationCoordinate2D sanFranciscoCoordinates = CLLocationCoordinate2DMake(37.773972, -122.431297);
+                                                                               mapCamera.centerCoordinate = sanFranciscoCoordinates;
+                                                                               _mkMapView.region = MKCoordinateRegionMakeWithDistance(sanFranciscoCoordinates, 1000, 100);
+
                                                                                // Wasn't able to locate the user with the requested accuracy within the timeout interval.
                                                                                // However, currentLocation contains the best location available (if any) as of right now,
                                                                                // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
@@ -101,6 +128,9 @@
                                                                            else {
                                                                                
                                                                                // An error occurred, more info is available by looking at the specific status returned.
+                                                                               CLLocationCoordinate2D sanFranciscoCoordinates = CLLocationCoordinate2DMake(37.773972, -122.431297);
+                                                                               mapCamera.centerCoordinate = sanFranciscoCoordinates;
+                                                                               _mkMapView.region = MKCoordinateRegionMakeWithDistance(sanFranciscoCoordinates, 1000, 100);
                                                                            }
                                                                        }];
 
@@ -129,6 +159,8 @@
     [self addChildViewController:_pageViewController];
     [self.view addSubview:_pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
+
+    geocoder = [[CLGeocoder alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -248,6 +280,7 @@
     // - (void)newGeofenceLocation:(void (^)(NSString *error))completion withGeoFence:(B311GeoFence *)geo_fence andWithHUD:(MBProgressHUD *)hud;
     // ***** Create the location first, because need "location_id" for geo_fence *****
     
+    // NOTE: See notepad notes
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Creating a New Location...";
@@ -258,12 +291,89 @@
                           delayUntilAuthorized:YES
                                          block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
 
-                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-
                                              if (status == INTULocationStatusSuccess) {
                                                  
                                                  // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
                                                  // currentLocation contains the device's current location.
+                                                 
+                                                 // Get the address information for this lat/long doing a reverse lookup
+                                                 [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+
+                                                     CLPlacemark *placemark = placemarks[0];
+                                                     NSLog(@"Found %@", placemark.name);
+
+                                                    /*
+                                                     @property (nonatomic, readonly, copy) NSDictionary *addressDictionary;
+                                                     
+                                                     // address dictionary properties
+                                                     @property (nonatomic, readonly, copy) NSString *name; // eg. Apple Inc.
+                                                     @property (nonatomic, readonly, copy) NSString *thoroughfare; // street address, eg. 1 Infinite Loop
+                                                     @property (nonatomic, readonly, copy) NSString *subThoroughfare; // eg. 1
+                                                     @property (nonatomic, readonly, copy) NSString *locality; // city, eg. Cupertino
+                                                     @property (nonatomic, readonly, copy) NSString *subLocality; // neighborhood, common name, eg. Mission District
+                                                     @property (nonatomic, readonly, copy) NSString *administrativeArea; // state, eg. CA
+                                                     @property (nonatomic, readonly, copy) NSString *subAdministrativeArea; // county, eg. Santa Clara
+                                                     @property (nonatomic, readonly, copy) NSString *postalCode; // zip code, eg. 95014
+                                                     @property (nonatomic, readonly, copy) NSString *ISOcountryCode; // eg. US
+                                                     @property (nonatomic, readonly, copy) NSString *country; // eg. United States
+                                                     @property (nonatomic, readonly, copy) NSString *inlandWater; // eg. Lake Tahoe
+                                                     @property (nonatomic, readonly, copy) NSString *ocean; // eg. Pacific Ocean
+                                                     @property (nonatomic, readonly, copy) NSArray *areasOfInterest; // eg. Golden Gate Park
+                                                    */
+                                                     B311MapDataLocation *location = [B311MapDataLocation new];
+
+                                                     location.title = placemark.name;
+                                                     location.address = [placemark.addressDictionary objectForKey:(NSString*) kABPersonAddressStreetKey];
+                                                     location.city = placemark.locality;
+                                                     location.state = placemark.administrativeArea;
+                                                     location.zip = placemark.postalCode;
+                                                     location.mtype = index;
+                                                     
+                                                     location.latitude = placemark.location.coordinate.latitude;
+                                                     location.longitude = placemark.location.coordinate.longitude;
+
+                                                     [[B311MapDataLocations instance] newMapLocation:^(NSString *error) {
+
+                                                         if (!error) {
+                                                             
+                                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"New Location Data API Error"
+                                                                                                                 message:error
+                                                                                                                delegate:nil
+                                                                                                       cancelButtonTitle:@"OK"
+                                                                                                       otherButtonTitles:nil];
+                                                             [alertView show];
+                                                         } else {
+                                                             
+                                                             // Added new location to back-end, now update all of them to get new one
+                                                             [[B311MapDataLocations instance] getMapLocations:^(BOOL success, NSArray *mapLocations, NSString *error) {
+                                                                 
+                                                                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                                 
+                                                                 if (!error) {
+                                                                     
+                                                                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Locations (New) Data API Error"
+                                                                                                                         message:error
+                                                                                                                        delegate:nil
+                                                                                                               cancelButtonTitle:@"OK"
+                                                                                                               otherButtonTitles:nil];
+                                                                     [alertView show];
+                                                                 } else {
+                                                                     
+                                                                     // UPDATE THE MAP ANNOTATIONS WITH ARRAY RETURNED FOR BACK-END
+                                                                     mapLocationAnnotations = mapLocations;
+
+                                                                     [_mkMapView addAnnotations:mapLocationAnnotations];
+                                                                     [_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
+                                                                 }
+                                                                 
+                                                             } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];
+                                                         }
+                                                         
+                                                     } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude withData:nil andWithHUD:nil];
+
+                                                 }];
+                                                 
+
                                              }
                                              else if (status == INTULocationStatusTimedOut) {
                                                  
@@ -369,6 +479,68 @@
         }
         
     } atLocationId:region.identifier andWithHUD:nil];
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (void)mapView:(MKMapView *)lMapView didAddAnnotationViews:(NSArray *)views
+{
+    //[mapView selectAnnotation:currentSeller animated:YES];
+    //[mapView selectAnnotation:[[mapView annotations] lastObject] animated:YES];
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)uLocation {
+    
+//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(uLocation.coordinate, 800, 800);
+//    [_mkMapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+}
+
+-(MKAnnotationView *) mapView:(MKMapView *)mV viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+    {
+        return nil;
+    }
+    
+    static NSString *b311ParkingRampNoneAnnotationIdentifier = @"com.b311.parking.ramp.none.pin";
+    static NSString *b311ParkingRampLeftAnnotationIdentifier = @"com.b311.parking.ramp.left.pin";
+    static NSString *b311ParkingRamprightAnnotationIdentifier = @"com.b311.parking.ramp.right.pin";
+    static NSString *b311GeneralAnnotationIdentifier = @"com.b311.general.pin";
+    static NSString *b311EntranceAnnotationIdentifier = @"com.b311.entrance.pin";
+
+    if ([annotation isKindOfClass:[B311GeneralMapAnnotation class]]) {
+        MKAnnotationView *annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311GeneralAnnotationIdentifier];
+        if (!annotationView)
+        {
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:b311GeneralAnnotationIdentifier];
+            annotationView.canShowCallout = YES;
+            //UIImageView *generalView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"deal_pin-a.png"]];
+            //[generalView setFrame:CGRectMake(0, 0, 30, 30)];
+            //annotationView.leftCalloutAccessoryView = generalView;
+            annotationView.image = [UIImage imageNamed:@"map_annotation_general"];
+        }
+        return annotationView;
+    }
+/*
+    if (annotation != mapView.userLocation)
+    {
+        MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:waitTimeAnnotationIdentifier];
+        if (!annotationView)
+        {
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:waitTimeAnnotationIdentifier];
+            annotationView.canShowCallout = YES;
+            UIImageView *houseIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Wait_Pin-a.png"]];
+            [houseIconView setFrame:CGRectMake(0, 0, 30, 30)];
+            annotationView.leftCalloutAccessoryView = houseIconView;
+            annotationView.image = [UIImage imageNamed:@"Wait_Pin-b.png"];
+            //UIButton * disclosureButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            //[disclosureButton addTarget:self action:@selector(presentMoreInfo:) forControlEvents:UIControlEventTouchUpInside];
+            //annotationView.rightCalloutAccessoryView = disclosureButton;
+        }
+        return annotationView;
+    }
+*/
+    return nil;
 }
 
 @end

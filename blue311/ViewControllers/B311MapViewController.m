@@ -373,46 +373,7 @@
                                                              return;
                                                          } else {
 
-// NOTE: Move this to a selector that can update new map locations and goefence locations (parking only) around that area
-// Move below (getMapLocations) and getGeofenceLocations - I thinkg pull both and if parking will pull it. Move to
-// one place - if new send it up full till user moves out.
-
-                                                             // Added new location to back-end, now update all of them to get new one
-                                                             [[B311MapDataLocations instance] getMapLocations:^(BOOL success, NSArray *mapLocations, NSString *error) {
-                                                                 
-                                                                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                                 
-                                                                 if (!success) {
-
-                                                                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Locations (New) Data API Error"
-                                                                                                                         message:error
-                                                                                                                        delegate:nil
-                                                                                                               cancelButtonTitle:@"OK"
-                                                                                                               otherButtonTitles:nil];
-                                                                     [alertView show];
-                                                                     return;
-                                                                 } else {
-                                                                     
-                                                                     // Add map annotations from map data returned from server
-                                                                     [mapLocationAnnotations removeAllObjects];
-                                                                     
-                                                                     mapLocationData = mapLocations;
-                                                                     
-                                                                     for (B311MapDataLocation *location in mapLocations) {
-                                                                         
-                                                                         B311MapDataAnnotation *annotation = [B311MapDataAnnotation new];
-                                                                         annotation.ltype = location.mtype;
-                                                                         annotation.title = location.address;
-                                                                         annotation.coordinate = CLLocationCoordinate2DMake(location.latitude , location.longitude);
-                                                                         [mapLocationAnnotations addObject:annotation];
-                                                                     }
-                                                                     
-                                                                     [_mkMapView addAnnotations:mapLocationAnnotations];
-                                                                     //[_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
-                                                                     [_mkMapView setCenterCoordinate:currentLocation.coordinate animated:NO];
-                                                                 }
-                                                                 
-                                                             } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];
+                                                             [self updateMapLocationGeoFences:currentLocation];
                                                          }
                                                          
                                                      } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude withData:location andWithHUD:nil];
@@ -438,42 +399,7 @@
     // Fetch Current Location
     CLLocation *location = [locations objectAtIndex:0];
 
-    [[B311GeoFenceLocations instance] getGeofenceLocations:^(BOOL success, NSArray *geFenceLocations, NSString *error) {
-
-        if (!success) {
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GeoFence API Error"
-                                                                message:error
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-            [alertView show];
-
-        } else {
-            
-            geoFences = [B311GeoFenceLocations instance].geoFenceLocations;
-
-            if (geoFences && [geoFences count]) {
-                
-                // Clear old regions by passing in same UUID region identifier
-                for (B311GeoFence *geoFence in currentGeoFences) {
-                    
-                    [currentGeoFences removeObject:geoFence];
-                    [_locationManager startMonitoringForRegion:geoFence.region];
-                }
-
-                for (B311GeoFence *geoFence in geoFences) {
-                    
-                    [currentGeoFences addObject:geoFence];
-                    [_locationManager startMonitoringForRegion:geoFence.region];
-                }
-                
-                // Start Monitoring geofence regions
-                [_locationManager stopUpdatingLocation];
-            }
-        }
-        
-    } atLatitude:location.coordinate.latitude atLongitude:location.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];
+    [self updateMapLocationGeoFences:location];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
@@ -524,14 +450,92 @@
     } atLocationId:region.identifier andWithHUD:nil];
 }
 
+- (void)updateMapLocationGeoFences:(CLLocation *)currentLocation {
+    
+    // Added new location to back-end, now update all of them to get new one and update geofencing regions
+    
+    [[B311MapDataLocations instance] getMapLocations:^(BOOL success, NSArray *mapLocations, NSString *error) {
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        if (!success) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Locations (New) Data API Error"
+                                                                message:error
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            return;
+        } else {
+            
+            // Add map annotations from map data returned from server
+            [mapLocationAnnotations removeAllObjects];
+            
+            mapLocationData = mapLocations;
+            
+            for (B311MapDataLocation *location in mapLocations) {
+                
+                B311MapDataAnnotation *annotation = [B311MapDataAnnotation new];
+                annotation.ltype = location.mtype;
+                annotation.title = location.address;
+                annotation.coordinate = CLLocationCoordinate2DMake(location.latitude , location.longitude);
+                [mapLocationAnnotations addObject:annotation];
+            }
+            
+            [_mkMapView addAnnotations:mapLocationAnnotations];
+            //[_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
+            [_mkMapView setCenterCoordinate:currentLocation.coordinate animated:NO];
+        }
+        
+    } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];
+
+    [[B311GeoFenceLocations instance] getGeofenceLocations:^(BOOL success, NSArray *geFenceLocations, NSString *error) {
+        
+        if (!success) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GeoFence API Error"
+                                                                message:error
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            
+        } else {
+            
+            geoFences = [B311GeoFenceLocations instance].geoFenceLocations;
+            
+            if (geoFences && [geoFences count]) {
+                
+                // Clear old regions by passing in same UUID region identifier
+                for (B311GeoFence *geoFence in currentGeoFences) {
+                    
+                    [currentGeoFences removeObject:geoFence];
+                    [_locationManager startMonitoringForRegion:geoFence.region];
+                }
+                
+                for (B311GeoFence *geoFence in geoFences) {
+                    
+                    [currentGeoFences addObject:geoFence];
+                    [_locationManager startMonitoringForRegion:geoFence.region];
+                }
+                
+                // Start Monitoring geofence regions
+                [_locationManager stopUpdatingLocation];
+            }
+        }
+        
+    } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];
+}
+
 #pragma mark - MKMapViewDelegate
 
 // NOTE: No dragging yet. Try and get highest quality read from GPS and see if good enough.
 /*
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
-    
+ 
     if (oldState == MKAnnotationViewDragStateDragging) {
-        
+ 
         //MapCoordinates *annotation = (MapCoordinates *)annotationView.annotation;
         //reverseDelegate = self;
         //CLLocation *loc = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];

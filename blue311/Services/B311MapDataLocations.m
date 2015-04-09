@@ -101,6 +101,16 @@
         
         NSString *path = [NSString stringWithFormat:@"%@://%@%@map_location_new", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
 
+        if (data == nil) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completion(@"B311MapDataLocation (withData:) is nil");
+            });
+            
+            return;
+        }
+        
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"title": data.title, @"address": data.address, @"city": data.city, @"state":data.state, @"zip":data.zip, @"location_type":[B311MapDataLocation stringB311MapDataLocationType:data.mtype], @"latitude":[NSNumber numberWithDouble:lat], @"longitude":[NSNumber numberWithDouble:lng] }];
         
         @try {
@@ -112,7 +122,7 @@
             NSLog(@"results = %@", results);
             
             NSString *errorMessage = [results objectForKey:@"error"];
-            if (errorMessage != nil) {
+            if (errorMessage != nil && results != nil) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
@@ -124,6 +134,16 @@
             }
             else {
                 
+                if (results == nil) {
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        completion(@"No results returned from server");
+                    });
+                    
+                    return;
+                }
+
                 // return nil on successful POST
                 dispatch_async(dispatch_get_main_queue(), ^{
                     

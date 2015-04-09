@@ -48,6 +48,8 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipTutorial:) name:@"skipTutorial" object:nil];
 
+    mapLocationAnnotations = [NSMutableArray new];
+
     currentGeoFences = [NSMutableArray new];
 
     // Initialize Location Manager
@@ -117,7 +119,8 @@
                                                                                    } else {
                                                                                        
                                                                                        // Add map annotations from map data returned from server
-                                                                                       mapLocationAnnotations = [NSMutableArray new];
+                                                                                       [mapLocationAnnotations removeAllObjects];
+
                                                                                        mapLocationData = mapLocations;
                                                                                        
                                                                                        for (B311MapDataLocation *location in mapLocations) {
@@ -346,14 +349,31 @@
 
                                                      [[B311MapDataLocations instance] newMapLocation:^(NSString *error) {
 
-                                                         if (!error) {
+                                                         if (error != nil) {
                                                              
+                                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+#define TESTING 1
+#ifdef TESTING
+                                                             // NOTE: For debugging create a new placement object using the type the user pressed (add to array for testing as move around)
+                                                             B311MapDataAnnotation *annotation = [B311MapDataAnnotation new];
+                                                             annotation.ltype = location.mtype;
+                                                             annotation.title = location.address;
+                                                             annotation.coordinate = CLLocationCoordinate2DMake(location.latitude , location.longitude);
+                                                             [mapLocationAnnotations addObject:annotation];
+                                                             
+                                                             [_mkMapView addAnnotations:mapLocationAnnotations];
+                                                             //[_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
+                                                             [_mkMapView setCenterCoordinate:currentLocation.coordinate animated:NO];
+                                                             
+#else
                                                              UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"New Location Data API Error"
                                                                                                                  message:error
                                                                                                                 delegate:nil
                                                                                                        cancelButtonTitle:@"OK"
                                                                                                        otherButtonTitles:nil];
                                                              [alertView show];
+#endif
+                                                             return;
                                                          } else {
                                                              
                                                              // Added new location to back-end, now update all of them to get new one
@@ -361,18 +381,20 @@
                                                                  
                                                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                                                  
-                                                                 if (!error) {
-                                                                     
+                                                                 if (!success) {
+
                                                                      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Locations (New) Data API Error"
                                                                                                                          message:error
                                                                                                                         delegate:nil
                                                                                                                cancelButtonTitle:@"OK"
                                                                                                                otherButtonTitles:nil];
                                                                      [alertView show];
+                                                                     return;
                                                                  } else {
                                                                      
                                                                      // Add map annotations from map data returned from server
-                                                                     mapLocationAnnotations = [NSMutableArray new];
+                                                                     [mapLocationAnnotations removeAllObjects];
+                                                                     
                                                                      mapLocationData = mapLocations;
                                                                      
                                                                      for (B311MapDataLocation *location in mapLocations) {
@@ -392,11 +414,8 @@
                                                              } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];
                                                          }
                                                          
-                                                     } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude withData:nil andWithHUD:nil];
-
+                                                     } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude withData:location andWithHUD:nil];
                                                  }];
-                                                 
-
                                              }
                                              else if (status == INTULocationStatusTimedOut) {
                                                  

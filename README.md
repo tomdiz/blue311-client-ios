@@ -1,6 +1,8 @@
-# open311
+# blue311
 
-Handicap parking and building entrances locator. Also supports general info.
+Handicap parking, general info  and building entrances locator.
+
+Parking spots are geofenced and marked as full or empty if in use or not
 
 ## Setting up Project
 

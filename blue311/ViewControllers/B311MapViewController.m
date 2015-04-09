@@ -286,11 +286,6 @@
 #pragma mark - CDSideBarController delegate
 
 - (void)menuButtonClicked:(long)index {
-    
-    // NOTE: Create a new B311GeoFenceLocations - getGeofenceLocations
-    // Get current location to add icon to the map
-    // - (void)newGeofenceLocation:(void (^)(NSString *error))completion withGeoFence:(B311GeoFence *)geo_fence andWithHUD:(MBProgressHUD *)hud;
-    // ***** Create the location first, because need "location_id" for geo_fence *****
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Creating a New Location...";
@@ -313,6 +308,8 @@
                                                      NSLog(@"Found %@", placemark.name);
 
                                                     /*
+                                                     Data returned from CLPlacemark we can use in details view
+                                                     
                                                      @property (nonatomic, readonly, copy) NSDictionary *addressDictionary;
                                                      
                                                      // address dictionary properties
@@ -375,7 +372,11 @@
 #endif
                                                              return;
                                                          } else {
-                                                             
+
+// NOTE: Move this to a selector that can update new map locations and goefence locations (parking only) around that area
+// Move below (getMapLocations) and getGeofenceLocations - I thinkg pull both and if parking will pull it. Move to
+// one place - if new send it up full till user moves out.
+
                                                              // Added new location to back-end, now update all of them to get new one
                                                              [[B311MapDataLocations instance] getMapLocations:^(BOOL success, NSArray *mapLocations, NSString *error) {
                                                                  
@@ -564,6 +565,13 @@
     static NSString *b311GeneralAnnotationIdentifier = @"com.b311.general.pin";
     static NSString *b311EntranceAnnotationIdentifier = @"com.b311.entrance.pin";
 
+    // NOTE: Create a new B311GeoFenceLocations - getGeofenceLocations
+    // Get current location to add icon to the map
+    // - (void)newGeofenceLocation:(void (^)(NSString *error))completion withGeoFence:(B311GeoFence *)geo_fence andWithHUD:(MBProgressHUD *)hud;
+    // ***** Create the location first, because need "location_id" for geo_fence *****
+    
+// If parking then create a geofence around that area. Create array of geolocations from those values?
+    
     if ([annotation isKindOfClass:[B311MapDataAnnotation class]]) {
         
         B311MapDataAnnotation *annotationData = annotation;
@@ -597,7 +605,7 @@
                 
                 annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:b311ParkingRampNoneAnnotationIdentifier];
                 annotationView.canShowCallout = YES;
-                annotationView.image = [UIImage imageNamed:@"map_annotation_parking_no_empty"];
+                annotationView.image = [UIImage imageNamed:@"map_annotation_parking_no_full"];
             }
         } else if (annotationData.ltype == B311GeoFenceLocationTypeParkingRampLeft) {
             
@@ -606,7 +614,7 @@
                 
                 annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:b311ParkingRampLeftAnnotationIdentifier];
                 annotationView.canShowCallout = YES;
-                annotationView.image = [UIImage imageNamed:@"map_annotation_parking_no_left"];
+                annotationView.image = [UIImage imageNamed:@"map_annotation_parking_left_full"];
             }
         } else if (annotationData.ltype == B311GeoFenceLocationTypeParkingRampRight) {
             
@@ -615,7 +623,7 @@
                 
                 annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:b311ParkingRampRightAnnotationIdentifier];
                 annotationView.canShowCallout = YES;
-                annotationView.image = [UIImage imageNamed:@"map_annotation_parking_no_right"];
+                annotationView.image = [UIImage imageNamed:@"map_annotation_parking_right_full"];
             }
         }
 

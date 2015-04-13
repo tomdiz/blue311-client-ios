@@ -287,6 +287,13 @@
 
 - (void)menuButtonClicked:(long)index {
 
+    // NOTE: index values
+    //      0 -> handicap-ramp-no
+    //      1 -> handicap-ramp-left
+    //      2 -> handicap-ramp-right
+    //      3 -> entrance
+    //      4 -> general
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Creating a New Location...";
     hud.dimBackground = YES;
@@ -304,58 +311,64 @@
                                                  // Get the address information for this lat/long doing a reverse lookup
                                                  [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
 
-                                                     CLPlacemark *placemark = placemarks[0];
-                                                     NSLog(@"Found %@", placemark.name);
-
-                                                    /*
-                                                     Data returned from CLPlacemark we can use in details view
-                                                     
-                                                     @property (nonatomic, readonly, copy) NSDictionary *addressDictionary;
-                                                     
-                                                     // address dictionary properties
-                                                     @property (nonatomic, readonly, copy) NSString *name; // eg. Apple Inc.
-                                                     @property (nonatomic, readonly, copy) NSString *thoroughfare; // street address, eg. 1 Infinite Loop
-                                                     @property (nonatomic, readonly, copy) NSString *subThoroughfare; // eg. 1
-                                                     @property (nonatomic, readonly, copy) NSString *locality; // city, eg. Cupertino
-                                                     @property (nonatomic, readonly, copy) NSString *subLocality; // neighborhood, common name, eg. Mission District
-                                                     @property (nonatomic, readonly, copy) NSString *administrativeArea; // state, eg. CA
-                                                     @property (nonatomic, readonly, copy) NSString *subAdministrativeArea; // county, eg. Santa Clara
-                                                     @property (nonatomic, readonly, copy) NSString *postalCode; // zip code, eg. 95014
-                                                     @property (nonatomic, readonly, copy) NSString *ISOcountryCode; // eg. US
-                                                     @property (nonatomic, readonly, copy) NSString *country; // eg. United States
-                                                     @property (nonatomic, readonly, copy) NSString *inlandWater; // eg. Lake Tahoe
-                                                     @property (nonatomic, readonly, copy) NSString *ocean; // eg. Pacific Ocean
-                                                     @property (nonatomic, readonly, copy) NSArray *areasOfInterest; // eg. Golden Gate Park
-                                                    */
-                                                     // NOTE: index values
-                                                     //      0 -> handicap-ramp-no
-                                                     //      1 -> handicap-ramp-left
-                                                     //      2 -> handicap-ramp-right
-                                                     //      3 -> entrance
-                                                     //      4 -> general
                                                      B311MapDataLocation *location = [B311MapDataLocation new];
-
-                                                     location.title = placemark.name;
-                                                     location.address = [placemark.addressDictionary objectForKey:(NSString*) kABPersonAddressStreetKey];
-                                                     location.city = placemark.locality;
-                                                     location.state = placemark.administrativeArea;
-                                                     location.zip = placemark.postalCode;
-                                                     location.mtype = index;
-                                                     location.latitude = placemark.location.coordinate.latitude;
-                                                     location.longitude = placemark.location.coordinate.longitude;
+                                                     if (placemarks.count == 0) {
+                                                         
+                                                         location.title = @"";
+                                                         location.address = @"";
+                                                         location.city = @"";
+                                                         location.state = @"";
+                                                         location.zip = @"";
+                                                         location.mtype = index;
+                                                     }
+                                                     else {
+                                                         
+                                                         CLPlacemark *placemark = placemarks[0];
+                                                         NSLog(@"Found %@", placemark.name);
+                                                         
+                                                         /*
+                                                          Data returned from CLPlacemark we can use in details view
+                                                          
+                                                          @property (nonatomic, readonly, copy) NSDictionary *addressDictionary;
+                                                          
+                                                          // address dictionary properties
+                                                          @property (nonatomic, readonly, copy) NSString *name; // eg. Apple Inc.
+                                                          @property (nonatomic, readonly, copy) NSString *thoroughfare; // street address, eg. 1 Infinite Loop
+                                                          @property (nonatomic, readonly, copy) NSString *subThoroughfare; // eg. 1
+                                                          @property (nonatomic, readonly, copy) NSString *locality; // city, eg. Cupertino
+                                                          @property (nonatomic, readonly, copy) NSString *subLocality; // neighborhood, common name, eg. Mission District
+                                                          @property (nonatomic, readonly, copy) NSString *administrativeArea; // state, eg. CA
+                                                          @property (nonatomic, readonly, copy) NSString *subAdministrativeArea; // county, eg. Santa Clara
+                                                          @property (nonatomic, readonly, copy) NSString *postalCode; // zip code, eg. 95014
+                                                          @property (nonatomic, readonly, copy) NSString *ISOcountryCode; // eg. US
+                                                          @property (nonatomic, readonly, copy) NSString *country; // eg. United States
+                                                          @property (nonatomic, readonly, copy) NSString *inlandWater; // eg. Lake Tahoe
+                                                          @property (nonatomic, readonly, copy) NSString *ocean; // eg. Pacific Ocean
+                                                          @property (nonatomic, readonly, copy) NSArray *areasOfInterest; // eg. Golden Gate Park
+                                                          */
+                                                         
+                                                         location.title = placemark.name;
+                                                         location.address = [placemark.addressDictionary objectForKey:(NSString*) kABPersonAddressStreetKey];
+                                                         location.city = placemark.locality;
+                                                         location.state = placemark.administrativeArea;
+                                                         location.zip = placemark.postalCode;
+                                                         location.mtype = index;
+                                                     }
 
                                                      [[B311MapDataLocations instance] newMapLocation:^(NSString *error) {
 
+                                                         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
                                                          if (error != nil) {
                                                              
-                                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 #define TESTING 1
 #ifdef TESTING
                                                              // NOTE: For debugging create a new placement object using the type the user pressed (add to array for testing as move around)
                                                              B311MapDataAnnotation *annotation = [B311MapDataAnnotation new];
                                                              annotation.ltype = location.mtype;
-                                                             annotation.title = location.address;
-                                                             annotation.coordinate = CLLocationCoordinate2DMake(location.latitude , location.longitude);
+                                                             annotation.title = location.title;
+                                                             //annotation.coordinate = CLLocationCoordinate2DMake(location.latitude , location.longitude);
+                                                             annotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude , currentLocation.coordinate.longitude);
                                                              [mapLocationAnnotations addObject:annotation];
                                                              
                                                              [_mkMapView addAnnotations:mapLocationAnnotations];
@@ -381,12 +394,14 @@
                                              }
                                              else if (status == INTULocationStatusTimedOut) {
                                                  
+                                                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                                  // Wasn't able to locate the user with the requested accuracy within the timeout interval.
                                                  // However, currentLocation contains the best location available (if any) as of right now,
                                                  // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
                                              }
                                              else {
                                                  
+                                                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                                  // An error occurred, more info is available by looking at the specific status returned.
                                              }
                                          }];

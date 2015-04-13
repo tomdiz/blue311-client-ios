@@ -111,8 +111,16 @@
             return;
         }
         
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"title": data.title, @"address": data.address, @"city": data.city, @"state":data.state, @"zip":data.zip, @"location_type":[B311MapDataLocation stringB311MapDataLocationType:data.mtype], @"latitude":[NSNumber numberWithDouble:lat], @"longitude":[NSNumber numberWithDouble:lng] }];
-        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"title": data.title == nil ? @"" : data.title,
+                                                                                       @"address": data.address == nil ? @"" : data.address,
+                                                                                       @"city": data.city == nil ? @"" : data.city,
+                                                                                       @"state":data.state == nil ? @"" : data.state,
+                                                                                       @"zip":data.zip == nil ? @"" : data.zip,
+                                                                                       @"location_type":[B311MapDataLocation stringB311MapDataLocationType:data.mtype],
+                                                                                       @"latitude":[NSNumber numberWithDouble:lat],
+                                                                                       @"longitude":[NSNumber numberWithDouble:lng]
+                                                                                       }];
+
         @try {
             
             NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"POST" stringParameters:params];

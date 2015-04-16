@@ -17,6 +17,7 @@
 #import "B311AppProperties.h"
 #import "B311GeoFenceLocations.h"
 #import "B311MapDataAnnotation.h"
+#import "B311DetailsViewController.h"
 
 @interface B311MapViewController () <UIPageViewControllerDataSource> {
     
@@ -86,6 +87,13 @@
     [self.pageViewController didMoveToParentViewController:self];
     
     geocoder = [[CLGeocoder alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [sideBar handleMenuState];
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Updating Location Data...";
@@ -96,18 +104,18 @@
                                                                      timeout:10.0
                                                         delayUntilAuthorized:YES
                                                                        block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-
+                                                                           
                                                                            if (status == INTULocationStatusSuccess) {
-
+                                                                               
                                                                                // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
                                                                                // currentLocation contains the device's current location.
                                                                                
                                                                                [self setUpMapKitCameraViewLocation:currentLocation];
                                                                                
                                                                                [[B311MapDataLocations instance] getMapLocations:^(BOOL success, NSArray *mapLocations, NSString *error) {
-
+                                                                                   
                                                                                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-
+                                                                                   
                                                                                    if (!error) {
                                                                                        
                                                                                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Locations Data API Error"
@@ -120,7 +128,7 @@
                                                                                        
                                                                                        // Add map annotations from map data returned from server
                                                                                        [mapLocationAnnotations removeAllObjects];
-
+                                                                                       
                                                                                        mapLocationData = mapLocations;
                                                                                        
                                                                                        for (B311MapDataLocation *location in mapLocations) {
@@ -155,13 +163,6 @@
                                                                                [self setUpMapKitCameraViewLocation:currentDeviceLocation];
                                                                            }
                                                                        }];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
-    [sideBar handleMenuState];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -559,7 +560,7 @@
     }
 }
 */
-- (void)mapView:(MKMapView *)lMapView didAddAnnotationViews:(NSArray *)views {
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     
     //[mapView selectAnnotation:currentSeller animated:YES];
     //[mapView selectAnnotation:[[mapView annotations] lastObject] animated:YES];
@@ -571,7 +572,20 @@
 //    [_mkMapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
 
--(MKAnnotationView *) mapView:(MKMapView *)mV viewForAnnotation:(id <MKAnnotation>)annotation {
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    
+    [mapView deselectAnnotation:view.annotation animated:YES];
+
+    B311DetailsViewController *detailsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"B311DetailsViewController"];
+    detailsViewController.location_data = view.annotation;
+    [self presentViewController:detailsViewController animated:YES completion:nil];
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    
+}
+
+-(MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         

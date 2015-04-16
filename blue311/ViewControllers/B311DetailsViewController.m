@@ -105,20 +105,68 @@
 
 - (IBAction)addCommentButtonPressed:(id)sender {
 
+    B311User *user = [B311User loadB311User];
+    if (user == nil) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Adding Comments"
+                                                            message:@"You need to create a Profile before you can add comments"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+
     locationEdited = NO;
 }
 
 - (IBAction)titleEditButtonPressed:(id)sender {
+    
+    B311User *user = [B311User loadB311User];
+    if (user == nil) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Editing Details"
+                                                            message:@"You need to create a Profile before you can change location details"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
     
     locationEdited = NO;
 }
 
 - (IBAction)streetEditButtonPressed:(id)sender {
     
+    B311User *user = [B311User loadB311User];
+    if (user == nil) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Editing Details"
+                                                            message:@"You need to create a Profile before you can change location details"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    
     locationEdited = NO;
 }
 
 - (IBAction)cityEditButtonPressed:(id)sender {
+    
+    B311User *user = [B311User loadB311User];
+    if (user == nil) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Editing Details"
+                                                            message:@"You need to create a Profile before you can change location details"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
     
     locationEdited = NO;
 }
@@ -129,6 +177,18 @@
 }
 
 - (IBAction)zipEditButtonPressed:(id)sender {
+    
+    B311User *user = [B311User loadB311User];
+    if (user == nil) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Editing Details"
+                                                            message:@"You need to create a Profile before you can change location details"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
     
     locationEdited = NO;
 }
@@ -160,14 +220,17 @@
                                                           cancelButtonTitle:@"OK"
                                                           otherButtonTitles:nil];
                 [alertView show];
+
             } else {
                 
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Location"
-                                                                    message:@"Location data has been updated."
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                [alertView show];
+                //UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Location"
+                //                                                    message:@"Location data has been updated."
+                //                                                   delegate:nil
+                //                                          cancelButtonTitle:@"OK"
+                //                                          otherButtonTitles:nil];
+                //[alertView show];
+
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
             
         } withData:location andWithHUD:hud];
@@ -197,7 +260,15 @@
         cell = [[B311CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
     }
     
-    cell.textLabel.text = @"My Text";
+    B311Comment *comment = [commentsArray objectAtIndex:[indexPath row]];
+    cell.comment = comment;
+    cell.mainView = self.view;
+    
+    cell.lblUserHandle.text = comment.user_handle;
+    cell.lblCommentSubject.text = comment.subject;
+    cell.txtCommentBody.text = comment.body;
+    cell.lblCommentRating.text = [NSString stringWithFormat:@"%d", comment.rating_up - comment.rating_down];
+
     return cell;
 }
 

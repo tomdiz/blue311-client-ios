@@ -71,6 +71,10 @@
     location.zip = fields[@"zip"];
     location.mtype = [self b311MapDataLocationTypeFromString:fields[@"mtype"]];
 
+    // **********
+    // 'loc' is an array of lat/long doubles
+    // **********
+    
     location.latitude = [fields[@"latitude"] doubleValue];
     location.longitude = [fields[@"longitude"] doubleValue];
 

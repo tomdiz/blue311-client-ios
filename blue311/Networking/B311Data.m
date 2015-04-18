@@ -20,7 +20,8 @@
 + (NSString *) kapi_domain {
     
 #if TARGET_IPHONE_SIMULATOR
-    return @"dev01-api.blue311.com";
+    return @"localhost:8080";
+    //return @"dev01-api.blue311.com";
 #else
     return @"dev01-api.blue311.com";
 #endif

@@ -30,13 +30,11 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@geofence_enter", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"location_id": location_id }];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@maplocations/%@", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion, location_id];
         
         @try {
             
-            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"POST" stringParameters:params];
+            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"PUT" stringParameters:nil];
             
             NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:nil];
             
@@ -55,7 +53,7 @@
             }
             else {
                 
-                // return nil on successful POST
+                // return nil on successful PUT
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     completion(nil);
@@ -77,13 +75,11 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@geofence_exit", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"location_id": location_id }];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@maplocations/%@", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion, location_id];
         
         @try {
             
-            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"POST" stringParameters:params];
+            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"DELETE" stringParameters:nil];
             
             NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:nil];
             
@@ -102,7 +98,7 @@
             }
             else {
                 
-                // return nil on successful POST
+                // return nil on successful DELETE
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     completion(nil);

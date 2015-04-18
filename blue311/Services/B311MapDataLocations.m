@@ -29,7 +29,7 @@
         
         [hud setProgress:45.00/360.00];
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_locations/", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@maplocations/within", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
         NSLog(@"Path: %@", path);
         
@@ -99,7 +99,7 @@
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_locations", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@maplocations", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
 
         if (data == nil) {
             
@@ -117,9 +117,10 @@
                                                                                        @"state":data.state == nil ? @"" : data.state,
                                                                                        @"zip":data.zip == nil ? @"" : data.zip,
                                                                                        @"location_type":[B311MapDataLocation stringB311MapDataLocationType:data.mtype],
-                                                                                       @"latitude":[NSNumber numberWithDouble:lat],
-                                                                                       @"longitude":[NSNumber numberWithDouble:lng]
+                                                                                       @"loc": @[ [NSNumber numberWithDouble:lat], [NSNumber numberWithDouble:lng] ]
                                                                                        }];
+//        @"latitude":[NSNumber numberWithDouble:lat],
+//        @"longitude":[NSNumber numberWithDouble:lng]
 
         @try {
             
@@ -163,7 +164,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                completion(@"Could not post comment at this time.  Please check your internet connection and try again.");
+                completion(@"Could not create map location data at this time.  Please check your internet connection and try again.");
             });
         }
     });
@@ -173,13 +174,13 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_location_update", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@maplocations/update/%@", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion, data.id];
         
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"title": data.title, @"address": data.address, @"city": data.city, @"state":data.state, @"zip":data.zip }];
         
         @try {
             
-            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"POST" stringParameters:params];
+            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"PUT" stringParameters:params];
             
             NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:nil];
             
@@ -209,7 +210,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                completion(@"Could not post comment at this time.  Please check your internet connection and try again.");
+                completion(@"Could not update map location data at this time.  Please check your internet connection and try again.");
             });
         }
     });

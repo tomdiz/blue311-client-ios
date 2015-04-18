@@ -29,7 +29,7 @@
         
         [hud setProgress:45.00/360.00];
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@comments/byid", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@comments", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
         NSLog(@"Path: %@", path);
 
@@ -97,7 +97,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@comment", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@comments", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"user_id": user.id, @"user_handle": user.handle, @"location_id": location_id, @"comment_subject":comment.subject, @"comment_body":comment.body }];
 
@@ -143,13 +143,11 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@comment_up", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"comment_id": commentId, @"user_id": user.id }];
-        
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@comments/%@", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion, commentId];
+
         @try {
             
-            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"POST" stringParameters:params];
+            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"PUT" stringParameters:nil];
             
             NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:nil];
             
@@ -168,7 +166,7 @@
             }
             else {
                 
-                // return nil on successful POST
+                // return nil on successful PUT
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     completion(nil);
@@ -189,13 +187,11 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@comment_down", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"comment_id": commentId, @"user_id": user.id }];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@comments/%@", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion, commentId];
         
         @try {
             
-            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"POST" stringParameters:params];
+            NSData *data = [B311Data dataWithContentsOfURL:[NSURL URLWithString:path] methodName:@"DELETE" stringParameters:nil];
             
             NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:nil];
             
@@ -214,7 +210,7 @@
             }
             else {
                 
-                // return nil on successful POST
+                // return nil on successful DELETE
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     completion(nil);

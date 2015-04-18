@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, B311MapDataLocationType) {
 @property (assign, nonatomic) B311MapDataLocationType mtype;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
+@property (nonatomic) BOOL inUse;
 
 // NOTE: Here is data get from Google reverve address lookup - Should put this in our object
 /*

@@ -74,6 +74,8 @@
     location.latitude = [fields[@"latitude"] doubleValue];
     location.longitude = [fields[@"longitude"] doubleValue];
 
+    location.inUse = [fields[@"inUse"] boolValue];
+
     return location;
 }
 

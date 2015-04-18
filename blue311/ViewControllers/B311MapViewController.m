@@ -490,6 +490,13 @@
             
             mapLocationData = mapLocations;
             
+            // Clear old regions by passing in same UUID region identifier
+            for (B311GeoFence *geoFence in currentGeoFences) {
+                
+                [currentGeoFences removeObject:geoFence];
+                [_locationManager startMonitoringForRegion:geoFence.region];
+            }
+            
             for (B311MapDataLocation *location in mapLocations) {
                 
                 B311MapDataAnnotation *annotation = [B311MapDataAnnotation new];
@@ -497,48 +504,25 @@
                 annotation.title = location.address;
                 annotation.coordinate = CLLocationCoordinate2DMake(location.latitude , location.longitude);
                 [mapLocationAnnotations addObject:annotation];
+
+                // Create a geoFence if it is a parking type
+                if (location.mtype == B311MapDataLocationTypeParkingRampNone || location.mtype == B311MapDataLocationTypeParkingRampLeft || location.mtype == B311MapDataLocationTypeParkingRampRight) {
+                    
+                    B311GeoFence *fence = [B311GeoFence new];
+                    fence.location_id = location.id;
+                    CLLocationCoordinate2D coordinate;
+                    coordinate.latitude = location.latitude;
+                    coordinate.longitude = location.longitude;
+                    fence.region = [[CLCircularRegion alloc] initWithCenter:coordinate radius:kGeoFenceRadius identifier:location.id];
+                }
             }
             
+            // Start Monitoring geofence regions
+            [_locationManager stopUpdatingLocation];
+
             [_mkMapView addAnnotations:mapLocationAnnotations];
             //[_mkMapView setCenterCoordinate:_mkMapView.region.center animated:NO];
             [_mkMapView setCenterCoordinate:currentLocation.coordinate animated:NO];
-        }
-        
-    } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];
-
-    [[B311GeoFenceLocations instance] getGeofenceLocations:^(BOOL success, NSArray *geFenceLocations, NSString *error) {
-        
-        if (!success) {
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GeoFence API Error"
-                                                                message:error
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-            [alertView show];
-            
-        } else {
-            
-            geoFences = [B311GeoFenceLocations instance].geoFenceLocations;
-            
-            if (geoFences && [geoFences count]) {
-                
-                // Clear old regions by passing in same UUID region identifier
-                for (B311GeoFence *geoFence in currentGeoFences) {
-                    
-                    [currentGeoFences removeObject:geoFence];
-                    [_locationManager startMonitoringForRegion:geoFence.region];
-                }
-                
-                for (B311GeoFence *geoFence in geoFences) {
-                    
-                    [currentGeoFences addObject:geoFence];
-                    [_locationManager startMonitoringForRegion:geoFence.region];
-                }
-                
-                // Start Monitoring geofence regions
-                [_locationManager stopUpdatingLocation];
-            }
         }
         
     } atLatitude:currentLocation.coordinate.latitude atLongitude:currentLocation.coordinate.longitude forRadius:[[B311AppProperties getInstance] getMapRadius] andWithHUD:nil];
@@ -610,7 +594,7 @@
         B311MapDataAnnotation *annotationData = annotation;
         MKAnnotationView *annotationView = nil;
 
-        if (annotationData.ltype == B311GeoFenceLocationTypeGeneral) {
+        if (annotationData.ltype == B311MapDataLocationTypeGeneral) {
         
             annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311GeneralAnnotationIdentifier];
             if (!annotationView) {
@@ -622,7 +606,7 @@
                 //annotationView.leftCalloutAccessoryView = generalView;
                 annotationView.image = [UIImage imageNamed:@"map_annotation_general"];
             }
-        } else if (annotationData.ltype == B311GeoFenceLocationTypeEntrance) {
+        } else if (annotationData.ltype == B311MapDataLocationTypeEntrance) {
             
             annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311GeneralAnnotationIdentifier];
             if (!annotationView) {
@@ -631,7 +615,7 @@
                 annotationView.canShowCallout = YES;
                 annotationView.image = [UIImage imageNamed:@"map_annotation_entrance"];
             }
-        } else if (annotationData.ltype == B311GeoFenceLocationTypeParkingRampNone) {
+        } else if (annotationData.ltype == B311MapDataLocationTypeParkingRampNone) {
             
             annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311ParkingRampNoneAnnotationIdentifier];
             if (!annotationView) {
@@ -640,7 +624,7 @@
                 annotationView.canShowCallout = YES;
                 annotationView.image = [UIImage imageNamed:@"map_annotation_parking_no_full"];
             }
-        } else if (annotationData.ltype == B311GeoFenceLocationTypeParkingRampLeft) {
+        } else if (annotationData.ltype == B311MapDataLocationTypeParkingRampLeft) {
             
             annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311ParkingRampLeftAnnotationIdentifier];
             if (!annotationView) {
@@ -649,7 +633,7 @@
                 annotationView.canShowCallout = YES;
                 annotationView.image = [UIImage imageNamed:@"map_annotation_parking_left_full"];
             }
-        } else if (annotationData.ltype == B311GeoFenceLocationTypeParkingRampRight) {
+        } else if (annotationData.ltype == B311MapDataLocationTypeParkingRampRight) {
             
             annotationView = [_mkMapView dequeueReusableAnnotationViewWithIdentifier:b311ParkingRampRightAnnotationIdentifier];
             if (!annotationView) {

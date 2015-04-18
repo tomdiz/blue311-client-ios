@@ -99,7 +99,7 @@
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_location_new", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@map_locations", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
 
         if (data == nil) {
             

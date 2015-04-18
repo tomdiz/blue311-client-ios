@@ -72,13 +72,14 @@
     location.mtype = [self b311MapDataLocationTypeFromString:fields[@"mtype"]];
 
     // **********
+    // Need to get from server to see what to do
     // 'loc' is an array of lat/long doubles
     // **********
     
     location.latitude = [fields[@"latitude"] doubleValue];
     location.longitude = [fields[@"longitude"] doubleValue];
 
-    location.inUse = [fields[@"inUse"] boolValue];
+    location.inUse = [fields[@"inUse"] intValue];
 
     return location;
 }

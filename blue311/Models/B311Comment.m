@@ -19,7 +19,7 @@
 
     comment.user_handle = fields[@"user_handle"];
 
-    comment.b311MapDataLocationId = fields[@"location_id"];
+    comment.location_id = fields[@"location_id"];
 
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];

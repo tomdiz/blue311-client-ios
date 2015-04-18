@@ -117,7 +117,8 @@
                                                                                        @"state":data.state == nil ? @"" : data.state,
                                                                                        @"zip":data.zip == nil ? @"" : data.zip,
                                                                                        @"location_type":[B311MapDataLocation stringB311MapDataLocationType:data.mtype],
-                                                                                       @"loc": @[ [NSNumber numberWithDouble:lat], [NSNumber numberWithDouble:lng] ]
+                                                                                       @"loc": @[ [NSNumber numberWithDouble:lat], [NSNumber numberWithDouble:lng] ],
+                                                                                       @"inUse": [NSNumber numberWithInt:1]
                                                                                        }];
 //        @"latitude":[NSNumber numberWithDouble:lat],
 //        @"longitude":[NSNumber numberWithDouble:lng]

@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) NSString *id;
 @property (strong, nonatomic) NSString *user_handle;
-@property (strong, nonatomic) NSString *b311MapDataLocationId;
+@property (strong, nonatomic) NSString *location_id;
 @property (strong, nonatomic) NSDate *created;
 @property (strong, nonatomic) NSString *subject;
 @property (strong, nonatomic) NSString *body;

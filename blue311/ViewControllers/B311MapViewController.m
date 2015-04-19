@@ -105,6 +105,8 @@
                                                         delayUntilAuthorized:YES
                                                                        block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
                                                                            
+                                                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
                                                                            if (status == INTULocationStatusSuccess) {
                                                                                
                                                                                // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
@@ -113,12 +115,10 @@
                                                                                [self setUpMapKitCameraViewLocation:currentLocation];
                                                                                
                                                                                [[B311MapDataLocations instance] getMapLocations:^(BOOL success, NSArray *mapLocations, NSString *error) {
-                                                                                   
-                                                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                                                   
-                                                                                   if (!error) {
+
+                                                                                   if (error) {
                                                                                        
-                                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Locations Data API Error"
+                                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Map Locations API Error"
                                                                                                                                            message:error
                                                                                                                                           delegate:nil
                                                                                                                                  cancelButtonTitle:@"OK"
@@ -149,18 +149,59 @@
                                                                            }
                                                                            else if (status == INTULocationStatusTimedOut) {
                                                                                
+                                                                               NSLog(@"INTULocationManager timeout with status: INTULocationStatusTimedOut");
+
                                                                                CLLocation *currentDeviceLocation = [[CLLocation alloc] initWithLatitude:37.773972 longitude:-122.431297];
                                                                                [self setUpMapKitCameraViewLocation:currentDeviceLocation];
+                                                                               [_mkMapView setCenterCoordinate:currentDeviceLocation.coordinate animated:NO];
                                                                                
                                                                                // Wasn't able to locate the user with the requested accuracy within the timeout interval.
                                                                                // However, currentLocation contains the best location available (if any) as of right now,
                                                                                // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
+
+                                                                               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GPS"
+                                                                                                                                   message:@"There is a problem getting your current location. Please refresh on map screen"
+                                                                                                                                  delegate:nil
+                                                                                                                         cancelButtonTitle:@"OK"
+                                                                                                                         otherButtonTitles:nil];
+                                                                               [alertView show];
                                                                            }
                                                                            else {
                                                                                
-                                                                               // An error occurred, more info is available by looking at the specific status returned.
+                                                                               // NOTE(tsd): I have noticed this general error status returned when user has no internet access
+                                                                               NSString *errMessage = @"GPS location error INTULocationStatusError";
+                                                                               
+                                                                               switch (status) {
+                                                                                   case INTULocationStatusServicesNotDetermined:
+                                                                                       errMessage = @"GPS location error INTULocationStatusServicesNotDetermined";
+                                                                                       break;
+
+                                                                                   case INTULocationStatusServicesDenied:
+                                                                                       errMessage = @"GPS location error INTULocationStatusServicesDenied";
+                                                                                       break;
+
+                                                                                   case INTULocationStatusServicesRestricted:
+                                                                                       errMessage = @"GPS location error INTULocationStatusServicesRestricted";
+                                                                                       break;
+
+                                                                                   case INTULocationStatusServicesDisabled:
+                                                                                       errMessage = @"GPS location error INTULocationStatusServicesDisabled";
+                                                                                       break;
+                                                                                       
+                                                                                    default:
+                                                                                       break;
+                                                                               }
+
                                                                                CLLocation *currentDeviceLocation = [[CLLocation alloc] initWithLatitude:37.773972 longitude:-122.431297];
+                                                                               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GPS"
+                                                                                                                                   message:errMessage
+                                                                                                                                  delegate:nil
+                                                                                                                         cancelButtonTitle:@"OK"
+                                                                                                                         otherButtonTitles:nil];
+                                                                               [alertView show];
+
                                                                                [self setUpMapKitCameraViewLocation:currentDeviceLocation];
+                                                                               [_mkMapView setCenterCoordinate:currentDeviceLocation.coordinate animated:NO];
                                                                            }
                                                                        }];
 }

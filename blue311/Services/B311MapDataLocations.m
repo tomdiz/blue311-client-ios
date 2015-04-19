@@ -29,7 +29,7 @@
         
         [hud setProgress:45.00/360.00];
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@maplocations/within", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@maplocations/around", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
         NSLog(@"Path: %@", path);
         
@@ -59,12 +59,14 @@
         [hud setProgress:180.00/360.00];
         
         // Check for error first
-        NSString *err = [result objectForKey:@"error"];
+        NSString *err = [result objectForKey:@"error_msg"];
+        int status = [[result objectForKey:@"http_status"] intValue];
         if (err != nil) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                completion(NO, nil, err);
+                NSString *errorMessage = [NSString stringWithFormat:@"%@, http code = %d", err, status];
+                completion(NO, nil, errorMessage);
             });
             return;
         }

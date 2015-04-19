@@ -198,7 +198,7 @@
     if (locationEdited == YES) {
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"Updating Location Data...";
+        hud.labelText = @"Updating Location Details...";
         hud.dimBackground = YES;
         
         B311MapDataLocation *location = [B311MapDataLocation new];

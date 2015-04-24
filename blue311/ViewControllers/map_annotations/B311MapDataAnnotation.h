@@ -13,8 +13,7 @@
 
 @interface B311MapDataAnnotation : NSObject <MKAnnotation>
 
-@property (nonatomic) B311MapDataLocationType ltype;
 @property (nonatomic) CLLocationCoordinate2D coordinate;
-@property (nonatomic, copy) NSString *title;
+@property (strong, nonatomic) B311MapDataLocation *location_data;
 
 @end

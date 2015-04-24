@@ -23,6 +23,7 @@
 		D102BF171AC11A310094B836 /* CDSideBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF111AC11A310094B836 /* CDSideBarController.m */; };
 		D102BF1A1AC11A310094B836 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = D102BF141AC11A310094B836 /* menuIcon.png */; };
 		D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF281AC12A760094B836 /* B311AppProperties.m */; };
+		D10464DD1AEA2847005475A5 /* B311CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D10464DC1AEA2847005475A5 /* B311CommentViewController.m */; };
 		D10EC1CE1AD4E54D005A3D9A /* B311MapDataAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D10EC1CD1AD4E54D005A3D9A /* B311MapDataAnnotation.m */; };
 		D155D4921ACC81CC008535AF /* B311Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D48F1ACC81CC008535AF /* B311Comment.m */; };
 		D155D4931ACC81CC008535AF /* B311MapDataLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D4911ACC81CC008535AF /* B311MapDataLocation.m */; };
@@ -33,6 +34,7 @@
 		D16795C41AC10C8800BF32AF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D16795C31AC10C8800BF32AF /* Images.xcassets */; };
 		D16795C71AC10C8800BF32AF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16795C51AC10C8800BF32AF /* LaunchScreen.xib */; };
 		D16795D31AC10C8800BF32AF /* blue311Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = D16795D21AC10C8800BF32AF /* blue311Tests.m */; };
+		D1725B991AE387B2009A354A /* B311MapDataAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1725B981AE387B2009A354A /* B311MapDataAnnotationView.m */; };
 		D1891A8D1ACA4276003D3103 /* B311DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1891A8C1ACA4276003D3103 /* B311DetailsViewController.m */; };
 		D1891A911ACA4E8C003D3103 /* B311Data.m in Sources */ = {isa = PBXBuildFile; fileRef = D1891A901ACA4E8C003D3103 /* B311Data.m */; };
 		D1906DCC1ACCA34C0081C041 /* B311Comments.m in Sources */ = {isa = PBXBuildFile; fileRef = D1906DCB1ACCA34C0081C041 /* B311Comments.m */; };
@@ -96,6 +98,8 @@
 		D102BF141AC11A310094B836 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
 		D102BF271AC12A760094B836 /* B311AppProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B311AppProperties.h; path = utils/B311AppProperties.h; sourceTree = "<group>"; };
 		D102BF281AC12A760094B836 /* B311AppProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = B311AppProperties.m; path = utils/B311AppProperties.m; sourceTree = "<group>"; };
+		D10464DB1AEA2847005475A5 /* B311CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311CommentViewController.h; sourceTree = "<group>"; };
+		D10464DC1AEA2847005475A5 /* B311CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311CommentViewController.m; sourceTree = "<group>"; };
 		D10EC1CC1AD4E54D005A3D9A /* B311MapDataAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B311MapDataAnnotation.h; path = map_annotations/B311MapDataAnnotation.h; sourceTree = "<group>"; };
 		D10EC1CD1AD4E54D005A3D9A /* B311MapDataAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = B311MapDataAnnotation.m; path = map_annotations/B311MapDataAnnotation.m; sourceTree = "<group>"; };
 		D155D48E1ACC81CC008535AF /* B311Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311Comment.h; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 		D16795CC1AC10C8800BF32AF /* blue311Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = blue311Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D16795D11AC10C8800BF32AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D16795D21AC10C8800BF32AF /* blue311Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = blue311Tests.m; sourceTree = "<group>"; };
+		D1725B971AE387B2009A354A /* B311MapDataAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B311MapDataAnnotationView.h; path = map_annotations/B311MapDataAnnotationView.h; sourceTree = "<group>"; };
+		D1725B981AE387B2009A354A /* B311MapDataAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = B311MapDataAnnotationView.m; path = map_annotations/B311MapDataAnnotationView.m; sourceTree = "<group>"; };
 		D1891A8B1ACA4276003D3103 /* B311DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311DetailsViewController.h; sourceTree = "<group>"; };
 		D1891A8C1ACA4276003D3103 /* B311DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311DetailsViewController.m; sourceTree = "<group>"; };
 		D1891A8F1ACA4E8C003D3103 /* B311Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311Data.h; sourceTree = "<group>"; };
@@ -258,6 +264,8 @@
 			children = (
 				D10EC1CC1AD4E54D005A3D9A /* B311MapDataAnnotation.h */,
 				D10EC1CD1AD4E54D005A3D9A /* B311MapDataAnnotation.m */,
+				D1725B971AE387B2009A354A /* B311MapDataAnnotationView.h */,
+				D1725B981AE387B2009A354A /* B311MapDataAnnotationView.m */,
 			);
 			name = LocationAnnotations;
 			sourceTree = "<group>";
@@ -370,6 +378,8 @@
 				D1891A8C1ACA4276003D3103 /* B311DetailsViewController.m */,
 				D1906DCE1ACCB14C0081C041 /* B311CommentTableViewCell.h */,
 				D1906DCF1ACCB14C0081C041 /* B311CommentTableViewCell.m */,
+				D10464DB1AEA2847005475A5 /* B311CommentViewController.h */,
+				D10464DC1AEA2847005475A5 /* B311CommentViewController.m */,
 			);
 			name = LocationDetails;
 			sourceTree = "<group>";
@@ -572,12 +582,14 @@
 				D1906E521ACE91E90081C041 /* B311GeoFenceLocations.m in Sources */,
 				D16795B91AC10C8800BF32AF /* main.m in Sources */,
 				D102BF0A1AC10DE40094B836 /* B311SettingsViewController.m in Sources */,
+				D10464DD1AEA2847005475A5 /* B311CommentViewController.m in Sources */,
 				D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */,
 				D155D4931ACC81CC008535AF /* B311MapDataLocation.m in Sources */,
 				D1891A8D1ACA4276003D3103 /* B311DetailsViewController.m in Sources */,
 				D102BEF81AC10D780094B836 /* B311LeftDrawerTableViewCell.m in Sources */,
 				D1906DD01ACCB14C0081C041 /* B311CommentTableViewCell.m in Sources */,
 				D102BEF71AC10D780094B836 /* B311MapViewController.m in Sources */,
+				D1725B991AE387B2009A354A /* B311MapDataAnnotationView.m in Sources */,
 				D102BEFD1AC10D780094B836 /* TutorialPageContentViewController.m in Sources */,
 				D1891A911ACA4E8C003D3103 /* B311Data.m in Sources */,
 				D102BF171AC11A310094B836 /* CDSideBarController.m in Sources */,

@@ -9,6 +9,7 @@
 #import "B311DetailsViewController.h"
 #import "B311CommentTableViewCell.h"
 #import "B311Comments.h"
+#import "B311CommentViewController.h"
 
 @interface B311DetailsViewController () {
     
@@ -23,13 +24,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtCity;
 @property (weak, nonatomic) IBOutlet UITextField *txtState;
 @property (weak, nonatomic) IBOutlet UITextField *txtZip;
+@property (weak, nonatomic) IBOutlet UILabel *lblUserCommentCount;
 
 - (IBAction)addCommentButtonPressed:(id)sender;
-- (IBAction)titleEditButtonPressed:(id)sender;
-- (IBAction)streetEditButtonPressed:(id)sender;
-- (IBAction)cityEditButtonPressed:(id)sender;
-- (IBAction)stateEditButtonPressed:(id)sender;
-- (IBAction)zipEditButtonPressed:(id)sender;
+- (IBAction)editButtonPressed:(id)sender;
 - (IBAction)closeButtonPressed:(id)sender;
 
 @end
@@ -42,11 +40,14 @@
 
     locationEdited = NO;
     
-    _txtTitle.text = _location_data.title;
-    _txtCity.text = _location_data.city;
-    _txtAddress.text = _location_data.address;
-    _txtState.text = _location_data.state;
-    _txtZip.text = _location_data.zip;
+    // NOTE(tsd): Need to load the corrcet icon for location type - Parking, General, Entrace, ramp, etc....
+    // imgLocationIconType
+    
+    _txtTitle.text = _location_data.title == nil ? @"Name" : _location_data.title;
+    _txtCity.text = _location_data.city == nil ? @"City" : _location_data.city;
+    _txtAddress.text = _location_data.address == nil ? @"Address" : _location_data.address;
+    _txtState.text = _location_data.state == nil ? @"State" : _location_data.state;
+    _txtZip.text = _location_data.zip == nil ? @"Zip" : _location_data.zip;
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Getting Comments for Location...";
@@ -78,9 +79,12 @@
                 //                                          cancelButtonTitle:@"OK"
                 //                                          otherButtonTitles:nil];
                 //[alertView show];
+                
+                _lblUserCommentCount.text = @"User Comments: None";
             }
             else {
                 
+                _lblUserCommentCount.text = [NSString stringWithFormat:@"User Comments: %lu", (unsigned long)commentsArray.count];
                 [_tblComments reloadData];
             }
         }
@@ -117,66 +121,38 @@
         return;
     }
 
-    locationEdited = NO;
-}
+    // Add a new comment to the array
+    // Then sync aray value if new
+    
+    // shit
+    
+    B311Comment *newComment = [B311Comment new];
 
-- (IBAction)titleEditButtonPressed:(id)sender {
-    
-    B311User *user = [B311User loadB311User];
-    if (user == nil) {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Editing Details"
-                                                            message:@"You need to create a Profile before you can change location details"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-        return;
-    }
-    
-    locationEdited = NO;
-}
+    B311CommentViewController *commentViewController = (B311CommentViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"B311CommentViewController"];
+    [self presentViewController:commentViewController animated:YES completion:nil];
 
-- (IBAction)streetEditButtonPressed:(id)sender {
+    /*
+     @property (strong, nonatomic) NSString *id;
+     @property (strong, nonatomic) NSString *user_handle;
+     @property (strong, nonatomic) NSString *location_id;
+     @property (strong, nonatomic) NSDate *created;
+     @property (strong, nonatomic) NSString *subject;
+     @property (strong, nonatomic) NSString *body;
+     @property (nonatomic) int rating_down;
+     @property (nonatomic) int rating_up;
+    */
     
-    B311User *user = [B311User loadB311User];
-    if (user == nil) {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Editing Details"
-                                                            message:@"You need to create a Profile before you can change location details"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-        return;
-    }
+    // Need a subject and body - get handle from user - Do a rating of "1" (up not down)
+    
+    //*********
+    // id and created come from server. I should input on another screen and then resynch
+    //*********
+    
     
     locationEdited = NO;
 }
 
-- (IBAction)cityEditButtonPressed:(id)sender {
-    
-    B311User *user = [B311User loadB311User];
-    if (user == nil) {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Editing Details"
-                                                            message:@"You need to create a Profile before you can change location details"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-        return;
-    }
-    
-    locationEdited = NO;
-}
-
-- (IBAction)stateEditButtonPressed:(id)sender {
-    
-    locationEdited = NO;
-}
-
-- (IBAction)zipEditButtonPressed:(id)sender {
+- (IBAction)editButtonPressed:(id)sender {
     
     B311User *user = [B311User loadB311User];
     if (user == nil) {
@@ -234,6 +210,10 @@
             }
             
         } withData:location andWithHUD:hud];
+    }
+    else {
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

@@ -46,7 +46,12 @@ static NSString * const kJVDrawerCellReuseIdentifier = @"O311DrawerCellReuseIden
 }
 
 #pragma mark - Table View Data Source
-
+/*
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 120;
+}
+*/
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     return 1;

@@ -12,7 +12,7 @@
 
 -(void)dealloc {
 
-    _title = nil;
+    _location_data = nil;
 }
 
 @end

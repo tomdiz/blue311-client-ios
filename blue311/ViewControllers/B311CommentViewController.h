@@ -10,4 +10,6 @@
 
 @interface B311CommentViewController : UIViewController
 
+@property (strong, nonatomic) NSString *location_id;
+
 @end

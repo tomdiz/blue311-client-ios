@@ -7,6 +7,8 @@
 //
 
 #import "B311CommentViewController.h"
+#import "MBProgressHUD.h"
+#import "B311Comments.h"
 
 @interface B311CommentViewController ()
 
@@ -41,7 +43,56 @@
 */
 
 - (IBAction)addbuttonPressed:(id)sender {
+
+    if (_txtSubject.text == nil || [_txtSubject.text isEqualToString:@""]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Comment Error"
+                                                        message:@"Please provide a comment subject"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     
+    if (_txtBody.text == nil || [_txtBody.text isEqualToString:@""]) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Comment Error"
+                                                        message:@"Please provide a comment body"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Adding Comment to Location...";
+    hud.dimBackground = YES;
+
+    B311User *user = [B311User loadB311User];
+
+    B311Comment *newComment = [B311Comment new];
+
+    [[B311Comments instance] postComment:^(NSString *error) {
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        if (!error) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Comments API Error"
+                                                                message:error
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            
+        } else {
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        
+    } withComment:newComment forUser:user forLocationId:_location_id andWithHUD:hud];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {

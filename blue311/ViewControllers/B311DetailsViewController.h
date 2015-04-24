@@ -11,7 +11,6 @@
 
 @interface B311DetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSString *location_id;
 @property (strong, nonatomic) B311MapDataLocation *location_data;
 
 @end

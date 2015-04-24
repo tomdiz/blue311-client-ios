@@ -48,11 +48,16 @@
     _txtAddress.text = _location_data.address == nil ? @"Address" : _location_data.address;
     _txtState.text = _location_data.state == nil ? @"State" : _location_data.state;
     _txtZip.text = _location_data.zip == nil ? @"Zip" : _location_data.zip;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Getting Comments for Location...";
     hud.dimBackground = YES;
-
+    
     [[B311Comments instance] getComments:^(BOOL success, NSArray *location_comments, NSString *error) {
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -89,7 +94,7 @@
             }
         }
         
-    } forLocationId:_location_id andWithHUD:hud];
+    } forLocationId:_location_data.id andWithHUD:hud];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -125,10 +130,9 @@
     // Then sync aray value if new
     
     // shit
-    
-    B311Comment *newComment = [B311Comment new];
 
     B311CommentViewController *commentViewController = (B311CommentViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"B311CommentViewController"];
+    commentViewController.location_id = _location_data.id;
     [self presentViewController:commentViewController animated:YES completion:nil];
 
     /*

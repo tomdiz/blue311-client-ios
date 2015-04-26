@@ -151,11 +151,7 @@
     hud.dimBackground = YES;
     
     // Get current location to add icon to the map
-#if TARGET_IPHONE_SIMULATOR
     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock
-#else
-    [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom
-#endif
                                                                      timeout:10.0
                                                         delayUntilAuthorized:YES
                                                                        block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
@@ -389,7 +385,7 @@
 #if TARGET_IPHONE_SIMULATOR
     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock
 #else
-     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom
+     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom // Need 5 meter support. How handle if can't get?
 #endif
                                        timeout:10.0
                           delayUntilAuthorized:YES
@@ -538,7 +534,8 @@
                                                                                            cancelButtonTitle:@"OK"
                                                                                            otherButtonTitles:nil];
                                                  [alertView show];
-
+#define TESTING_MORE 1
+#ifdef TESTING_MORE
                                                  // Get the address information for this lat/long doing a reverse lookup
                                                  CLLocation *currentDeviceLocation = [[CLLocation alloc] initWithLatitude:37.773972 longitude:-122.431297];
                                                  [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
@@ -628,7 +625,7 @@
                                                          
                                                      } atLatitude:currentDeviceLocation.coordinate.latitude atLongitude:currentDeviceLocation.coordinate.longitude withData:location andWithHUD:nil];
                                                  }];
-
+#endif
                                              }
                                          }];
 }

@@ -56,6 +56,15 @@
         
         NSLog(@"results: %@", result);
         
+        if (result == nil) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completion(YES, [NSArray new], nil);
+            });
+            return;
+        }
+        
         [hud setProgress:180.00/360.00];
         
         // Check for error first

@@ -72,7 +72,7 @@
         // Create the data model
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipTutorial:) name:@"skipTutorial" object:nil];
 
-        _pageTitles = @[@"Annotate handicap parking spots on a map", @"Discover handicap entrances at locations", @"Annotate general handicap tips on a map"];
+        _pageTitles = @[@"Annotate handicap parking spots on a map. Then find out if the parking spot is in use.", @"Discover handicap entrances at locations", @"Don't forget to full in your Profile so you can post map locations and comments"];
         _pageImages = @[@"page1.png", @"page2.png", @"page3.png"];
         
         // Create page view controller

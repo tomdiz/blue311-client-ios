@@ -55,12 +55,12 @@
 
     if ([[B311AppProperties getInstance] getTutorialState] == NO) {
         
-        _lblTutorialState.text = @"Turn Tutorial Off";
+        _lblTutorialState.text = @"Turn Tutorial On";
         [_swtTutorialSwitch setOn:YES];
     }
     else {
         
-        _lblSideMenuOnMap.text = @"Turn Tutorial On";
+        _lblSideMenuOnMap.text = @"Turn Tutorial Off";
         [_swtTutorialSwitch setOn:NO];
     }
 

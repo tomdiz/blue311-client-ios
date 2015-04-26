@@ -46,6 +46,7 @@ static B311AppProperties * shared = nil;
     [[NSUserDefaults standardUserDefaults] setObject:@"hide" forKey:@"sideMenuBarState"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:2.0] forKey:@"map_radius"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:15.0] forKey:@"map_update_timer"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"tutorialState"];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -100,6 +101,18 @@ static B311AppProperties * shared = nil;
 - (void)setMapUpdateTimer:(double)time {
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:time] forKey:@"map_update_timer"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)getTutorialState {
+    
+    BOOL state = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialState"] boolValue];
+    return state;
+}
+
+- (void)setTutorialState:(BOOL)state {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:state] forKey:@"tutorialState"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

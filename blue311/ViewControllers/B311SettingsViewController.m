@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblRadius;
 @property (weak, nonatomic) IBOutlet UISlider *sldMapUpdateTimer;
 @property (weak, nonatomic) IBOutlet UILabel *lblMapTimer;
+@property (weak, nonatomic) IBOutlet UISwitch *swtTutorialSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *lblTutorialState;
 
 - (IBAction)menuBurgerButtonPressed:(id)sender;
 - (IBAction)sideMenuSwitchValueChanged:(id)sender;
@@ -49,6 +51,17 @@
         
         _lblSideMenuOnMap.text = @"Hide Side Menu on Map";
         [_swtSideMenu setOn:NO];
+    }
+
+    if ([[B311AppProperties getInstance] getTutorialState] == NO) {
+        
+        _lblTutorialState.text = @"Turn tutorial on";
+        [_swtTutorialSwitch setOn:YES];
+    }
+    else {
+        
+        _lblSideMenuOnMap.text = @"Turn tutorial off";
+        [_swtTutorialSwitch setOn:NO];
     }
 
     _lblRadius.text = [NSString stringWithFormat:@"%d miles", (int)[[B311AppProperties getInstance] getMapRadius]];
@@ -94,6 +107,17 @@
         
         [[B311AppProperties getInstance] setSideMenuState:YES];
         _lblSideMenuOnMap.text = @"Hide Side Menu on Map";
+    }
+
+    if (_swtTutorialSwitch.isOn == YES) {
+        
+        [[B311AppProperties getInstance] setTutorialState:NO];
+        _lblTutorialState.text = @"Turn tutorial on";
+    }
+    else {
+        
+        [[B311AppProperties getInstance] setTutorialState:YES];
+        _lblTutorialState.text = @"Turn tutorial off";
     }
 }
 

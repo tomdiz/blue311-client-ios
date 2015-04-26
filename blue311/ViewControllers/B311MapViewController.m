@@ -49,8 +49,6 @@
     
     [super viewDidLoad];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipTutorial:) name:@"skipTutorial" object:nil];
-
     mapLocationAnnotations = [NSMutableArray new];
 
     currentGeoFences = [NSMutableArray new];
@@ -68,25 +66,30 @@
     sideBar.delegate = self;
     [sideBar insertMenuButtonOnView:self.view atPosition:CGPointMake(self.view.frame.size.width - 70, 50)];
     
-    // Tutorial Setup
-    // Create the data model
-    _pageTitles = @[@"Annotate handicap parking spots on a map", @"Discover handicap entrances at locations", @"Annotate general handicap tips on a map"];
-    _pageImages = @[@"page1.png", @"page2.png", @"page3.png"];
-    
-    // Create page view controller
-    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialPageViewController"];
-    self.pageViewController.dataSource = self;
-    
-    TutorialPageContentViewController *startingViewController = [self viewControllerAtIndex:0];
-    NSArray *viewControllers = @[startingViewController];
-    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
-    // Change the size of page view controller
-    self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    
-    [self addChildViewController:_pageViewController];
-    [self.view addSubview:_pageViewController.view];
-    [self.pageViewController didMoveToParentViewController:self];
+    if ([[B311AppProperties getInstance] getTutorialState] == NO) {
+        
+        // Tutorial Setup
+        // Create the data model
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipTutorial:) name:@"skipTutorial" object:nil];
+
+        _pageTitles = @[@"Annotate handicap parking spots on a map", @"Discover handicap entrances at locations", @"Annotate general handicap tips on a map"];
+        _pageImages = @[@"page1.png", @"page2.png", @"page3.png"];
+        
+        // Create page view controller
+        self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialPageViewController"];
+        self.pageViewController.dataSource = self;
+        
+        TutorialPageContentViewController *startingViewController = [self viewControllerAtIndex:0];
+        NSArray *viewControllers = @[startingViewController];
+        [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        
+        // Change the size of page view controller
+        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        
+        [self addChildViewController:_pageViewController];
+        [self.view addSubview:_pageViewController.view];
+        [self.pageViewController didMoveToParentViewController:self];
+    }
 
     geocoder = [[CLGeocoder alloc] init];
 }
@@ -99,7 +102,10 @@
 
     [self refreshMapLocation];
 
-    mapRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:[[B311AppProperties getInstance] getMapUpdateTimer] target:self selector:@selector(timerMapRefreshMethod:) userInfo:nil repeats:YES];
+    if ([[B311AppProperties getInstance] getTutorialState] == YES) {
+    
+        mapRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:[[B311AppProperties getInstance] getMapUpdateTimer] target:self selector:@selector(timerMapRefreshMethod:) userInfo:nil repeats:YES];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -284,6 +290,10 @@
     _pageImages = nil;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    mapRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:[[B311AppProperties getInstance] getMapUpdateTimer] target:self selector:@selector(timerMapRefreshMethod:) userInfo:nil repeats:YES];
+
+    [[B311AppProperties getInstance] setTutorialState:YES];
 }
 
 - (TutorialPageContentViewController *)viewControllerAtIndex:(NSUInteger)index {

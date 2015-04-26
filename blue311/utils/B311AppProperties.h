@@ -21,4 +21,7 @@
 - (double)getMapUpdateTimer;
 - (void)setMapUpdateTimer:(double)time;
 
+- (BOOL)getTutorialState;
+- (void)setTutorialState:(BOOL)state;
+
 @end

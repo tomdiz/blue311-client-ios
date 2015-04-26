@@ -86,28 +86,16 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uSw-Tr-skM" id="dHz-I1-pr1">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UVo-74-mgf">
-                                            <rect key="frame" x="26" y="35" width="30" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="30" id="0KT-u1-sFd"/>
-                                            </constraints>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UVo-74-mgf">
+                                            <rect key="frame" x="19" y="35" width="30" height="31"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kA-dB-We8">
-                                            <rect key="frame" x="82" y="39" width="497" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kA-dB-We8">
+                                            <rect key="frame" x="63" y="39" width="180" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstItem="UVo-74-mgf" firstAttribute="leading" secondItem="dHz-I1-pr1" secondAttribute="leadingMargin" constant="18" id="Pdx-Ig-Hkr"/>
-                                        <constraint firstItem="UVo-74-mgf" firstAttribute="top" secondItem="dHz-I1-pr1" secondAttribute="topMargin" constant="27" id="SEM-HF-FYw"/>
-                                        <constraint firstItem="4kA-dB-We8" firstAttribute="centerY" secondItem="dHz-I1-pr1" secondAttribute="centerY" id="Yxr-y5-tvg"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="4kA-dB-We8" secondAttribute="trailing" constant="13" id="elu-Ic-lsO"/>
-                                        <constraint firstItem="UVo-74-mgf" firstAttribute="centerY" secondItem="4kA-dB-We8" secondAttribute="centerY" id="uP8-rw-OfQ"/>
-                                        <constraint firstItem="4kA-dB-We8" firstAttribute="top" secondItem="dHz-I1-pr1" secondAttribute="topMargin" constant="31" id="vDx-Q9-bDv"/>
-                                        <constraint firstItem="4kA-dB-We8" firstAttribute="leading" secondItem="UVo-74-mgf" secondAttribute="trailing" constant="26" id="yOM-a3-V8V"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>

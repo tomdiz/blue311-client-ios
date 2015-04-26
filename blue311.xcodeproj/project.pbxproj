@@ -198,8 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				D1906E321ACE7DCD0081C041 /* Map */,
-				D102BEFE1AC10DE40094B836 /* ViewController.m */,
 				D102BEFF1AC10DE40094B836 /* ViewController.h */,
+				D102BEFE1AC10DE40094B836 /* ViewController.m */,
 				D102BF031AC10DE40094B836 /* B311SettingsViewController.h */,
 				D102BF021AC10DE40094B836 /* B311SettingsViewController.m */,
 				D102BF051AC10DE40094B836 /* B311ProfileViewController.h */,

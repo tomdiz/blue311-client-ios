@@ -27,6 +27,7 @@
     NSArray *mapLocationData;
     NSMutableArray *mapLocationAnnotations;
     CLGeocoder *geocoder;
+    NSTimer *mapRefreshTimer;
 }
 
 @property (nonatomic, strong, readonly) JVFloatingDrawerSpringAnimator *drawerAnimator;
@@ -62,7 +63,7 @@
     [_locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
 
     // Side menu bar - Parking - Parking Ramp, Entrance and General
-    NSArray *imageList = @[[UIImage imageNamed:@"handicap-ramp-no.png"], [UIImage imageNamed:@"handicap-ramp-left.png"], [UIImage imageNamed:@"handicap-ramp-right.png"], [UIImage imageNamed:@"entrance.png"], [UIImage imageNamed:@"general.png"]];
+    NSArray *imageList = @[[UIImage imageNamed:@"handicap-ramp-no.png"], [UIImage imageNamed:@"handicap-ramp-left.png"], [UIImage imageNamed:@"handicap-ramp-right.png"], [UIImage imageNamed:@"entrance.png"], [UIImage imageNamed:@"general.png"], [UIImage imageNamed:@"refresh_map.png"]];
     sideBar = [[CDSideBarController alloc] initWithImages:imageList];
     sideBar.delegate = self;
     [sideBar insertMenuButtonOnView:self.view atPosition:CGPointMake(self.view.frame.size.width - 70, 50)];
@@ -86,7 +87,7 @@
     [self addChildViewController:_pageViewController];
     [self.view addSubview:_pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
-    
+
     geocoder = [[CLGeocoder alloc] init];
 }
 
@@ -96,18 +97,65 @@
     
     [sideBar handleMenuState];
 
+    [self refreshMapLocation];
+
+    mapRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:[[B311AppProperties getInstance] getMapUpdateTimer] target:self selector:@selector(timerMapRefreshMethod:) userInfo:nil repeats:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+
+    [mapRefreshTimer invalidate];
+    mapRefreshTimer = nil;
+}
+
+- (void)didReceiveMemoryWarning {
+    
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+
+-(void)timerMapRefreshMethod:(NSTimer *)timer {
+    
+    NSLog(@"timerMapRefreshMethod called");
+    [self refreshMapLocation];
+}
+
+- (void)refreshMapLocation {
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Updating Location Data...";
     hud.dimBackground = YES;
     
     // Get current location to add icon to the map
-    [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyCity
+#if TARGET_IPHONE_SIMULATOR
+    [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock
+#else
+    [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom
+#endif
                                                                      timeout:10.0
                                                         delayUntilAuthorized:YES
                                                                        block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
                                                                            
                                                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-
+                                                                           
                                                                            if (status == INTULocationStatusSuccess) {
                                                                                
                                                                                // Request succeeded, meaning achievedAccuracy is at least the requested accuracy, and
@@ -116,15 +164,16 @@
                                                                                [self setUpMapKitCameraViewLocation:currentLocation];
                                                                                
                                                                                [[B311MapDataLocations instance] getMapLocations:^(BOOL success, NSArray *mapLocations, NSString *error) {
-
+                                                                                   
                                                                                    if (error) {
                                                                                        
-                                                                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Map Locations API Error"
-                                                                                                                                           message:error
-                                                                                                                                          delegate:nil
-                                                                                                                                 cancelButtonTitle:@"OK"
-                                                                                                                                 otherButtonTitles:nil];
-                                                                                       [alertView show];
+                                                                                       NSLog(@"Get Map Locations API Error: %@", error);
+                                                                                       //UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Get Map Locations API Error"
+                                                                                       //                                                    message:error
+                                                                                       //                                                   delegate:nil
+                                                                                       //                                          cancelButtonTitle:@"OK"
+                                                                                       //                                          otherButtonTitles:nil];
+                                                                                       //[alertView show];
                                                                                    } else {
                                                                                        
                                                                                        // Add map annotations from map data returned from server
@@ -150,7 +199,7 @@
                                                                            else if (status == INTULocationStatusTimedOut) {
                                                                                
                                                                                NSLog(@"INTULocationManager timeout with status: INTULocationStatusTimedOut");
-
+                                                                               
                                                                                CLLocation *currentDeviceLocation = [[CLLocation alloc] initWithLatitude:37.773972 longitude:-122.431297];
                                                                                [self setUpMapKitCameraViewLocation:currentDeviceLocation];
                                                                                [_mkMapView setCenterCoordinate:currentDeviceLocation.coordinate animated:NO];
@@ -158,13 +207,13 @@
                                                                                // Wasn't able to locate the user with the requested accuracy within the timeout interval.
                                                                                // However, currentLocation contains the best location available (if any) as of right now,
                                                                                // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
-
-                                                                               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GPS"
-                                                                                                                                   message:@"There is a problem getting your current location. Please refresh on map screen"
-                                                                                                                                  delegate:nil
-                                                                                                                         cancelButtonTitle:@"OK"
-                                                                                                                         otherButtonTitles:nil];
-                                                                               [alertView show];
+                                                                               
+                                                                               //UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GPS"
+                                                                               //                                                    message:@"There is a problem getting your current location. Please refresh on map screen"
+                                                                               //                                                   delegate:nil
+                                                                               //                                          cancelButtonTitle:@"OK"
+                                                                               //                                          otherButtonTitles:nil];
+                                                                               //[alertView show];
                                                                            }
                                                                            else {
                                                                                
@@ -175,57 +224,36 @@
                                                                                    case INTULocationStatusServicesNotDetermined:
                                                                                        errMessage = @"GPS location error INTULocationStatusServicesNotDetermined";
                                                                                        break;
-
+                                                                                       
                                                                                    case INTULocationStatusServicesDenied:
                                                                                        errMessage = @"GPS location error INTULocationStatusServicesDenied";
                                                                                        break;
-
+                                                                                       
                                                                                    case INTULocationStatusServicesRestricted:
                                                                                        errMessage = @"GPS location error INTULocationStatusServicesRestricted";
                                                                                        break;
-
+                                                                                       
                                                                                    case INTULocationStatusServicesDisabled:
                                                                                        errMessage = @"GPS location error INTULocationStatusServicesDisabled";
                                                                                        break;
                                                                                        
-                                                                                    default:
+                                                                                   default:
                                                                                        break;
                                                                                }
-
+                                                                               
                                                                                CLLocation *currentDeviceLocation = [[CLLocation alloc] initWithLatitude:37.773972 longitude:-122.431297];
-                                                                               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GPS"
-                                                                                                                                   message:errMessage
-                                                                                                                                  delegate:nil
-                                                                                                                         cancelButtonTitle:@"OK"
-                                                                                                                         otherButtonTitles:nil];
-                                                                               [alertView show];
-
+                                                                               //UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GPS"
+                                                                               //                                                    message:errMessage
+                                                                               //                                                   delegate:nil
+                                                                               //                                          cancelButtonTitle:@"OK"
+                                                                               //                                          otherButtonTitles:nil];
+                                                                               //[alertView show];
+                                                                               
                                                                                [self setUpMapKitCameraViewLocation:currentDeviceLocation];
                                                                                [_mkMapView setCenterCoordinate:currentDeviceLocation.coordinate animated:NO];
                                                                            }
                                                                        }];
 }
-
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-}
-
-- (void)didReceiveMemoryWarning {
-    
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)setUpMapKitCameraViewLocation:(CLLocation *)coords {
     
@@ -335,12 +363,24 @@
     //      2 -> handicap-ramp-right
     //      3 -> entrance
     //      4 -> general
+    //      5 -> refresh map
+    
+    if (index == 5) {
+        
+        [self refreshMapLocation];
+        return;
+    }
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Creating a New Location...";
     hud.dimBackground = YES;
 
+    // Get current location to add icon to the map
+#if TARGET_IPHONE_SIMULATOR
     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock
+#else
+     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom
+#endif
                                        timeout:10.0
                           delayUntilAuthorized:YES
                                          block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {

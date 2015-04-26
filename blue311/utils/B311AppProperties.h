@@ -18,4 +18,7 @@
 - (float)getMapRadius;
 - (void)setMapRadius:(float)radius;
 
+- (double)getMapUpdateTimer;
+- (void)setMapUpdateTimer:(double)time;
+
 @end

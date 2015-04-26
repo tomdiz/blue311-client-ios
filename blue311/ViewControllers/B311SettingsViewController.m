@@ -19,10 +19,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblSideMenuOnMap;
 @property (weak, nonatomic) IBOutlet UISlider *sldRadiusSearch;
 @property (weak, nonatomic) IBOutlet UILabel *lblRadius;
+@property (weak, nonatomic) IBOutlet UISlider *sldMapUpdateTimer;
+@property (weak, nonatomic) IBOutlet UILabel *lblMapTimer;
 
 - (IBAction)menuBurgerButtonPressed:(id)sender;
 - (IBAction)sideMenuSwitchValueChanged:(id)sender;
 - (IBAction)radiusValueChanged:(UISlider *)sender;
+- (IBAction)mapTimerValueChanged:(UISlider *)sender;
 
 @end
 
@@ -48,7 +51,8 @@
         [_swtSideMenu setOn:NO];
     }
 
-    _lblRadius.text = [NSString stringWithFormat:@"%d", (int)[[B311AppProperties getInstance] getMapRadius]];
+    _lblRadius.text = [NSString stringWithFormat:@"%d miles", (int)[[B311AppProperties getInstance] getMapRadius]];
+    _lblMapTimer.text = [NSString stringWithFormat:@"%d secs", (int)[[B311AppProperties getInstance] getMapUpdateTimer]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -98,6 +102,13 @@
     //NSLog(@"slider value = %f", sender.value);
     _lblRadius.text = [NSString stringWithFormat:@"%d miles", (int)sender.value];
     [[B311AppProperties getInstance] setMapRadius:(float)sender.value];
+}
+
+- (IBAction)mapTimerValueChanged:(UISlider *)sender {
+
+    //NSLog(@"slider value = %f", sender.value);
+    _lblMapTimer.text = [NSString stringWithFormat:@"%d secs", (int)sender.value];
+    [[B311AppProperties getInstance] setMapUpdateTimer:(double)sender.value];
 }
 
 #pragma mark - Helpers

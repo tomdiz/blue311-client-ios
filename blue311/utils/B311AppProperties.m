@@ -45,6 +45,7 @@ static B311AppProperties * shared = nil;
     
     [[NSUserDefaults standardUserDefaults] setObject:@"hide" forKey:@"sideMenuBarState"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:2.0] forKey:@"map_radius"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:15.0] forKey:@"map_update_timer"];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -87,6 +88,18 @@ static B311AppProperties * shared = nil;
 - (void)setMapRadius:(float)radius {
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:radius] forKey:@"map_radius"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (double)getMapUpdateTimer {
+    
+    int time = [[[NSUserDefaults standardUserDefaults] objectForKey:@"map_update_timer"] doubleValue];
+    return time;
+}
+
+- (void)setMapUpdateTimer:(double)time {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:time] forKey:@"map_update_timer"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

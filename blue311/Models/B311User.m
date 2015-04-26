@@ -82,6 +82,10 @@
 + (B311User *)loadB311User {
     
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"b311User"];
+    if (data == nil) {
+        
+        return nil;
+    }
     B311User *user = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     return user;
 }

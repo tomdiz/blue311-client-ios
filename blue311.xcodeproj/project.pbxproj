@@ -25,6 +25,7 @@
 		D102BF291AC12A760094B836 /* B311AppProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D102BF281AC12A760094B836 /* B311AppProperties.m */; };
 		D10464DD1AEA2847005475A5 /* B311CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D10464DC1AEA2847005475A5 /* B311CommentViewController.m */; };
 		D10EC1CE1AD4E54D005A3D9A /* B311MapDataAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D10EC1CD1AD4E54D005A3D9A /* B311MapDataAnnotation.m */; };
+		D14F97961AED5CC400BBB831 /* refresh_map.png in Resources */ = {isa = PBXBuildFile; fileRef = D14F97951AED5CC400BBB831 /* refresh_map.png */; };
 		D155D4921ACC81CC008535AF /* B311Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D48F1ACC81CC008535AF /* B311Comment.m */; };
 		D155D4931ACC81CC008535AF /* B311MapDataLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D4911ACC81CC008535AF /* B311MapDataLocation.m */; };
 		D155D4961ACC81E2008535AF /* B311User.m in Sources */ = {isa = PBXBuildFile; fileRef = D155D4951ACC81E2008535AF /* B311User.m */; };
@@ -102,6 +103,7 @@
 		D10464DC1AEA2847005475A5 /* B311CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311CommentViewController.m; sourceTree = "<group>"; };
 		D10EC1CC1AD4E54D005A3D9A /* B311MapDataAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = B311MapDataAnnotation.h; path = map_annotations/B311MapDataAnnotation.h; sourceTree = "<group>"; };
 		D10EC1CD1AD4E54D005A3D9A /* B311MapDataAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = B311MapDataAnnotation.m; path = map_annotations/B311MapDataAnnotation.m; sourceTree = "<group>"; };
+		D14F97951AED5CC400BBB831 /* refresh_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh_map.png; sourceTree = "<group>"; };
 		D155D48E1ACC81CC008535AF /* B311Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311Comment.h; sourceTree = "<group>"; };
 		D155D48F1ACC81CC008535AF /* B311Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = B311Comment.m; sourceTree = "<group>"; };
 		D155D4901ACC81CC008535AF /* B311MapDataLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = B311MapDataLocation.h; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 		D102BF0F1AC11A310094B836 /* CDSideBarController */ = {
 			isa = PBXGroup;
 			children = (
+				D14F97951AED5CC400BBB831 /* refresh_map.png */,
 				D1906DD81ACDBAD60081C041 /* handicap-ramp-left.png */,
 				D1906DD91ACDBAD60081C041 /* handicap-ramp-no.png */,
 				D1906DDA1ACDBAD60081C041 /* handicap-ramp-right.png */,
@@ -518,6 +521,7 @@
 				D102BEFB1AC10D780094B836 /* page2.png in Resources */,
 				D1906E601ACF6DC70081C041 /* map_annotation_parking_right_empty.png in Resources */,
 				D1906E3C1ACE7E1A0081C041 /* map_annotation_parking_no.png in Resources */,
+				D14F97961AED5CC400BBB831 /* refresh_map.png in Resources */,
 				D1906E5F1ACF6DC70081C041 /* map_annotation_parking_no_full.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,10 +723,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Thomas DiZoglio (2LN348VA3X)";
 				INFOPLIST_FILE = blue311/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6769d800-f9c8-4b17-afc6-e688bd8ed2d6";
 			};
 			name = Debug;
 		};
@@ -732,10 +738,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Thomas DiZoglio (B28C6PLVZA)";
 				INFOPLIST_FILE = blue311/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7dd3f7bb-196b-4038-ba8f-197306587072";
 			};
 			name = Release;
 		};

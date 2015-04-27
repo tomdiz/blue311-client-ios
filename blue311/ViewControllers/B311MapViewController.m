@@ -385,7 +385,7 @@
 #if TARGET_IPHONE_SIMULATOR
     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock
 #else
-     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom // Need 5 meter support. How handle if can't get?
+     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock//INTULocationAccuracyRoom // Need 5 meter support. How handle if can't get?
 #endif
                                        timeout:10.0
                           delayUntilAuthorized:YES

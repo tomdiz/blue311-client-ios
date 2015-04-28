@@ -58,7 +58,7 @@
     NSLog(@"fields = %@", fields);
     B311MapDataLocation *location = [B311MapDataLocation new];
     
-    location.id = fields[@"id"];
+    location.id = fields[@"_id"];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];

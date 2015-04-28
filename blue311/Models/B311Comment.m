@@ -15,7 +15,7 @@
     NSLog(@"fields = %@", fields);
     B311Comment *comment = [B311Comment new];
     
-    comment.id = fields[@"id"];
+    comment.id = fields[@"_id"];
 
     comment.user_handle = fields[@"user_handle"];
 

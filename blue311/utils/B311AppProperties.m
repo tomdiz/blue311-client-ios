@@ -45,7 +45,7 @@ static B311AppProperties * shared = nil;
     
     [[NSUserDefaults standardUserDefaults] setObject:@"hide" forKey:@"sideMenuBarState"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:2.0] forKey:@"map_radius"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:15.0] forKey:@"map_update_timer"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:30.0] forKey:@"map_update_timer"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"tutorialState"];
 
     [[NSUserDefaults standardUserDefaults] synchronize];

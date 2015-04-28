@@ -80,8 +80,10 @@
             return;
         }
         
-        int msgCount = [[result objectForKey:@"count"] intValue];
-        int offsetMsgsToSync = msgCount;
+        //int msgCount = [[result objectForKey:@"count"] intValue];
+        //int offsetMsgsToSync = msgCount;
+        
+        [hud setProgress:270.00/360.00];
         
         NSMutableArray *newLocations = [NSMutableArray new];
         NSArray *locations = [result objectForKey:@"locations"];
@@ -92,12 +94,14 @@
             B311MapDataLocation *location = [B311MapDataLocation parse:locationJson];
             [newLocations addObject:location];
             
-            offsetMsgsToSync--;
-            [hud setProgress:((msgCount - offsetMsgsToSync) / (float) msgCount)];
+            //offsetMsgsToSync--;
+            //[hud setProgress:((msgCount - offsetMsgsToSync) / (float) msgCount)];
         }
         
         _mapLocations = [newLocations copy];
-        
+ 
+        [hud setProgress:360.00/360.00];
+
         // Complete
         dispatch_async(dispatch_get_main_queue(), ^{
             

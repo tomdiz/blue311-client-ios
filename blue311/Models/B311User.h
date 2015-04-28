@@ -16,7 +16,6 @@ typedef NS_ENUM(NSInteger, B311UserType) {
 
 @interface B311User : NSObject <NSCoding>
 
-@property (strong, nonatomic) NSString *id;         // (UUID) Sent back from the server - user already exists then get same ID back
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *email;

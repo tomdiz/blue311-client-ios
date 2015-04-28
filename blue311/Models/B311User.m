@@ -57,7 +57,6 @@
         return nil;
     }
     
-    self.id = [decoder decodeObjectForKey:@"user_id"];
     self.firstName = [decoder decodeObjectForKey:@"firstName"];
     self.lastName = [decoder decodeObjectForKey:@"lastName"];
     self.email = [decoder decodeObjectForKey:@"email"];
@@ -70,7 +69,6 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     
-    [encoder encodeObject:self.id forKey:@"user_id"];
     [encoder encodeObject:self.firstName forKey:@"firstName"];
     [encoder encodeObject:self.lastName forKey:@"lastName"];
     [encoder encodeObject:self.email forKey:@"email"];
@@ -102,7 +100,7 @@
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *path = [NSString stringWithFormat:@"%@://%@%@profile", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
+        NSString *path = [NSString stringWithFormat:@"%@://%@%@profiles", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"first_name": firstName, @"last_name": lastName, @"email": email, @"handle":handle }];
         
@@ -144,7 +142,6 @@
                 
                 // Success - store of user info
                 B311User *user = [B311User new];
-                user.id = [results objectForKey:@"user_id"];
                 user.firstName = firstName;
                 user.lastName = lastName;
                 user.email = email;

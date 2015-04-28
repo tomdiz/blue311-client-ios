@@ -151,7 +151,7 @@
     hud.dimBackground = YES;
     
     // Get current location to add icon to the map
-    [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock
+    [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyCity //INTULocationAccuracyBlock
                                                                      timeout:10.0
                                                         delayUntilAuthorized:YES
                                                                        block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {

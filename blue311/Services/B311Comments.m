@@ -99,7 +99,7 @@
         
         NSString *path = [NSString stringWithFormat:@"%@://%@%@comments", B311Data.kapi_protocol, B311Data.kapi_domain, B311Data.kAPIVersion];
         
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"user_id": user.id, @"user_handle": user.handle, @"location_id": location_id, @"comment_subject":comment.subject, @"comment_body":comment.body }];
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"user_handle": user.handle, @"location_id": location_id, @"comment_subject":comment.subject, @"comment_body":comment.body }];
 
         @try {
             

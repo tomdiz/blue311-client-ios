@@ -63,22 +63,14 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     location.created = [dateFormat dateFromString:fields[@"created"]];
-
     location.title = fields[@"title"];
     location.address = fields[@"address"];
     location.city = fields[@"city"];
     location.state = fields[@"state"];
     location.zip = fields[@"zip"];
     location.mtype = [self b311MapDataLocationTypeFromString:fields[@"mtype"]];
-
-    // **********
-    // Need to get from server to see what to do
-    // 'loc' is an array of lat/long doubles
-    // **********
-    
     location.latitude = [fields[@"latitude"] doubleValue];
     location.longitude = [fields[@"longitude"] doubleValue];
-
     location.inUse = [fields[@"inUse"] intValue];
 
     return location;

@@ -126,34 +126,11 @@
         return;
     }
 
-    // Add a new comment to the array
-    // Then sync aray value if new
-    
-    // shit
+    locationEdited = NO;
 
     B311CommentViewController *commentViewController = (B311CommentViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"B311CommentViewController"];
     commentViewController.location_id = _location_data.id;
     [self presentViewController:commentViewController animated:YES completion:nil];
-
-    /*
-     @property (strong, nonatomic) NSString *id;
-     @property (strong, nonatomic) NSString *user_handle;
-     @property (strong, nonatomic) NSString *location_id;
-     @property (strong, nonatomic) NSDate *created;
-     @property (strong, nonatomic) NSString *subject;
-     @property (strong, nonatomic) NSString *body;
-     @property (nonatomic) int rating_down;
-     @property (nonatomic) int rating_up;
-    */
-    
-    // Need a subject and body - get handle from user - Do a rating of "1" (up not down)
-    
-    //*********
-    // id and created come from server. I should input on another screen and then resynch
-    //*********
-    
-    
-    locationEdited = NO;
 }
 
 - (IBAction)editButtonPressed:(id)sender {

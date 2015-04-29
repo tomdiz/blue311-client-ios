@@ -23,8 +23,8 @@
     return @"localhost:8080";
     //return @"dev01-api.blue311.com";
 #else
-    //return @"cryptic-caverns-5821.herokuapp.com";
-    return @"10.0.2.11:8080";
+    return @"cryptic-caverns-5821.herokuapp.com";
+    //return @"10.0.2.11:8080";
     //return @"dev01-api.blue311.com";
 #endif
 }
@@ -70,7 +70,7 @@
     if (data) {
       
         NSString *strData = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"(1)String returned from server = %@",strData);
+        //NSLog(@"(1)String returned from server = %@",strData);
         if ([strData isEqualToString:@""]) {
             
             return nil;
@@ -97,7 +97,7 @@
     if (data) {
         
         NSString *strData = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"(2)String returned from server = %@",strData);
+        //NSLog(@"(2)String returned from server = %@",strData);
         if ([strData isEqualToString:@""]) {
             
             return nil;
@@ -165,7 +165,7 @@
             NSString *url_string = [NSString stringWithFormat:@"%@?%@", original_url, bodyData];
             NSURL *url =  [NSURL URLWithString:[url_string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 
-            NSLog(@"URL: %@", url_string);
+            //NSLog(@"URL: %@", url_string);
             [mutableRequest setURL:url];
         } else {
             
@@ -234,7 +234,7 @@
 
             bodyData = [bodyData stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 
-            NSLog(@"bodyData = %@", bodyData);
+            //NSLog(@"bodyData = %@", bodyData);
 
             // Designate the request a POST request and specify its body data
             [mutableRequest setHTTPBody:[NSData dataWithBytes:[bodyData UTF8String] length:[bodyData length]]];
@@ -245,7 +245,7 @@
     while (data == nil) {
 
         [mutableRequest setTimeoutInterval:timeout];
-        NSLog(@":Mutable Request: %@", mutableRequest);
+        //NSLog(@":Mutable Request: %@", mutableRequest);
         
         NSError *error = nil;
         NSURLResponse *response;
@@ -260,7 +260,7 @@
         NSHTTPURLResponse *httpResponse;
 
         httpResponse = (NSHTTPURLResponse *)response;
-        NSLog(@"HTTP Response Headers %@", [httpResponse allHeaderFields]);
+        //NSLog(@"HTTP Response Headers %@", [httpResponse allHeaderFields]);
 
         if (!data) {
             

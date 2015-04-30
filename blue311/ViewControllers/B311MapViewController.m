@@ -151,7 +151,7 @@
     hud.dimBackground = YES;
     
     // Get current location to add icon to the map
-    [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyCity //INTULocationAccuracyBlock
+    [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock //INTULocationAccuracyCity
                                                                      timeout:10.0
                                                         delayUntilAuthorized:YES
                                                                        block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
@@ -385,7 +385,7 @@
 #if TARGET_IPHONE_SIMULATOR
     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock
 #else
-     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyBlock//INTULocationAccuracyRoom // Need 5 meter support. How handle if can't get?
+     [[INTULocationManager sharedInstance] requestLocationWithDesiredAccuracy:INTULocationAccuracyRoom // Need 5 meter support. How handle if can't get?
 #endif
                                        timeout:10.0
                           delayUntilAuthorized:YES

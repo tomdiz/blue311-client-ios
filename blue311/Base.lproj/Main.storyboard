@@ -680,6 +680,12 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FP4-mZ-ara">
+                                <rect key="frame" x="16" y="559" width="568" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.77069516339999999" green="0.94901960780000005" blue="0.98477983499999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -689,6 +695,9 @@
                             <constraint firstItem="dov-Bv-SAU" firstAttribute="top" secondItem="87l-ng-LnX" secondAttribute="top" id="gRE-Xb-jq3"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lblAppVersion" destination="FP4-mZ-ara" id="vAo-lb-Qqj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbD-K7-81I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

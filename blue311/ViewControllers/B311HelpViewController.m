@@ -13,6 +13,7 @@
 @interface B311HelpViewController ()
 
 @property (nonatomic, strong, readonly) JVFloatingDrawerSpringAnimator *drawerAnimator;
+@property (weak, nonatomic) IBOutlet UILabel *lblAppVersion;
 
 - (IBAction)menuBurgerButtonPressed:(id)sender;
 
@@ -22,7 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+    NSString *blue311VersionString = [NSString stringWithFormat:@"Version: %@ %@", version, build];
+    _lblAppVersion.text = blue311VersionString;
 }
 
 - (void)didReceiveMemoryWarning {
